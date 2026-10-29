@@ -1,0 +1,892 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#020b2b">
+<title>IBI Bank — International Bank of India | Beneficiaries</title>
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+:root{color-scheme:dark;--navy:#020821;--panel:#031744;--cyan:#00dfff;--blue:#075bff;--text:#f4f8ff}
+*{box-sizing:border-box}
+html{width:100%;max-width:100%;overflow-x:clip}
+body{margin:0!important;width:100%;max-width:100%;overflow-x:clip;background:var(--navy)!important;color:var(--text)!important;font-family:Inter,"Segoe UI",Arial,sans-serif!important}
+.sidebar{display:none!important}
+.main.beneficiaries-page{display:block;margin:0!important;padding:0 30px 30px!important;width:100%!important;max-width:100%!important;min-width:0!important;min-height:100vh;overflow:clip;background:radial-gradient(ellipse at 50% 0%,#082c93 0%,#03123e 42%,#020821 100%)!important}
+
+.ibi-topbar{position:relative;z-index:5;width:calc(100% + 60px);min-height:92px;margin:0 -30px 16px;padding:10px 30px;display:grid;grid-template-columns:320px minmax(180px,1fr) auto;align-items:center;gap:24px;background:radial-gradient(ellipse at 60% 0%,#0754e655,transparent 55%),linear-gradient(105deg,#04143f,#063acb 58%,#071344);border-bottom:2px solid #087dff;box-shadow:0 5px 22px #006bff40}
+.ibi-brand{min-width:0;display:flex;align-items:center;gap:14px}
+.ibi-logo{width:92px;height:72px;flex:0 0 92px;display:flex;align-items:center;justify-content:center;overflow:visible;border:none;border-radius:0;background:transparent;box-shadow:none}
+.ibi-logo img{display:block!important;visibility:visible!important;opacity:1!important;width:100%;height:100%;max-width:100%;max-height:100%;padding:0;object-fit:contain;object-position:center;border:none!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+.ibi-brand-name{color:#fff;font-size:35px;font-weight:850;line-height:1.1;letter-spacing:-.5px;white-space:nowrap}
+.ibi-brand-sub{margin-top:4px;color:#e2efff;font-size:13px;white-space:nowrap}
+
+.ibi-global-search{width:100%;min-width:0;height:54px;padding:0 19px;display:flex;align-items:center;gap:12px;border:1px solid #078bff;border-radius:30px;background:#0642c5b8;box-shadow:inset 0 0 14px #087eff50}
+.ibi-search-icon{flex:0 0 auto;width:25px;height:25px;color:white}
+.ibi-global-search input{width:100%;min-width:0;padding:0;border:0!important;outline:none!important;background:transparent!important;color:#fff!important;font-size:15px!important;box-shadow:none!important}
+.ibi-global-search input::placeholder{color:#e0eaff}
+
+.ibi-user-area{min-width:0;flex-shrink:0;display:flex!important;visibility:visible!important;opacity:1!important;align-items:center;justify-content:flex-end;gap:13px;overflow:visible}
+.ibi-avatar{width:56px;height:56px;flex:0 0 56px;display:grid!important;visibility:visible!important;opacity:1!important;place-items:center;border:2px solid #00dfff;border-radius:50%;background:linear-gradient(145deg,#008aff,#00eaff);box-shadow:0 0 17px #008dff80,inset 0 0 10px #ffffff35;color:white}
+.ibi-avatar svg{display:block;width:29px;height:29px}
+.ibi-welcome{display:block!important;visibility:visible!important;opacity:1!important;min-width:100px;color:#d8e7ff;font-size:13px;line-height:1.5;white-space:nowrap}
+.ibi-welcome strong{display:block!important;visibility:visible!important;max-width:175px;overflow:hidden;color:white;font-size:16px;font-weight:800;text-overflow:ellipsis;white-space:nowrap}
+.ibi-logout{min-height:48px;flex:0 0 auto;padding:12px 19px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #ff8abd;border-radius:13px;background:linear-gradient(135deg,#ff4c83,#ed008f);box-shadow:0 0 15px #ff168e70;color:white!important;font-size:15px;font-weight:800;text-decoration:none!important;white-space:nowrap}
+.ibi-logout:hover{background:linear-gradient(135deg,#ff7098,#ff078e);box-shadow:0 0 20px #ff168e90}
+
+.page-header{position:relative;isolation:isolate;width:100%;min-width:0;min-height:230px;margin:0 0 18px;padding:29px 38px;display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,300px);align-items:center;gap:25px;overflow:hidden;border:1px solid #00bfff;border-radius:22px;background:radial-gradient(ellipse at 58% 10%,#005dff80,transparent 32%),linear-gradient(120deg,#032b7c,#04184e 45%,#1011a5);box-shadow:0 0 18px #00aaff60,inset 0 0 28px #006dff30}
+.page-header::before{content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;background:linear-gradient(140deg,transparent 55%,#006bff35 55.2%,transparent 57%),radial-gradient(ellipse at 70% 100%,#522aff65,transparent 36%)}
+.hero-main{min-width:0}
+.hero-eyebrow{margin-bottom:7px;color:#00efff;font-size:15px;font-weight:800;letter-spacing:2px}
+.page-header h1{margin:0 0 9px;color:white;font-size:clamp(30px,3.2vw,48px);line-height:1.15;overflow-wrap:anywhere;text-shadow:0 0 18px #8ecaff45}
+.hero-title-icon{display:inline-block;width:36px;height:36px;vertical-align:middle;color:#00eaff}
+.page-header p{margin:0 0 18px;color:#00eaff;font-size:18px;line-height:1.5}
+.hero-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.back-button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border:2px solid #ff9a9e;border-radius:13px;background:linear-gradient(180deg,#ff626b,#df101f);box-shadow:0 0 14px #ff233b60;color:white;font-size:14px;font-weight:800;text-decoration:none}
+.hero-pill{min-height:43px;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid #087cff;border-radius:25px;background:#052f83a6;color:white;font-size:12px;white-space:nowrap}
+.hero-pill b{width:29px;height:29px;flex:0 0 29px;display:grid;place-items:center;border:1px solid #52dfff;border-radius:50%;background:#0849e6;font-size:16px}
+.hero-quote{display:flex;align-items:flex-start;gap:13px;padding-left:24px;border-left:2px solid #00eaff;color:white;font-size:23px;font-weight:700;line-height:1.45}
+.hero-quote-mark{color:#a5a0ff;font-size:53px;font-weight:900;line-height:.8}
+.hero-quote-line{width:75px;height:5px;margin-top:17px;border-radius:8px;background:linear-gradient(90deg,#f34cff,#00eaff)}
+
+.beneficiary-panel{width:100%;min-width:0;margin:0 0 15px;padding:24px;border:1px solid #00bfff;border-radius:21px;background:linear-gradient(120deg,#06215e,#03123d 70%,#061a5a);box-shadow:0 0 18px #007dff60,inset 0 0 24px #005dff20}
+.add-beneficiary-box{margin:0 0 23px}
+.add-heading,.registered-heading{display:flex;align-items:center;gap:15px}
+.add-heading{margin-bottom:17px}
+.add-icon,.registered-icon{width:58px;height:58px;flex:0 0 58px;display:grid;place-items:center;border:2px solid #54aaff;border-radius:50%;background:radial-gradient(circle at 35% 30%,#006bff,#0819a8);box-shadow:0 0 15px #7d40ff70,inset 0 0 15px #00baff;color:white}
+.add-icon svg,.registered-icon svg{width:31px;height:31px}
+.add-beneficiary-title{margin:0 0 4px;color:white;font-size:26px}
+.add-subtitle{color:#e1ebff;font-size:15px;line-height:1.5}
+
+.beneficiary-form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;align-items:end;gap:16px;width:100%;min-width:0}
+.beneficiary-form-group{min-width:0;display:flex;flex-direction:column;gap:8px}
+.beneficiary-form-group label{color:#f0f6ff;font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.beneficiary-form-group input{width:100%;min-width:0;height:52px;padding:12px 15px;border:1px solid #00aaff;border-radius:10px;outline:none;background:#03143e;box-shadow:inset 0 0 10px #001a50;color:white;font-size:16px}
+.beneficiary-form-group input:focus{border-color:#45eaff;box-shadow:0 0 12px #00bfff70}
+.beneficiary-form-group input::placeholder{color:#d1e0ff}
+.add-beneficiary-btn{min-height:52px;padding:0 19px;border:2px solid #41f2ff;border-radius:13px;background:linear-gradient(135deg,#00dfff,#0058ff);box-shadow:0 0 14px #008cff70;color:white;font-size:15px;font-weight:800;cursor:pointer;white-space:nowrap}
+.add-beneficiary-btn:hover{box-shadow:0 0 22px #00bfff}
+.add-beneficiary-btn:disabled{opacity:.55;cursor:not-allowed}
+.add-beneficiary-message{display:none;margin-top:12px;padding:12px 14px;border-radius:9px;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.add-beneficiary-message.error{display:block;border:1px solid #ff315c;background:#57102caa;color:#ff858b}
+.add-beneficiary-message.success{display:block;border:1px solid #00e7b2;background:#063c46;color:#69ffcb}
+
+.registered-heading{margin:0 0 17px}
+.registered-heading h2{margin:0 0 4px;color:white;font-size:25px}
+.registered-heading p{margin:0;color:#e1eaff;font-size:14px;line-height:1.5}
+.beneficiary-table-wrapper{width:100%;max-width:100%;min-width:0;overflow:visible}
+.beneficiary-table{width:100%;max-width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0 5px}
+.beneficiary-table th{padding:13px 8px;border-bottom:1px solid #007cff;background:#073b9b;color:#f0f6ff;text-align:left;font-size:11px;letter-spacing:.2px;text-transform:uppercase;overflow-wrap:anywhere}
+.beneficiary-table th:first-child{border-radius:9px 0 0 9px}
+.beneficiary-table th:last-child{border-radius:0 9px 9px 0}
+.beneficiary-table td{padding:13px 8px;border-top:1px solid #0646a0;border-bottom:1px solid #0646a0;background:#031a4d;color:#f0f5ff;font-size:13px;line-height:1.45;overflow-wrap:anywhere;word-break:break-word}
+.beneficiary-table td:first-child{border-left:1px solid #0646a0;border-radius:9px 0 0 9px;color:#00f0ff;font-weight:800}
+.beneficiary-table td:last-child{border-right:1px solid #0646a0;border-radius:0 9px 9px 0}
+.beneficiary-table tbody tr:hover td{background:#063078}
+.account-number{color:#00efff!important;font-weight:800;letter-spacing:.2px}
+.beneficiary-name{color:#fff!important;font-weight:600}
+.account-type{color:#d8ecff;font-weight:600}
+.beneficiary-status{display:inline-block;max-width:100%;padding:6px 9px;border:1px solid #008d82;border-radius:20px;background:#004b56;box-shadow:0 0 9px #00d8a622;color:#00ffd1;font-size:10px;font-weight:800;text-align:center;text-transform:uppercase;overflow-wrap:anywhere}
+.beneficiary-status.inactive{border-color:#a72a58;background:#511b3b;box-shadow:0 0 9px #ff347022;color:#ff8297}
+.beneficiary-action{width:100%;max-width:125px;padding:9px 6px;border-radius:9px;font-size:11px;font-weight:800;line-height:1.3;white-space:normal;overflow-wrap:anywhere;cursor:pointer}
+.deactivate-btn{border:1px solid #ffb800;background:#402d0d;box-shadow:0 0 8px #ffb80030;color:#ffd44d}
+.deactivate-btn:hover{background:#694900}
+.delete-btn{border:1px solid #ff728a;background:linear-gradient(135deg,#ff536b,#b90937);box-shadow:0 0 9px #ff315c50;color:white}
+.message{padding:30px 18px;border:1px solid #64a0d214;border-radius:15px;background:#ffffff08;color:#e1ebff;font-size:15px;line-height:1.6;text-align:center;overflow-wrap:anywhere}
+
+@media(max-width:1200px){
+.main.beneficiaries-page{padding:0 20px 24px!important}
+.ibi-topbar{width:calc(100% + 40px);margin:0 -20px 16px;padding:12px 20px;grid-template-columns:245px minmax(100px,1fr) auto;gap:13px}
+.ibi-logo{width:70px;height:62px;flex-basis:70px}
+.ibi-brand{gap:9px}
+.ibi-brand-name{font-size:27px}
+.ibi-brand-sub{font-size:10px}
+.ibi-avatar{width:44px;height:44px;flex-basis:44px}
+.ibi-avatar svg{width:24px;height:24px}
+.ibi-user-area{gap:8px}
+.ibi-welcome{min-width:80px;font-size:11px}
+.ibi-welcome strong{max-width:125px;font-size:13px}
+.ibi-logout{min-height:42px;padding:10px 12px;font-size:12px}
+.page-header{grid-template-columns:minmax(0,1fr) 200px;padding:25px}
+.hero-quote{padding-left:15px;font-size:19px}
+.beneficiary-panel{padding:20px}
+.beneficiary-form{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.add-beneficiary-btn{grid-column:1/-1;width:100%}
+.beneficiary-table th,.beneficiary-table td{padding:10px 5px;font-size:11px}
+.beneficiary-action{font-size:10px}
+}
+@media(max-width:700px){
+.main.beneficiaries-page{padding:0 12px 18px!important}
+.ibi-topbar{width:calc(100% + 24px);min-height:0;margin:0 -12px 13px;padding:12px;grid-template-columns:minmax(0,1fr) auto;gap:12px}
+.ibi-brand{gap:8px}
+.ibi-logo{width:54px;height:48px;flex-basis:54px}
+.ibi-brand-name{font-size:21px}
+.ibi-brand-sub{font-size:9px}
+.ibi-global-search{grid-column:1/-1;grid-row:2;height:43px;padding:0 13px}
+.ibi-search-icon{width:21px;height:21px}
+.ibi-global-search input{font-size:13px!important}
+.ibi-user-area{display:flex!important;visibility:visible!important;align-items:center;justify-content:flex-end;gap:7px}
+.ibi-avatar{display:grid!important;width:36px;height:36px;flex-basis:36px}
+.ibi-avatar svg{width:20px;height:20px}
+.ibi-welcome{display:block!important;min-width:0;font-size:9px}
+.ibi-welcome strong{max-width:92px;font-size:11px}
+.ibi-logout{min-height:35px;padding:8px;border-radius:9px;font-size:10px}
+.page-header{display:block;min-height:0;padding:23px 18px;margin-bottom:14px;border-radius:16px}
+.page-header h1{font-size:clamp(27px,7vw,36px)}
+.page-header p{font-size:15px}
+.hero-eyebrow{font-size:12px}
+.hero-quote{display:none}
+.hero-actions{gap:8px}
+.back-button{min-height:40px;padding:9px 12px;font-size:12px}
+.hero-pill{min-height:34px;padding:5px 8px;font-size:10px}
+.hero-pill b{width:23px;height:23px;flex-basis:23px;font-size:13px}
+.beneficiary-panel{padding:17px 12px;border-radius:15px}
+.add-heading,.registered-heading{align-items:center;gap:11px}
+.add-icon,.registered-icon{width:44px;height:44px;flex-basis:44px}
+.add-icon svg,.registered-icon svg{width:25px;height:25px}
+.add-beneficiary-title,.registered-heading h2{font-size:20px}
+.add-subtitle,.registered-heading p{font-size:12px}
+.beneficiary-form{grid-template-columns:minmax(0,1fr);gap:12px}
+.add-beneficiary-btn{grid-column:auto;width:100%}
+.beneficiary-form-group input{height:49px;font-size:14px}
+.beneficiary-table-wrapper{overflow:visible}
+.beneficiary-table,.beneficiary-table tbody{display:block;width:100%}
+.beneficiary-table{table-layout:auto;border-collapse:separate;border-spacing:0}
+.beneficiary-table thead{display:none}
+.beneficiary-table tbody tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 10px;margin-bottom:13px;padding:8px 10px;border:1px solid #087cff70;border-radius:12px;background:#031a4d}
+.beneficiary-table tbody td,.beneficiary-table tbody td:first-child,.beneficiary-table tbody td:last-child{display:block;min-width:0;padding:9px 4px;border:0;border-radius:0;background:transparent;font-size:12px;text-align:left;white-space:normal;overflow-wrap:anywhere;word-break:break-word}
+.beneficiary-table tbody td::before{display:block;margin-bottom:4px;color:#83bfff;font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.beneficiary-table tbody td:nth-child(1)::before{content:"ID"}
+.beneficiary-table tbody td:nth-child(2)::before{content:"Owner Account"}
+.beneficiary-table tbody td:nth-child(3)::before{content:"Beneficiary Name"}
+.beneficiary-table tbody td:nth-child(4)::before{content:"Beneficiary Account"}
+.beneficiary-table tbody td:nth-child(5)::before{content:"Account Type"}
+.beneficiary-table tbody td:nth-child(6)::before{content:"Bank"}
+.beneficiary-table tbody td:nth-child(7)::before{content:"IFSC"}
+.beneficiary-table tbody td:nth-child(8)::before{content:"Status"}
+.beneficiary-table tbody td:nth-child(9)::before{content:"Action"}
+.beneficiary-action{width:100%;max-width:none;padding:8px 5px;font-size:10px}
+}
+@media(max-width:380px){
+.ibi-brand-name{font-size:18px}
+.ibi-brand-sub{font-size:8px}
+.ibi-user-area{gap:5px}
+.ibi-avatar{width:31px;height:31px;flex-basis:31px}
+.ibi-welcome strong{max-width:76px;font-size:10px}
+.ibi-logout{padding:7px 6px;font-size:9px}
+.hero-pill{white-space:normal}
+.beneficiary-table tbody tr{gap:0 6px;padding:7px}
+}
+</style>
+</head>
+
+<body>
+<header class="ibi-topbar">
+  <div class="ibi-brand">
+    <div class="ibi-logo">
+      <img
+        id="ibiBankLogo"
+        src="../images/ibi-logo.png"
+        alt="IBI Bank Logo"
+        onerror="handleExistingLogoError(this)"
+      >
+    </div>
+    <div>
+      <div class="ibi-brand-name">IBI Bank</div>
+      <div class="ibi-brand-sub">International Bank of India</div>
+    </div>
+  </div>
+
+  <label class="ibi-global-search">
+    <svg class="ibi-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+      <circle cx="10.8" cy="10.8" r="7"></circle>
+      <path d="m16 16 5 5"></path>
+    </svg>
+    <input id="globalSearch" type="search" placeholder="Search transactions, accounts, beneficiaries..." aria-label="Search beneficiaries">
+  </label>
+
+  <div class="ibi-user-area">
+    <div class="ibi-avatar" aria-label="Profile icon">
+      <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+        <circle cx="12" cy="7.5" r="4"></circle>
+        <path d="M4 21v-2a8 8 0 0 1 16 0v2z"></path>
+      </svg>
+    </div>
+    <div class="ibi-welcome">
+      Welcome back,
+      <strong id="welcomeName">IBI Customer</strong>
+    </div>
+    <a href="#" class="ibi-logout" onclick="logout(); return false;" aria-label="Logout">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10 17l5-5-5-5"></path>
+        <path d="M15 12H3"></path>
+        <path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"></path>
+      </svg>
+      Logout
+    </a>
+  </div>
+</header>
+
+<main class="main beneficiaries-page">
+  <section class="page-header">
+    <div class="hero-main">
+      <div class="hero-eyebrow">BENEFICIARY MANAGEMENT</div>
+      <h1>
+        Beneficiary Management
+        <svg class="hero-title-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="9" r="5"></circle>
+          <path d="M2 27v-3a9 9 0 0 1 18 0v3z"></path>
+          <path d="M21 5a5 5 0 0 1 0 10"></path>
+          <path d="M24 19a8 8 0 0 1 6 8"></path>
+        </svg>
+      </h1>
+      <p>Manage and view your registered beneficiaries.</p>
+      <div class="hero-actions">
+        <a href="javascript:history.back()" class="back-button"><span>←</span> Back to Previous Page</a>
+        <span class="hero-pill"><b>⛨</b> Secure Banking</span>
+        <span class="hero-pill"><b>ϟ</b> Fast Transfers</span>
+        <span class="hero-pill"><b>♡</b> Always With You</span>
+      </div>
+    </div>
+    <div class="hero-quote">
+      <span class="hero-quote-mark">“</span>
+      <div>
+        Your money.<br>
+        Your choices.<br>
+        Your trust.
+        <div class="hero-quote-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="beneficiary-panel">
+    <div id="addBeneficiaryBox" class="add-beneficiary-box">
+      <div class="add-heading">
+        <div class="add-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="8" r="5"></circle>
+            <path d="M3 27v-3a9 9 0 0 1 18 0v3z"></path>
+            <path d="M25 10v10"></path>
+            <path d="M20 15h10"></path>
+          </svg>
+        </div>
+        <div>
+          <h3 class="add-beneficiary-title">Add Beneficiary</h3>
+          <div class="add-subtitle">Add a new beneficiary to make faster and secure transfers.</div>
+        </div>
+      </div>
+
+      <form id="beneficiaryForm" class="beneficiary-form">
+        <div class="beneficiary-form-group">
+          <label for="beneficiaryName">Beneficiary Name</label>
+          <input type="text" id="beneficiaryName" placeholder="Enter beneficiary name" autocomplete="off" required>
+        </div>
+        <div class="beneficiary-form-group">
+          <label for="beneficiaryAccount">Account Number</label>
+          <input type="text" id="beneficiaryAccount" placeholder="Enter account number" autocomplete="off" required>
+        </div>
+        <button type="submit" id="addBeneficiaryBtn" class="add-beneficiary-btn">＋ Add Beneficiary</button>
+      </form>
+
+      <div id="addBeneficiaryMessage" class="add-beneficiary-message" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="registered-heading">
+      <div class="registered-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="5" y="3" width="22" height="26" rx="2"></rect>
+          <path d="M10 10h12"></path>
+          <path d="M10 16h12"></path>
+          <path d="M10 22h12"></path>
+        </svg>
+      </div>
+      <div>
+        <h2>Registered Beneficiaries</h2>
+        <p>View and manage your registered beneficiaries.</p>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="message">Loading beneficiaries...</div>
+    </div>
+  </section>
+</main>
+
+<script>
+"use strict";
+
+const API_BASE = "http://127.0.0.1:5000";
+
+let currentUser = null;
+let currentAdmin = null;
+let allBeneficiaries = [];
+let allAccounts = [];
+
+/* Uses only the existing ibi-logo.png file.
+   Tries common paths if the first relative path fails. */
+function handleExistingLogoError(image) {
+  const paths = [
+    "../images/ibi-logo.png",
+    "images/ibi-logo.png",
+    "/Fronted/images/ibi-logo.png",
+    "/images/ibi-logo.png",
+    "../../images/ibi-logo.png"
+  ];
+
+  const currentIndex = Number(image.dataset.logoPathIndex || "0");
+  const nextIndex = currentIndex + 1;
+
+  if (nextIndex < paths.length) {
+    image.dataset.logoPathIndex = String(nextIndex);
+    image.src = paths[nextIndex];
+    return;
+  }
+
+  /* No replacement logo or text fallback. */
+  image.style.display = "none";
+  console.error(
+    "IBI Bank logo could not be found. Check the location and filename of images/ibi-logo.png."
+  );
+}
+
+function getLoggedInUser() {
+  let user = null;
+  let admin = null;
+
+  try {
+    const value = localStorage.getItem("loggedInUser");
+    if (value && value !== "undefined" && value !== "null") {
+      user = JSON.parse(value);
+    }
+  } catch (error) {
+    console.error("Could not read logged-in user.", error);
+  }
+
+  try {
+    const value = localStorage.getItem("loggedInAdmin");
+    if (value && value !== "undefined" && value !== "null") {
+      admin = JSON.parse(value);
+    }
+  } catch (error) {
+    console.error("Could not read logged-in admin.", error);
+  }
+
+  currentUser = user;
+  currentAdmin = admin;
+  return { user, admin };
+}
+
+function getProfileName(profile) {
+  if (!profile) return "IBI Customer";
+
+  return (
+    profile.name ||
+    profile.full_name ||
+    profile.customer_name ||
+    profile.username ||
+    profile.email ||
+    "IBI Customer"
+  );
+}
+
+function setWelcomeName() {
+  const { user, admin } = getLoggedInUser();
+  const profile = user || admin;
+  const welcome = document.getElementById("welcomeName");
+
+  if (welcome) {
+    welcome.textContent = getProfileName(profile);
+    welcome.title = getProfileName(profile);
+  }
+}
+
+async function loadBeneficiaries() {
+  const content = document.getElementById("content");
+  const { user, admin } = getLoggedInUser();
+
+  setWelcomeName();
+
+  if (!user && !admin) {
+    content.innerHTML = '<div class="message">Please login first.</div>';
+    document.getElementById("addBeneficiaryBox").style.display = "none";
+    return;
+  }
+
+  const isAdmin = Boolean(
+    admin && String(admin.role || "").toLowerCase() === "admin"
+  );
+
+  document.getElementById("addBeneficiaryBox").style.display =
+    isAdmin ? "none" : "";
+
+  content.innerHTML = '<div class="message">Loading beneficiaries...</div>';
+
+  try {
+    const [beneficiaryResponse, accountResponse] = await Promise.all([
+      fetch(`${API_BASE}/api/beneficiaries`),
+      fetch(`${API_BASE}/api/accounts`)
+    ]);
+
+    if (!beneficiaryResponse.ok || !accountResponse.ok) {
+      throw new Error(
+        "Failed to load data. Check the backend server and API routes."
+      );
+    }
+
+    const beneficiariesData = await beneficiaryResponse.json();
+    const accountsData = await accountResponse.json();
+
+    allBeneficiaries = Array.isArray(beneficiariesData) ? beneficiariesData : [];
+    allAccounts = Array.isArray(accountsData) ? accountsData : [];
+
+    let filteredBeneficiaries = allBeneficiaries;
+
+    if (!isAdmin && user) {
+      const userEmail = String(user.email || "").toLowerCase();
+
+      const userAccount = allAccounts.find(account =>
+        String(account.email || "").toLowerCase() === userEmail
+      );
+
+      if (!userAccount) {
+        content.innerHTML = '<div class="message">No account found for this user.</div>';
+        updateAddFormState([]);
+        return;
+      }
+
+      filteredBeneficiaries = allBeneficiaries.filter(
+        beneficiary =>
+          Number(beneficiary.account_id) === Number(userAccount.account_id)
+      );
+    }
+
+    updateAddFormState(filteredBeneficiaries);
+
+    if (filteredBeneficiaries.length === 0) {
+      content.innerHTML = '<div class="message">No beneficiary records found.</div>';
+      return;
+    }
+
+    let html = `
+      <div class="beneficiary-table-wrapper">
+        <table class="beneficiary-table">
+          <colgroup>
+            <col style="width:5%">
+            <col style="width:12%">
+            <col style="width:15%">
+            <col style="width:13%">
+            <col style="width:11%">
+            <col style="width:16%">
+            <col style="width:10%">
+            <col style="width:9%">
+            <col style="width:9%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Owner Account</th>
+              <th>Beneficiary Name</th>
+              <th>Beneficiary Account</th>
+              <th>Account Type</th>
+              <th>Bank</th>
+              <th>IFSC</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>`;
+
+    filteredBeneficiaries.forEach(beneficiary => {
+      const ownerAccount = allAccounts.find(
+        account =>
+          Number(account.account_id) === Number(beneficiary.account_id)
+      );
+
+      const ownerAccountNumber = ownerAccount
+        ? ownerAccount.account_number || "-"
+        : "-";
+
+      const status = beneficiary.status || "Inactive";
+      const isActive = String(status).toLowerCase() === "active";
+      const statusClass = isActive ? "" : "inactive";
+      let actionHTML = "-";
+
+      if (!isAdmin && user) {
+        const id = Number(beneficiary.beneficiary_id);
+
+        if (Number.isFinite(id) && id > 0) {
+          if (isActive) {
+            actionHTML = `
+              <button type="button"
+                class="beneficiary-action deactivate-btn"
+                onclick="deactivateBeneficiary(${id})">
+                ⏻ Deactivate
+              </button>`;
+          } else {
+            actionHTML = `
+              <button type="button"
+                class="beneficiary-action delete-btn"
+                onclick="deleteBeneficiary(${id})">
+                Delete
+              </button>`;
+          }
+        }
+      }
+
+      html += `
+        <tr>
+          <td>#${escapeHTML(beneficiary.beneficiary_id)}</td>
+          <td class="account-number">${escapeHTML(ownerAccountNumber)}</td>
+          <td class="beneficiary-name">${escapeHTML(beneficiary.beneficiary_name)}</td>
+          <td class="account-number">${escapeHTML(beneficiary.beneficiary_account_no)}</td>
+          <td class="account-type">${escapeHTML(beneficiary.account_type || "-")}</td>
+          <td>${escapeHTML(beneficiary.bank_name || "-")}</td>
+          <td>${escapeHTML(beneficiary.IFSC || "-")}</td>
+          <td>
+            <span class="beneficiary-status ${statusClass}">
+              ${escapeHTML(status)}
+            </span>
+          </td>
+          <td>${actionHTML}</td>
+        </tr>`;
+    });
+
+    html += `
+          </tbody>
+        </table>
+      </div>`;
+
+    content.innerHTML = html;
+    filterBeneficiaryRows(document.getElementById("globalSearch").value);
+
+  } catch (error) {
+    console.error("LOAD BENEFICIARIES ERROR:", error);
+
+    content.innerHTML = `
+      <div class="message">
+        Failed to load beneficiaries. Check that the backend is running
+        and the beneficiary and account API routes are available.
+        <br><br>
+        ${escapeHTML(error.message)}
+      </div>`;
+  }
+}
+
+function updateAddFormState(beneficiaries) {
+  const button = document.getElementById("addBeneficiaryBtn");
+  const message = document.getElementById("addBeneficiaryMessage");
+
+  if (!button) return;
+
+  const { user } = getLoggedInUser();
+
+  if (!user || !user.email) {
+    button.disabled = true;
+    return;
+  }
+
+  const userEmail = String(user.email).toLowerCase();
+
+  const userAccount = allAccounts.find(
+    account => String(account.email || "").toLowerCase() === userEmail
+  );
+
+  const ownedBeneficiaries = userAccount
+    ? beneficiaries.filter(
+        beneficiary =>
+          Number(beneficiary.account_id) === Number(userAccount.account_id)
+      )
+    : [];
+
+  const hasActive = ownedBeneficiaries.some(
+    beneficiary => String(beneficiary.status || "").toLowerCase() === "active"
+  );
+
+  button.disabled = false;
+  button.textContent = "＋ Add Beneficiary";
+
+  if (hasActive) {
+    message.className = "add-beneficiary-message error";
+    message.style.display = "block";
+    message.textContent =
+      "⚠ You already have one active beneficiary. Deactivate it before adding another.";
+  } else if (!message.classList.contains("success")) {
+    message.className = "add-beneficiary-message";
+    message.style.display = "none";
+    message.textContent = "";
+  }
+}
+
+document.getElementById("beneficiaryForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const nameInput = document.getElementById("beneficiaryName");
+  const accountInput = document.getElementById("beneficiaryAccount");
+  const button = document.getElementById("addBeneficiaryBtn");
+
+  const beneficiaryName = nameInput.value.trim();
+  const beneficiaryAccount = accountInput.value.trim();
+  const { user, admin } = getLoggedInUser();
+
+  if (!user || !user.email) {
+    showAddMessage("Please login as a customer first.", "error");
+    return;
+  }
+
+  if (admin && String(admin.role || "").toLowerCase() === "admin") {
+    showAddMessage(
+      "Administrators cannot add customer beneficiaries from this page.",
+      "error"
+    );
+    return;
+  }
+
+  if (!beneficiaryName || !beneficiaryAccount) {
+    showAddMessage("Please enter the beneficiary name and account number.", "error");
+    return;
+  }
+
+  const userEmail = String(user.email).toLowerCase();
+
+  const userAccount = allAccounts.find(
+    account => String(account.email || "").toLowerCase() === userEmail
+  );
+
+  if (!userAccount) {
+    showAddMessage("Your account could not be found.", "error");
+    return;
+  }
+
+  const hasActive = allBeneficiaries.some(
+    beneficiary =>
+      Number(beneficiary.account_id) === Number(userAccount.account_id) &&
+      String(beneficiary.status || "").toLowerCase() === "active"
+  );
+
+  if (hasActive) {
+    showAddMessage(
+      "You already have one active beneficiary. Deactivate it before adding another.",
+      "error"
+    );
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Adding...";
+
+  try {
+    const response = await fetch(`${API_BASE}/api/beneficiaries`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        customer_email: user.email,
+        beneficiary_name: beneficiaryName,
+        beneficiary_account_no: beneficiaryAccount
+      })
+    });
+
+    const result = await readResponse(response);
+
+    if (!response.ok) {
+      throw new Error(result.message || "Failed to add beneficiary.");
+    }
+
+    nameInput.value = "";
+    accountInput.value = "";
+
+    await loadBeneficiaries();
+
+    showAddMessage(
+      result.message || "Beneficiary added successfully.",
+      "success"
+    );
+
+  } catch (error) {
+    console.error("ADD BENEFICIARY ERROR:", error);
+    showAddMessage(error.message || "Failed to add beneficiary.", "error");
+
+  } finally {
+    button.disabled = false;
+    button.textContent = "＋ Add Beneficiary";
+  }
+});
+
+function showAddMessage(text, type) {
+  const message = document.getElementById("addBeneficiaryMessage");
+  if (!message) return;
+
+  message.textContent = text;
+  message.className = "add-beneficiary-message " + type;
+  message.style.display = "block";
+}
+
+async function readResponse(response) {
+  const text = await response.text();
+  if (!text) return {};
+
+  try {
+    return JSON.parse(text);
+  } catch (_) {
+    return { message: text };
+  }
+}
+
+async function deactivateBeneficiary(beneficiaryId) {
+  const { user } = getLoggedInUser();
+
+  if (!user || !user.email) {
+    alert("Please login first.");
+    return;
+  }
+
+  if (!confirm("Are you sure you want to deactivate this beneficiary?")) {
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `${API_BASE}/api/beneficiaries/${encodeURIComponent(beneficiaryId)}/deactivate?email=${encodeURIComponent(user.email)}`,
+      { method: "PUT" }
+    );
+
+    const result = await readResponse(response);
+
+    if (!response.ok) {
+      throw new Error(result.message || "Failed to deactivate beneficiary.");
+    }
+
+    alert(result.message || "Beneficiary deactivated successfully.");
+    clearAddMessage();
+    await loadBeneficiaries();
+
+  } catch (error) {
+    console.error("DEACTIVATE BENEFICIARY ERROR:", error);
+    alert(error.message || "Failed to deactivate beneficiary.");
+  }
+}
+
+
+async function deleteBeneficiary(beneficiaryId) {
+    const user = JSON.parse(
+        localStorage.getItem("loggedInUser") || "null"
+    );
+
+    if (!user || !user.email) {
+        alert("Please log in again to delete this beneficiary.");
+        return;
+    }
+
+    if (!beneficiaryId || !Number.isFinite(Number(beneficiaryId))) {
+        alert("Invalid beneficiary ID.");
+        return;
+    }
+
+    const confirmed = confirm(
+        "Are you sure you want to permanently delete this inactive beneficiary?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+        const url =
+            "http://127.0.0.1:5000/api/beneficiaries/" +
+            encodeURIComponent(beneficiaryId) +
+            "?email=" +
+            encodeURIComponent(user.email);
+
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: {
+                "Accept": "application/json"
+            }
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(
+                result.message ||
+                result.error ||
+                `Delete failed (HTTP ${response.status}).`
+            );
+        }
+
+        alert(result.message || "Inactive beneficiary deleted successfully.");
+
+        // Refresh using your existing beneficiary-loading function.
+        if (typeof loadBeneficiaries === "function") {
+            await loadBeneficiaries();
+        } else if (typeof fetchBeneficiaries === "function") {
+            await fetchBeneficiaries();
+        } else {
+            window.location.reload();
+        }
+    } catch (error) {
+        console.error("Delete beneficiary error:", error);
+        alert(error.message || "Unable to delete the beneficiary. Please try again.");
+    }
+}
+
+function clearAddMessage() {
+  const message = document.getElementById("addBeneficiaryMessage");
+  if (!message) return;
+
+  message.className = "add-beneficiary-message";
+  message.style.display = "none";
+  message.textContent = "";
+}
+
+function filterBeneficiaryRows(value) {
+  const query = String(value || "").trim().toLowerCase();
+
+  document.querySelectorAll("#content .beneficiary-table tbody tr").forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(query) ? "" : "none";
+  });
+
+  const visibleRows = Array.from(
+    document.querySelectorAll("#content .beneficiary-table tbody tr")
+  ).filter(row => row.style.display !== "none");
+
+  let noResults = document.getElementById("searchNoResults");
+
+  if (query && visibleRows.length === 0) {
+    if (!noResults) {
+      noResults = document.createElement("div");
+      noResults.id = "searchNoResults";
+      noResults.className = "message";
+      noResults.textContent = "No beneficiaries match your search.";
+      document.getElementById("content").appendChild(noResults);
+    }
+  } else if (noResults) {
+    noResults.remove();
+  }
+}
+
+document.getElementById("globalSearch").addEventListener("input", function() {
+  filterBeneficiaryRows(this.value);
+});
+
+function escapeHTML(value) {
+  if (value === null || value === undefined) return "";
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function logout() {
+  localStorage.removeItem("loggedInUser");
+  localStorage.removeItem("loggedInAdmin");
+  window.location.href = "index.html";
+}
+
+setWelcomeName();
+loadBeneficiaries();
+</script>
+</body>
+</html>

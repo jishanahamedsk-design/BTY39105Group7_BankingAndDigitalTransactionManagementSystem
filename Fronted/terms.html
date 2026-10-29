@@ -1,0 +1,1290 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#02091d">
+    <meta name="description" content="Read the IBI Bank Terms and Conditions governing use of the educational digital banking demonstration application.">
+    <title>Terms &amp; Conditions | IBI Bank — International Bank of India</title>
+
+    <style>
+        :root {
+            --bg: #02091d;
+            --panel: #03132f;
+            --panel-light: #061b49;
+            --cyan: #00dfff;
+            --blue: #075cff;
+            --text: #eaf5ff;
+            --muted: #a9bdd6;
+            --border: rgba(0, 223, 255, 0.25);
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse at 15% 0%, rgba(7, 92, 255, 0.16), transparent 42%),
+                radial-gradient(ellipse at 90% 30%, rgba(0, 223, 255, 0.07), transparent 35%),
+                var(--bg);
+            line-height: 1.75;
+        }
+
+        a {
+            color: var(--cyan);
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--cyan);
+            outline-offset: 4px;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(2, 9, 29, 0.96);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(14px);
+        }
+
+        .header-inner {
+            width: min(1180px, calc(100% - 36px));
+            min-height: 88px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-width: 0;
+        }
+
+        .brand img {
+            display: block;
+            width: 76px;
+            height: 66px;
+            object-fit: contain;
+        }
+
+        .brand-copy {
+            line-height: 1.35;
+        }
+
+        .brand-copy strong {
+            display: block;
+            color: #fff;
+            font-size: 19px;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-copy span {
+            display: block;
+            color: var(--cyan);
+            font-size: 11px;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 17px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: #fff;
+            background: linear-gradient(120deg, #061b49, #03132f);
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .back-link:hover {
+            border-color: var(--cyan);
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            width: min(1180px, calc(100% - 36px));
+            margin: 32px auto 22px;
+            padding: 34px clamp(20px, 4vw, 44px);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            background:
+                radial-gradient(ellipse at 95% 0%, rgba(0, 223, 255, 0.12), transparent 45%),
+                linear-gradient(130deg, #061b49, #03132f 70%);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .eyebrow {
+            color: var(--cyan);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            margin: 10px 0 5px;
+            font-size: clamp(29px, 4.5vw, 45px);
+            line-height: 1.2;
+            color: #fff;
+        }
+
+        .hero h2 {
+            margin: 0 0 15px;
+            color: var(--cyan);
+            font-size: clamp(15px, 2.3vw, 20px);
+            font-weight: 600;
+        }
+
+        .hero p {
+            max-width: 850px;
+            margin: 8px 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .metadata {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .metadata span {
+            padding: 7px 12px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            background: rgba(2, 9, 29, 0.45);
+            color: #dceeff;
+            font-size: 12px;
+        }
+
+        .notice {
+            width: min(1180px, calc(100% - 36px));
+            margin: 0 auto 22px;
+            padding: 18px 21px;
+            border: 1px solid rgba(0, 223, 255, 0.38);
+            border-left: 4px solid var(--cyan);
+            border-radius: 12px;
+            background: rgba(3, 19, 47, 0.9);
+            color: #dbeaff;
+            font-size: 13px;
+        }
+
+        .notice strong {
+            color: var(--cyan);
+        }
+
+        .layout {
+            width: min(1180px, calc(100% - 36px));
+            margin: 0 auto 45px;
+            display: grid;
+            grid-template-columns: 250px minmax(0, 1fr);
+            align-items: start;
+            gap: 22px;
+        }
+
+        .contents {
+            position: sticky;
+            top: 108px;
+            padding: 21px 17px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: rgba(3, 19, 47, 0.94);
+        }
+
+        .contents h2 {
+            margin: 0 0 13px;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .contents ol {
+            margin: 0;
+            padding-left: 19px;
+        }
+
+        .contents li {
+            padding: 4px 0;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .contents a {
+            color: #c6d9f1;
+        }
+
+        .policy {
+            min-width: 0;
+            padding: clamp(20px, 3.5vw, 40px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: linear-gradient(150deg, rgba(3, 19, 47, 0.97), rgba(2, 9, 29, 0.98));
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .policy section {
+            padding: 0 0 24px;
+            margin: 0 0 25px;
+            border-bottom: 1px solid rgba(169, 189, 214, 0.13);
+            scroll-margin-top: 110px;
+        }
+
+        .policy section:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .policy h2 {
+            margin: 0 0 13px;
+            color: var(--cyan);
+            font-size: clamp(18px, 2.5vw, 22px);
+            line-height: 1.4;
+        }
+
+        .policy h3 {
+            margin: 20px 0 7px;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .policy p {
+            margin: 9px 0 13px;
+            color: #c8d8ec;
+            font-size: 13.5px;
+        }
+
+        .policy ul,
+        .policy ol {
+            padding-left: 24px;
+            margin: 10px 0 15px;
+        }
+
+        .policy li {
+            padding: 3px 0;
+            color: #c8d8ec;
+            font-size: 13.5px;
+        }
+
+        .policy strong {
+            color: #fff;
+        }
+
+        .policy code {
+            padding: 2px 5px;
+            border-radius: 4px;
+            background: #061b49;
+            color: var(--cyan);
+            font-size: 12px;
+            overflow-wrap: anywhere;
+        }
+
+        .policy-note {
+            margin: 14px 0;
+            padding: 14px 16px;
+            border: 1px solid rgba(0, 223, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(6, 27, 73, 0.48);
+        }
+
+        .contact-card {
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #061b49;
+        }
+
+        .contact-card p {
+            margin: 5px 0;
+        }
+
+        .site-footer {
+            padding: 27px 18px;
+            border-top: 1px solid var(--border);
+            background: rgba(2, 9, 29, 0.96);
+            text-align: center;
+        }
+
+        .footer-brand {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 22px;
+            margin: 13px 0;
+            font-size: 12px;
+        }
+
+        .site-footer p {
+            margin: 7px 0;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 30;
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: #fff;
+            background: linear-gradient(135deg, #075cff, #03132f);
+            font-size: 21px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 850px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .contents {
+                position: static;
+            }
+
+            .contents ol {
+                columns: 2;
+                column-gap: 28px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .header-inner {
+                width: calc(100% - 24px);
+                min-height: 76px;
+                gap: 8px;
+            }
+
+            .brand {
+                gap: 7px;
+            }
+
+            .brand img {
+                width: 52px;
+                height: 54px;
+            }
+
+            .brand-copy strong {
+                font-size: 15px;
+            }
+
+            .brand-copy span {
+                max-width: 165px;
+                font-size: 8px;
+                letter-spacing: 0.5px;
+            }
+
+            .back-link {
+                padding: 9px 10px;
+                font-size: 11px;
+            }
+
+            .hero,
+            .notice,
+            .layout {
+                width: calc(100% - 24px);
+            }
+
+            .hero {
+                margin-top: 18px;
+                padding: 24px 19px;
+            }
+
+            .contents ol {
+                columns: 1;
+            }
+
+            .policy {
+                padding: 21px 17px;
+            }
+
+            .policy p,
+            .policy li {
+                font-size: 13px;
+            }
+
+            .back-to-top {
+                right: 14px;
+                bottom: 14px;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #111;
+            }
+
+            .site-header,
+            .contents,
+            .site-footer,
+            .back-link,
+            .back-to-top {
+                display: none !important;
+            }
+
+            .hero,
+            .notice,
+            .layout {
+                width: 100%;
+                margin: 0 auto 15px;
+            }
+
+            .hero,
+            .notice,
+            .policy {
+                background: #fff;
+                color: #111;
+                box-shadow: none;
+                border: 1px solid #bbb;
+            }
+
+            .hero h1,
+            .hero h2,
+            .policy h2,
+            .policy h3,
+            .policy strong,
+            .policy p,
+            .policy li,
+            .hero p {
+                color: #111;
+            }
+
+            .layout {
+                display: block;
+            }
+
+            .policy section {
+                break-inside: avoid;
+            }
+
+            a {
+                color: #111;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header class="site-header">
+    <div class="header-inner">
+        <a class="brand" href="index.html" aria-label="IBI Bank home">
+            <img src="images/ibi-logo.png"
+                 alt="IBI Bank logo"
+                 onerror="this.onerror=null;this.alt='IBI Bank logo';">
+            <span class="brand-copy">
+                <strong>IBI Bank</strong>
+                <span>International Bank of India</span>
+            </span>
+        </a>
+
+        <a class="back-link" href="index.html">← Back to Login</a>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="eyebrow">Terms · Security · Responsible Use</div>
+        <h1>Terms &amp; Conditions</h1>
+        <h2>IBI Bank — International Bank of India</h2>
+        <p>
+            These Terms &amp; Conditions describe the rules and conditions
+            for accessing and using the IBI Bank educational digital banking
+            demonstration application, including its available features,
+            account access, responsibilities, and limitations.
+        </p>
+
+        <div class="metadata">
+            <span>Effective Date: October 23, 2026</span>
+            <span>Last Updated: October 23, 2026</span>
+            <span>Document: Website Terms &amp; Conditions</span>
+        </div>
+    </section>
+
+    <div class="notice">
+        <strong>Important demonstration notice:</strong>
+        IBI Bank is an educational and demonstration banking application.
+        It is not represented by these terms as a licensed bank or regulated
+        financial institution. The application must not be used to perform
+        real banking transactions. Do not enter real banking credentials,
+        PINs, card security codes, or other sensitive financial information.
+    </div>
+
+    <div class="layout">
+        <aside class="contents" aria-label="Terms and conditions contents">
+            <h2>On this page</h2>
+            <ol>
+                <li><a href="#introduction">Introduction and acceptance</a></li>
+                <li><a href="#educational">Educational project</a></li>
+                <li><a href="#eligibility">Eligibility</a></li>
+                <li><a href="#registration">Registration and accounts</a></li>
+                <li><a href="#security">Credentials and security</a></li>
+                <li><a href="#acceptable-use">Acceptable use</a></li>
+                <li><a href="#account-information">Account information</a></li>
+                <li><a href="#transactions">Transactions and transfers</a></li>
+                <li><a href="#beneficiaries">Beneficiary management</a></li>
+                <li><a href="#loans">Loans, interest and EMI</a></li>
+                <li><a href="#administrators">Administrator access</a></li>
+                <li><a href="#privacy">Privacy and personal information</a></li>
+                <li><a href="#intellectual-property">Intellectual property</a></li>
+                <li><a href="#third-parties">Third-party services</a></li>
+                <li><a href="#availability">Availability and maintenance</a></li>
+                <li><a href="#warranties">Disclaimer of warranties</a></li>
+                <li><a href="#liability">Limitation of liability</a></li>
+                <li><a href="#indemnity">Misuse and indemnity</a></li>
+                <li><a href="#termination">Suspension and termination</a></li>
+                <li><a href="#changes">Changes to these terms</a></li>
+                <li><a href="#governing-law">Governing law</a></li>
+                <li><a href="#severability">Severability</a></li>
+                <li><a href="#waiver">Waiver</a></li>
+                <li><a href="#entire-agreement">Entire agreement</a></li>
+                <li><a href="#contact">Contact us</a></li>
+            </ol>
+        </aside>
+
+        <article class="policy">
+            <section id="introduction">
+                <h2>1. Introduction and Acceptance</h2>
+                <p>
+                    Welcome to IBI Bank — International Bank of India
+                    ("IBI Bank," "we," "our," or "us"). These Terms &amp;
+                    Conditions ("Terms") govern access to and use of the
+                    IBI Bank website and its educational digital banking
+                    demonstration application.
+                </p>
+                <p>
+                    By accessing or using the application, you acknowledge
+                    that you have read and understood these Terms. If you
+                    do not agree with them, discontinue using the application.
+                </p>
+                <p>
+                    These Terms should be read together with the
+                    <a href="privacy.html">Privacy Policy</a>, which describes
+                    information handling associated with the application.
+                </p>
+            </section>
+
+            <section id="educational">
+                <h2>2. Educational Project and Demonstration Purpose</h2>
+                <p>
+                    IBI Bank is an educational software project intended
+                    to demonstrate digital banking concepts and application
+                    development. Available features may include customer
+                    authentication, administrator management, account
+                    records, beneficiary management, transaction
+                    demonstrations, fund transfers, loan records, and EMI
+                    management.
+                </p>
+                <div class="policy-note">
+                    <p>
+                        <strong>Not a real banking service:</strong>
+                        The application does not, merely by displaying
+                        banking-related information, establish a real
+                        deposit account, transfer funds through a banking
+                        network, issue a real loan, or create a legally
+                        binding credit facility.
+                    </p>
+                </div>
+                <p>
+                    Account balances, transaction entries, loan details,
+                    interest calculations, and payment statuses may be
+                    simulated or stored for demonstration purposes. They
+                    must not be treated as official financial statements
+                    or confirmations of real financial activity.
+                </p>
+                <p>
+                    Unless separately established by the operator through
+                    appropriate legal and regulatory arrangements, IBI Bank
+                    is not a licensed bank or regulated financial institution.
+                </p>
+            </section>
+
+            <section id="eligibility">
+                <h2>3. Eligibility and Appropriate Use</h2>
+                <p>
+                    You may use the application only where permitted by
+                    applicable law and these Terms. If you are not legally
+                    permitted to use a feature, you must not use that feature.
+                </p>
+                <ul>
+                    <li>Provide accurate information when using application forms.</li>
+                    <li>Use only accounts and test data that you are authorized to access.</li>
+                    <li>Do not impersonate another customer, employee, or administrator.</li>
+                    <li>Do not use the application for unlawful activities or fraudulent purposes.</li>
+                    <li>Follow any additional instructions provided by the authorized project operator.</li>
+                </ul>
+                <p>
+                    The operator may restrict access where reasonably
+                    necessary to protect the application, its users,
+                    or its educational environment.
+                </p>
+            </section>
+
+            <section id="registration">
+                <h2>4. Registration and User Accounts</h2>
+                <p>
+                    Some features require a user account. Registration
+                    and account creation must follow the available
+                    application workflow and any eligibility checks
+                    implemented by the system.
+                </p>
+                <p>
+                    You are responsible for providing accurate information
+                    and keeping your account details reasonably up to date.
+                    Do not create an account using another person's
+                    information without authorization.
+                </p>
+                <p>
+                    Email verification may be required before registration
+                    can be completed. Verification confirms control of an
+                    email address for the relevant workflow; it does not
+                    independently prove a person's legal identity.
+                </p>
+                <p>
+                    Account creation, activation, suspension, or deletion
+                    may depend on application rules and administrator
+                    permissions. The operator may reject or restrict
+                    an account where justified by security, misuse,
+                    or applicable requirements.
+                </p>
+            </section>
+
+            <section id="security">
+                <h2>5. Credentials and Account Security</h2>
+                <p>
+                    You are responsible for keeping your login credentials
+                    and account recovery information confidential.
+                    You should take reasonable precautions to prevent
+                    unauthorized access to your device and account.
+                </p>
+                <ul>
+                    <li>Use a unique password that you do not use for a real bank or another important service.</li>
+                    <li>Never disclose your password or OTP to another person.</li>
+                    <li>Do not share access tokens, recovery links, or account credentials.</li>
+                    <li>Log out after using a shared or public device.</li>
+                    <li>Notify the project operator if you suspect unauthorized access.</li>
+                </ul>
+                <p>
+                    The application may use email OTPs for login,
+                    registration verification, or password recovery
+                    where those workflows are enabled. OTPs may expire
+                    and may be subject to attempt limits.
+                </p>
+                <p>
+                    The operator may take reasonable protective steps,
+                    including requiring re-authentication, invalidating
+                    sessions, or temporarily restricting access when
+                    suspicious activity is detected.
+                </p>
+            </section>
+
+            <section id="acceptable-use">
+                <h2>6. Acceptable Use and Prohibited Activities</h2>
+                <p>
+                    You must not misuse the application, interfere with
+                    its operation, or attempt to access data or features
+                    without permission.
+                </p>
+                <ul>
+                    <li>Do not attempt unauthorized access to customer, employee, or administrator accounts.</li>
+                    <li>Do not bypass authentication, authorization, OTP verification, or other security controls.</li>
+                    <li>Do not exploit vulnerabilities or interfere with the database or server.</li>
+                    <li>Do not upload or transmit malicious code or intentionally disrupt the service.</li>
+                    <li>Do not scrape, copy, or extract protected information without authorization.</li>
+                    <li>Do not use the application to deceive others into believing that simulated records are real banking records.</li>
+                    <li>Do not submit another person's personal or financial information without an appropriate basis and authorization.</li>
+                    <li>Do not use the application in violation of applicable laws.</li>
+                </ul>
+                <p>
+                    Suspected misuse may result in access restrictions
+                    and, where appropriate, referral to the relevant
+                    system owner or lawful authority.
+                </p>
+            </section>
+
+            <section id="account-information">
+                <h2>7. Account Information and Demonstration Records</h2>
+                <p>
+                    The application may display customer profiles,
+                    account identifiers, account types, branch details,
+                    recorded balances, account status, and related
+                    information based on the database records available
+                    to the logged-in user.
+                </p>
+                <p>
+                    Displayed information is intended for software
+                    demonstration and testing. Records may be incomplete,
+                    outdated, manually created, altered during testing,
+                    or inconsistent with real-world banking practices.
+                </p>
+                <p>
+                    You should not rely on displayed balances, account
+                    numbers, or account statuses as evidence of real
+                    funds, ownership, solvency, or financial entitlement.
+                </p>
+                <p>
+                    The operator and authorized administrators may
+                    maintain or correct demonstration records to support
+                    the application's intended functionality, subject
+                    to applicable permissions and operational safeguards.
+                </p>
+            </section>
+
+            <section id="transactions">
+                <h2>8. Transactions, Transfers, and Receipts</h2>
+                <p>
+                    The application may provide interfaces for transaction
+                    history, transfers between demonstration accounts,
+                    transfer references, receipts, and related records.
+                    These features illustrate digital banking workflows.
+                </p>
+                <p>
+                    Unless the operator has separately established a
+                    legitimate, authorized, and regulated payment
+                    arrangement, submitting a transfer form does not
+                    initiate a real bank transfer or move real money.
+                </p>
+                <ul>
+                    <li>Review the displayed details before submitting a demonstration transfer.</li>
+                    <li>Use only authorized test accounts and fictional test information wherever possible.</li>
+                    <li>Do not interpret a success message or receipt as confirmation from a real bank or payment network.</li>
+                    <li>Transaction references generated by the application may be internal demonstration identifiers.</li>
+                    <li>Recorded transaction history may be subject to testing, corrections, and system maintenance.</li>
+                </ul>
+                <p>
+                    Do not use screenshots, receipts, or records from the
+                    demonstration application to misrepresent a real
+                    payment or financial transaction.
+                </p>
+            </section>
+
+            <section id="beneficiaries">
+                <h2>9. Beneficiary Management</h2>
+                <p>
+                    Where available, the beneficiary feature allows an
+                    authorized user to maintain beneficiary details for
+                    demonstration transfers. These records may include
+                    a beneficiary name, account reference, and status.
+                </p>
+                <p>
+                    You should enter only test information or information
+                    that you are authorized to use. Adding a beneficiary
+                    does not verify ownership of an account at a real
+                    financial institution.
+                </p>
+                <p>
+                    Available functions may allow an authorized user or
+                    administrator to add, deactivate, or otherwise manage
+                    beneficiary records. Restrictions may apply to preserve
+                    related demonstration transaction history and database
+                    integrity.
+                </p>
+                <p>
+                    The application does not guarantee that a beneficiary
+                    exists, that a name matches an account holder, or that
+                    a real-world payment could be completed.
+                </p>
+            </section>
+
+            <section id="loans">
+                <h2>10. Loans, Interest Rates, and EMI</h2>
+                <p>
+                    Loan and EMI features may display loan categories,
+                    requested amounts, interest rates, repayment periods,
+                    estimated instalments, due dates, payment records,
+                    and related statuses.
+                </p>
+                <p>
+                    Such calculations and records are provided for
+                    educational demonstration purposes. They are not
+                    an offer of credit, a loan approval, a loan agreement,
+                    a promise to disburse funds, or financial advice.
+                </p>
+                <ul>
+                    <li>Displayed interest rates may be illustrative and may change during development.</li>
+                    <li>EMI values may depend on the calculation method and configured parameters.</li>
+                    <li>Late fees or payment statuses may be simulated by application logic.</li>
+                    <li>A submitted loan application does not guarantee approval or disbursement.</li>
+                    <li>Displayed outstanding amounts may not represent a real financial obligation.</li>
+                </ul>
+                <p>
+                    Do not rely on the application's loan or EMI
+                    calculations when making real financial decisions.
+                </p>
+            </section>
+
+            <section id="administrators">
+                <h2>11. Administrator Access and Responsibilities</h2>
+                <p>
+                    Administrator accounts may have permissions to manage
+                    customer records, accounts, beneficiaries, loan
+                    applications, employee access, and other administrative
+                    functions enabled in the application.
+                </p>
+                <p>
+                    Administrative access is restricted to appropriately
+                    authorized individuals. Administrators must use their
+                    own assigned credentials and must not share privileged
+                    access with unauthorized persons.
+                </p>
+                <ul>
+                    <li>Use administrative permissions only for authorized project or operational tasks.</li>
+                    <li>Do not access or modify records out of curiosity or for an unauthorized purpose.</li>
+                    <li>Protect administrator passwords, OTPs, and recovery methods.</li>
+                    <li>Do not create or change privileged accounts without the required authorization.</li>
+                    <li>Report suspected compromise, misuse, or unauthorized changes promptly.</li>
+                </ul>
+                <p>
+                    The main administrator or designated operator may
+                    manage employee-administrator accounts according to
+                    the permissions implemented in the application.
+                    Actual permissions depend on the deployed backend
+                    authorization controls, not merely on what a page
+                    displays.
+                </p>
+            </section>
+
+            <section id="privacy">
+                <h2>12. Privacy and Personal Information</h2>
+                <p>
+                    Use of the application may involve processing
+                    customer details, contact information, account
+                    records, authentication information, and other data
+                    entered into enabled features.
+                </p>
+                <p>
+                    Our <a href="privacy.html">Privacy Policy</a> describes
+                    the categories of information that may be processed,
+                    the intended purposes, storage and security
+                    considerations, retention, and contact channels
+                    for privacy enquiries.
+                </p>
+                <p>
+                    You should not enter real banking passwords, ATM
+                    or card PINs, card security codes, or other sensitive
+                    financial authentication secrets into this
+                    educational application.
+                </p>
+                <p>
+                    By using the application, you acknowledge that
+                    technical processing is necessary for the relevant
+                    features you use. This does not replace any consent,
+                    notice, or other legal basis required by applicable law.
+                </p>
+            </section>
+
+            <section id="intellectual-property">
+                <h2>13. Intellectual Property and Project Materials</h2>
+                <p>
+                    The website's code, layout, interface, branding,
+                    images, text, and other materials may be owned by
+                    the project creator or their respective rights holders,
+                    or may be used under applicable licenses.
+                </p>
+                <p>
+                    Except where permitted by law or an applicable license,
+                    you must not misrepresent ownership, remove relevant
+                    attribution, or reproduce protected materials for
+                    unauthorized commercial purposes.
+                </p>
+                <p>
+                    Nothing in these Terms transfers intellectual property
+                    rights to you. Third-party names, software, libraries,
+                    logos, and other materials remain subject to their
+                    respective ownership and license terms.
+                </p>
+                <p>
+                    If you believe material has been used improperly,
+                    contact the project operator with sufficient details
+                    to identify the material and explain the concern.
+                </p>
+            </section>
+
+            <section id="third-parties">
+                <h2>14. Third-Party Services and Links</h2>
+                <p>
+                    The application may depend on third-party
+                    infrastructure or services, such as email delivery,
+                    website hosting, database hosting, software libraries,
+                    or external websites, depending on the deployed
+                    configuration.
+                </p>
+                <p>
+                    External services operate under their own terms,
+                    policies, availability conditions, and security
+                    practices. Their inclusion does not mean that the
+                    project operator controls or guarantees their
+                    operation.
+                </p>
+                <p>
+                    The website may link to the IBI Bank Instagram page:
+                    <a href="https://www.instagram.com/ibibankofficial/"
+                       target="_blank"
+                       rel="noopener noreferrer">instagram.com/ibibankofficial</a>.
+                    Use of external websites is subject to the relevant
+                    provider's terms and privacy policy.
+                </p>
+            </section>
+
+            <section id="availability">
+                <h2>15. Application Availability and Maintenance</h2>
+                <p>
+                    We aim to provide a useful demonstration experience,
+                    but uninterrupted availability is not guaranteed.
+                    The application may be unavailable because of
+                    maintenance, development, hosting issues, network
+                    interruptions, database problems, or other causes.
+                </p>
+                <p>
+                    Features may be changed, suspended, replaced, or
+                    removed as the educational project evolves.
+                    The operator may perform maintenance, testing,
+                    database updates, or other work that temporarily
+                    affects access or stored demonstration records.
+                </p>
+                <p>
+                    Users should not rely on the application as a
+                    production banking service or as the sole storage
+                    location for important information.
+                </p>
+            </section>
+
+            <section id="warranties">
+                <h2>16. Disclaimer of Warranties</h2>
+                <p>
+                    To the extent permitted by applicable law, the
+                    application is provided on an "as is" and
+                    "as available" basis for educational and
+                    demonstration purposes.
+                </p>
+                <p>
+                    The operator does not warrant that the application
+                    will always be available, error-free, secure,
+                    compatible with every device, or free from
+                    unintended defects.
+                </p>
+                <p>
+                    The operator does not guarantee the accuracy,
+                    completeness, or suitability of simulated account
+                    balances, transaction records, loan calculations,
+                    EMI amounts, or other demonstration data.
+                </p>
+                <p>
+                    Nothing in this section excludes a warranty,
+                    consumer right, or other protection that cannot
+                    lawfully be excluded or restricted.
+                </p>
+            </section>
+
+            <section id="liability">
+                <h2>17. Limitation of Liability</h2>
+                <p>
+                    To the extent permitted by applicable law, the
+                    operator will not be responsible for losses
+                    resulting from inappropriate reliance on simulated
+                    banking information, unauthorized use of credentials,
+                    interruptions, data loss, or misuse of the application.
+                </p>
+                <p>
+                    The application is not intended to replace a
+                    regulated banking service, a professional financial
+                    service, or a secure system designed for real
+                    financial transactions.
+                </p>
+                <p>
+                    Nothing in these Terms excludes or limits liability
+                    where such exclusion or limitation is prohibited
+                    by applicable law, including liability that cannot
+                    legally be waived.
+                </p>
+            </section>
+
+            <section id="indemnity">
+                <h2>18. Misuse and Indemnity</h2>
+                <p>
+                    You are responsible for your use of the application
+                    and for complying with these Terms and applicable law.
+                </p>
+                <p>
+                    To the extent permitted by law, you may be responsible
+                    for direct losses or claims arising from your unlawful
+                    use, deliberate misuse, unauthorized access, or
+                    infringement of another person's rights.
+                </p>
+                <p>
+                    Nothing in this section requires you to indemnify
+                    another party where doing so would be prohibited
+                    by applicable law. Any claim will depend on the
+                    relevant facts and legal requirements.
+                </p>
+            </section>
+
+            <section id="termination">
+                <h2>19. Suspension and Termination</h2>
+                <p>
+                    The operator may restrict, suspend, or terminate
+                    access where reasonably necessary for security,
+                    maintenance, prevention of misuse, project
+                    administration, or compliance with applicable law.
+                </p>
+                <p>
+                    Where appropriate and practicable, the operator
+                    may provide notice of a restriction. Notice may
+                    not be possible where immediate action is necessary
+                    to protect the system or comply with a legal obligation.
+                </p>
+                <p>
+                    On termination, you must stop using any access
+                    that has been withdrawn. Certain provisions,
+                    including those relating to intellectual property,
+                    disclaimers, liability, and applicable legal
+                    requirements, may continue to apply as appropriate.
+                </p>
+            </section>
+
+            <section id="changes">
+                <h2>20. Changes to These Terms</h2>
+                <p>
+                    These Terms may be updated as application features,
+                    security practices, operational arrangements,
+                    or applicable legal requirements change.
+                </p>
+                <p>
+                    The updated version will be published on this page
+                    with a revised "Last Updated" date. Where required
+                    by law, material changes will be communicated
+                    through an appropriate method.
+                </p>
+                <p>
+                    You should review these Terms periodically.
+                    Continued use after updated Terms take effect
+                    may indicate acceptance where permitted by
+                    applicable law. If you do not agree to revised
+                    Terms, stop using the application.
+                </p>
+            </section>
+
+            <section id="governing-law">
+                <h2>21. Governing Law and Disputes</h2>
+                <p>
+                    These Terms are subject to applicable law.
+                    Where legally appropriate, disputes concerning
+                    the website or its use should first be raised
+                    with the project operator to seek a reasonable
+                    resolution.
+                </p>
+                <p>
+                    The applicable law and competent forum depend
+                    on the operator's legal status, relevant facts,
+                    and mandatory legal requirements. Nothing in
+                    this section overrides a right or jurisdictional
+                    rule that cannot lawfully be excluded.
+                </p>
+                <p>
+                    These Terms are not intended to create the
+                    impression that IBI Bank is a licensed financial
+                    institution or that a regulated banking complaint
+                    mechanism exists where one has not been established.
+                </p>
+            </section>
+
+            <section id="severability">
+                <h2>22. Severability</h2>
+                <p>
+                    If any provision of these Terms is found to be
+                    invalid, unlawful, or unenforceable, that provision
+                    will be applied only to the extent permitted by law
+                    or severed where necessary.
+                </p>
+                <p>
+                    The remaining provisions will continue to apply
+                    to the extent that they remain valid and enforceable.
+                </p>
+            </section>
+
+            <section id="waiver">
+                <h2>23. Waiver</h2>
+                <p>
+                    A failure or delay in exercising a right under
+                    these Terms does not automatically constitute
+                    a waiver of that right.
+                </p>
+                <p>
+                    Any waiver must be assessed according to the
+                    circumstances and applicable law. A waiver on
+                    one occasion does not necessarily apply to
+                    another occasion.
+                </p>
+            </section>
+
+            <section id="entire-agreement">
+                <h2>24. Entire Agreement</h2>
+                <p>
+                    These Terms, together with any applicable notices
+                    and policies referenced here, describe the
+                    conditions governing use of the application,
+                    subject to applicable law.
+                </p>
+                <p>
+                    If a specific feature has additional terms or
+                    notices, those terms should be read together
+                    with this document. Where a conflict arises,
+                    applicable law and any valid, specifically
+                    applicable agreement will govern as appropriate.
+                </p>
+                <p>
+                    Nothing in these Terms removes statutory rights
+                    that cannot legally be excluded.
+                </p>
+            </section>
+
+            <section id="contact">
+                <h2>25. Contact Us</h2>
+                <p>
+                    If you have questions about these Terms, the
+                    application's features, or an issue related
+                    to its use, contact the project operator using
+                    the details below.
+                </p>
+
+                <div class="contact-card">
+                    <p><strong>Organization:</strong> IBI Bank — International Bank of India</p>
+                    <p>
+                        <strong>Email:</strong>
+                        <a href="mailto:ibibankofficial@gmail.com?subject=IBI%20Bank%20Terms%20Enquiry">
+                            ibibankofficial@gmail.com
+                        </a>
+                    </p>
+                    <p>
+                        <strong>Instagram:</strong>
+                        <a href="https://www.instagram.com/ibibankofficial/"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            @ibibankofficial
+                        </a>
+                    </p>
+                </div>
+
+                <p>
+                    When contacting us, explain your question clearly
+                    and include only the information necessary to
+                    understand the issue. Never send passwords,
+                    OTPs, PINs, card security codes, or other
+                    authentication secrets by email.
+                </p>
+                <p>
+                    These contact details do not by themselves
+                    establish a regulated banking service, a
+                    statutory grievance officer, or a formal
+                    financial complaint process.
+                </p>
+            </section>
+        </article>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-brand">IBI Bank — International Bank of India</div>
+
+    <nav class="footer-links" aria-label="Footer navigation">
+        <a href="index.html">Home / Login</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html" aria-current="page">Terms &amp; Conditions</a>
+        <a href="mailto:ibibankofficial@gmail.com?subject=IBI%20Bank%20Enquiry">
+            Contact Us
+        </a>
+        <a href="https://www.instagram.com/ibibankofficial/"
+           target="_blank"
+           rel="noopener noreferrer">Instagram</a>
+    </nav>
+
+    <p>
+        Effective October 23, 2026 · Last Updated October 23, 2026
+    </p>
+    <p>
+        Educational banking demonstration application. Do not submit
+        real banking credentials or sensitive financial authentication data.
+    </p>
+</footer>
+
+<button class="back-to-top" id="backToTop"
+        type="button" aria-label="Back to top" title="Back to top">
+    ↑
+</button>
+
+<script>
+    "use strict";
+
+    const backToTopButton = document.getElementById("backToTop");
+
+    function updateBackToTopButton() {
+        backToTopButton.classList.toggle(
+            "visible",
+            window.scrollY > 350
+        );
+    }
+
+    window.addEventListener("scroll", updateBackToTopButton, {
+        passive: true
+    });
+
+    backToTopButton.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
+    updateBackToTopButton();
+</script>
+</body>
+</html>

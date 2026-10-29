@@ -1,0 +1,41 @@
+﻿# Environment variables and secrets
+.env
+.env.*
+!.env.example
+Backend/.env
+Backend/.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+Backend/node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local editor and operating system files
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Database exports may contain private data
+Database/PBL_Submission/Exports/
+
+# Node.js dependencies (case variants)
+**/Node_Modules/
+**/node_modules/
+
+# Local backup files
+*.bak
+
+# Application backup copies
+*.backup
+*.backup-*
+# Local security backups and pre-finalization documents
+Backend/*.security-backup
+Database/PBL_Submission/Documentation/Before_Finalization/

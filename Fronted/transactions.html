@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#02091d">
+<title>IBI Bank — Transaction History</title>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js"></script>
+
+<style>
+:root {
+    --bg:#02091d;
+    --panel:#041747;
+    --cyan:#00d9ff;
+    --blue:#087cff;
+    --text:#f4f8ff;
+    --muted:#a6b9df;
+    --red:#ff2855;
+    --green:#00edb0;
+}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--bg)}
+body{
+    margin:0;min-height:100vh;color:var(--text);
+    font-family:"Segoe UI",Arial,sans-serif;overflow-x:hidden;
+    background:radial-gradient(ellipse at 50% 0%,rgba(0,69,255,.18),transparent 50%),
+    linear-gradient(135deg,#02091d,#03143a 55%,#02091d)
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.top-navigation{
+    width:100%;min-height:82px;padding:12px 26px;
+    display:grid;grid-template-columns:320px minmax(180px,1fr) auto;
+    align-items:center;gap:24px;
+    background:linear-gradient(100deg,rgba(2,13,54,.98),rgba(3,29,107,.96));
+    border-bottom:1px solid rgba(0,217,255,.42);
+    box-shadow:0 5px 28px rgba(0,70,255,.2)
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-logo{width:88px;height:58px;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 0 10px #008cff66)}
+.brand-copy{min-width:0}
+.brand-name{font-size:25px;line-height:1.1;font-weight:800;white-space:nowrap}
+.brand-full-name{color:#d5e7ff;font-size:12px;margin-top:5px;white-space:nowrap}
+.global-search,.table-search{
+    width:100%;min-width:0;height:47px;display:flex;align-items:center;gap:11px;
+    padding:0 16px;border-radius:26px;border:1px solid #087cff;
+    background:linear-gradient(100deg,#07318a,#004bd8);
+    box-shadow:inset 0 0 13px #00d9ff20,0 0 16px #0057ff33
+}
+.global-search svg,.table-search svg{width:20px;height:20px;flex:0 0 auto}
+.global-search input,.table-search input{
+    width:100%;min-width:0;background:transparent;border:0;outline:0;color:#fff;font-size:13px
+}
+.global-search input::placeholder,.table-search input::placeholder{color:#d4e2ff}
+.nav-actions{display:flex;align-items:center;justify-content:flex-end;gap:16px}
+.profile{display:flex;align-items:center;gap:11px;min-width:0}
+.profile-icon{
+    width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(145deg,#04dfff,#075dff);border:2px solid #13e7ff;
+    box-shadow:0 0 18px #00d9ff66;flex:0 0 auto
+}
+.profile-icon svg{width:25px;height:25px}
+.profile-copy small{display:block;color:#c6d6f7;font-size:11px;margin-bottom:3px}
+.profile-copy strong{display:block;font-size:14px;max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logout-button,.refresh-button,.download-button,.back-button{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    color:#fff;font-weight:750;transition:transform .2s,box-shadow .2s
+}
+.logout-button{
+    min-height:46px;padding:0 18px;border:1px solid #ffffff40;border-radius:12px;
+    background:linear-gradient(135deg,#ff4e76,#e50057);box-shadow:0 0 17px #ff1e5c40
+}
+.logout-button:hover,.back-button:hover,.refresh-button:hover,.download-button:hover{transform:translateY(-1px)}
+.transactions-page{width:100%;max-width:1800px;margin:0 auto;padding:14px 26px 28px}
+.hero-banner{
+    position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,31%);
+    align-items:center;gap:24px;min-height:188px;padding:24px 38px;margin-bottom:14px;overflow:hidden;
+    border:1px solid #00d9ffcc;border-radius:18px;
+    background:radial-gradient(ellipse at 75% 5%,#0084ffb8,transparent 37%),
+    radial-gradient(ellipse at 90% 100%,#5f00ff73,transparent 36%),
+    linear-gradient(110deg,#03133f,#0639a5 52%,#061b65);
+    box-shadow:0 0 20px #006cff40,inset 0 0 30px #00d9ff14
+}
+.hero-copy{min-width:0}
+.hero-eyebrow{margin-bottom:5px;color:#00f1ff;font-size:12px;font-weight:900;letter-spacing:5px;text-transform:uppercase}
+.hero-title{margin:0;font-size:clamp(27px,3vw,43px);line-height:1.15;font-weight:850;letter-spacing:-.8px}
+.hero-description{margin:7px 0 13px;color:#4df3ff;font-size:16px;line-height:1.5}
+.hero-bottom{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.back-button{
+    min-height:44px;padding:0 19px;background:linear-gradient(135deg,#ff5a75,#ed003e);
+    border:1px solid #ff9cac;border-radius:25px;box-shadow:0 0 19px #ff144280;font-size:13px
+}
+.security-pill{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 13px;border-radius:24px;background:#00124570;color:#e2efff;font-size:12px;white-space:nowrap}
+.security-pill svg{width:19px;height:19px;color:#21edff}
+.hero-quote{min-height:110px;padding:8px 0 8px 30px;border-left:1px solid #00eeff99;display:flex;align-items:center;gap:15px}
+.quote-mark{align-self:flex-start;color:#a9c4ff;font-size:54px;line-height:.9;font-weight:900}
+.hero-quote p{margin:0;font-size:19px;font-weight:650;line-height:1.5}
+.quote-line{width:66px;height:3px;margin-top:13px;background:linear-gradient(90deg,#ff31d2,#00eaff)}
+.summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:14px}
+.summary-card{
+    position:relative;min-height:125px;padding:17px 22px;display:flex;align-items:center;gap:20px;overflow:hidden;
+    border-radius:17px;border:1px solid #00d9ffa6;
+    background:radial-gradient(ellipse at 100% 100%,#006aff5c,transparent 48%),linear-gradient(120deg,#042062fa,#031341fa);
+    box-shadow:inset 0 0 18px #0091ff24,0 0 13px #005dff29
+}
+.summary-card.green{border-color:#00ffbaba;background:radial-gradient(ellipse at 100% 100%,#00ffba33,transparent 50%),linear-gradient(120deg,#02444efa,#031843fa)}
+.summary-card.purple{border-color:#a544ffe6;background:radial-gradient(ellipse at 100% 100%,#7a00ff4d,transparent 48%),linear-gradient(120deg,#250a70fa,#04144cfa)}
+.summary-icon{width:76px;height:76px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;border:2px solid #21dcff;border-radius:50%;background:linear-gradient(145deg,#087dff,#1b00d9);box-shadow:0 0 18px #0091ff8c}
+.summary-icon svg{width:34px;height:34px;stroke-width:2.3}
+.green .summary-icon{background:linear-gradient(145deg,#00efa9,#009c72);border-color:#aaffdf}
+.purple .summary-icon{background:linear-gradient(145deg,#c400ff,#4a00db);border-color:#f1a7ff}
+.summary-copy{min-width:0;position:relative;z-index:1}
+.summary-label{font-size:14px;margin-bottom:7px}
+.summary-value{font-size:clamp(23px,2vw,31px);font-weight:850;line-height:1.15;overflow-wrap:anywhere}
+.summary-note{margin-top:7px;color:#00f2e2;font-size:12px;font-weight:650}
+.transaction-panel{
+    padding:17px 16px 18px;border-radius:19px;border:1px solid #00d9ffbf;
+    background:radial-gradient(ellipse at 50% 0%,#003faf29,transparent 60%),linear-gradient(135deg,#03194ffa,#020f31fa);
+    box-shadow:inset 0 0 24px #0074ff1a,0 0 18px #0059ff33;min-width:0
+}
+.panel-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 4px 14px}
+.panel-title-wrap{display:flex;align-items:center;gap:13px;min-width:0}
+.panel-icon{width:48px;height:48px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(140deg,#00dfff,#3500ff);box-shadow:0 0 17px #00d9ff73}
+.panel-icon svg{width:25px;height:25px}
+.panel-title-wrap h2{margin:0;font-size:21px}
+.panel-title-wrap p{margin:4px 0 0;color:#c1d3f6;font-size:13px}
+.panel-controls{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:10px}
+.table-search{height:45px;width:250px;background:#002f85a6;box-shadow:inset 0 0 10px #00d9ff14}
+.type-filter{height:45px;min-width:125px;padding:0 13px;color:#f4f8ff;background:#002c7ecc;border:1px solid #008dff;border-radius:11px;outline:none}
+.type-filter option,.statement-select option{color:#fff;background:#061a49}
+.refresh-button,.download-button{height:45px;padding:0 16px;border:1px solid #00cfff;border-radius:24px;background:linear-gradient(135deg,#006dff,#001fd0);box-shadow:0 0 12px #0091ff66;font-size:13px}
+.download-button{background:linear-gradient(135deg,#008dff,#4400d4);border-color:#3ee9ff}
+button:disabled{opacity:.55;cursor:wait;transform:none}
+.transaction-table-wrapper{width:100%;max-width:100%;overflow-x:auto;border-radius:12px;scrollbar-color:#087cff #06173e;scrollbar-width:thin}
+.transaction-table{width:100%;min-width:1120px;border-collapse:separate;border-spacing:0}
+.transaction-table thead th{padding:12px 14px;text-align:left;white-space:nowrap;color:#f1f7ff;background:linear-gradient(100deg,#0736a2,#0640bc);border-bottom:1px solid #00d9ff40;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.35px}
+.transaction-table thead th:first-child{border-radius:10px 0 0 10px}
+.transaction-table thead th:last-child{border-radius:0 10px 10px 0}
+.transaction-table tbody td{padding:8px 14px;color:#e3edff;background:#03163da8;border-bottom:1px solid #0068ff2e;font-size:12px;line-height:1.45;vertical-align:middle}
+.transaction-table tbody tr:nth-child(even) td{background:#051f50c7}
+.transaction-table tbody tr:hover td{background:#0075ff30}
+.transaction-id{color:#00eaff!important;font-weight:850;white-space:nowrap}
+.email-cell{min-width:175px;overflow-wrap:anywhere}
+.account-cell{color:#a8dcff!important;white-space:nowrap}
+.type-badge{display:inline-flex;align-items:center;justify-content:center;min-width:78px;padding:4px 10px;border-radius:18px;color:#00edff;background:#009cff33;border:1px solid #00d9ff30;font-size:11px;font-weight:800;white-space:nowrap}
+.type-badge.emi{color:#e5b5ff;background:#7c00ff59}
+.type-badge.deposit,.type-badge.credit,.type-badge.interest,.type-badge.refund,.type-badge.received{color:#6bffca;background:#00cf8b30}
+.type-badge.withdrawal,.type-badge.withdraw{color:#ffe07c;background:#ffad002e}
+.transaction-credit{color:#00f4db!important;font-weight:850;white-space:nowrap}
+.transaction-debit{color:#ff3858!important;font-weight:850;white-space:nowrap}
+.date-cell{min-width:150px;white-space:nowrap}
+.description-cell{min-width:190px;overflow-wrap:anywhere}
+.message{min-height:100px;padding:28px 16px;display:flex;align-items:center;justify-content:center;text-align:center;color:#bdd0f4;border-radius:12px;border:1px solid #0097ff33;background:#010f2e99;font-size:14px}
+.table-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:13px 6px 0;color:#c5d7fb;font-size:12px}
+
+/* Statement dialog */
+.modal-backdrop{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:18px;background:#000b22d9;backdrop-filter:blur(7px)}
+.modal-backdrop.open{display:flex}
+.statement-modal{width:min(570px,100%);max-height:90vh;overflow:auto;padding:25px;border:1px solid #00d9ff;border-radius:20px;background:radial-gradient(ellipse at top right,#063f9b,transparent 55%),#031439;box-shadow:0 0 35px #007cff66}
+.modal-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+.modal-header h2{margin:0;font-size:23px}
+.close-modal{width:38px;height:38px;border-radius:50%;border:1px solid #00d9ff66;color:#fff;background:#052b68}
+.modal-description{margin:0 0 20px;color:#bfd2f5;font-size:13px;line-height:1.6}
+.field-label{display:block;margin:15px 0 7px;color:#dbeaff;font-size:13px;font-weight:700}
+.statement-select,.statement-format{width:100%;height:48px;padding:0 13px;color:#fff;background:#031e53;border:1px solid #087cff;border-radius:10px;outline:none}
+.format-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.format-choice{padding:14px;border:1px solid #087cff;border-radius:12px;background:#052052;color:#fff;text-align:left}
+.format-choice.selected{border-color:#00f1ff;box-shadow:0 0 15px #00d9ff55;background:#073780}
+.format-choice strong{display:block;margin-bottom:5px}
+.format-choice small{color:#bcd0f4}
+.statement-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;margin-top:23px}
+.cancel-button{height:45px;padding:0 17px;color:#e3efff;background:#061c46;border:1px solid #456aa8;border-radius:10px}
+.generate-button{height:45px;padding:0 18px;color:#fff;background:linear-gradient(135deg,#008dff,#4200dc);border:1px solid #00d9ff;border-radius:10px;font-weight:800}
+.statement-hint{margin-top:13px;color:#9eb9e8;font-size:11px;line-height:1.5}
+@media(max-width:1200px){
+ .top-navigation{grid-template-columns:255px minmax(150px,1fr) auto;gap:15px;padding:12px 18px}
+ .brand-logo{width:68px}.brand-name{font-size:22px}.profile-copy{display:none}
+ .transactions-page{padding:14px 18px 24px}.hero-banner{padding:23px}.hero-quote p{font-size:16px}
+ .summary-card{padding:16px;gap:14px}.summary-icon{width:62px;height:62px}
+}
+@media(max-width:850px){
+ .top-navigation{grid-template-columns:minmax(0,1fr) auto;gap:12px}
+ .global-search{grid-column:1/-1;grid-row:2}.nav-actions{grid-column:2;grid-row:1}
+ .hero-banner{grid-template-columns:1fr}.hero-quote{display:none}
+ .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.summary-card:last-child{grid-column:1/-1}
+ .panel-heading{align-items:flex-start;flex-direction:column}.panel-controls{width:100%;justify-content:flex-start}
+ .table-search{flex:1 1 220px;width:auto}
+}
+@media(max-width:560px){
+ .top-navigation{padding:12px}.brand-logo{width:48px;height:48px}.brand-name{font-size:19px}
+ .brand-full-name{font-size:9px;white-space:normal}.brand{gap:7px}
+ .profile-icon{width:39px;height:39px}.logout-button{min-height:40px;padding:0 10px;font-size:12px}
+ .transactions-page{padding:12px 12px 22px}.hero-banner{min-height:0;padding:21px 17px;border-radius:15px}
+ .hero-eyebrow{font-size:10px;letter-spacing:3px}.hero-title{font-size:27px}.hero-description{font-size:13px}
+ .back-button{min-height:42px;padding:0 13px;font-size:12px}.security-pill{min-height:34px;padding:0 9px;font-size:10px}
+ .summary-grid{grid-template-columns:1fr;gap:10px}.summary-card,.summary-card:last-child{grid-column:auto;min-height:105px;padding:14px 17px}
+ .summary-icon{width:58px;height:58px}.summary-icon svg{width:28px;height:28px}.summary-value{font-size:25px}
+ .transaction-panel{padding:13px 10px 15px;border-radius:15px}.panel-title-wrap h2{font-size:18px}.panel-title-wrap p{font-size:11px}
+ .panel-controls{display:grid;grid-template-columns:minmax(0,1fr) auto}.table-search{grid-column:1/-1;width:100%;min-height:43px}
+ .type-filter{width:100%;min-width:0}.refresh-button,.download-button{padding:0 11px;font-size:12px}
+ .statement-modal{padding:19px}.modal-header h2{font-size:20px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<header class="top-navigation">
+    <div class="brand">
+        <img class="brand-logo" id="bankLogo" src="images/ibi-logo.png" alt="IBI Bank logo">
+        <div class="brand-copy">
+            <div class="brand-name">IBI Bank</div>
+            <div class="brand-full-name">International Bank of India</div>
+        </div>
+    </div>
+    <label class="global-search">
+        <i data-lucide="search"></i>
+        <input id="globalSearch" type="search" placeholder="Search transactions, accounts, beneficiaries..." aria-label="Search transactions">
+    </label>
+    <div class="nav-actions">
+        <div class="profile">
+            <div class="profile-icon"><i data-lucide="user-round"></i></div>
+            <div class="profile-copy">
+                <small>Welcome back,</small>
+                <strong id="profileName">IBI Bank Customer</strong>
+            </div>
+        </div>
+        <button class="logout-button" type="button" onclick="logout()"><i data-lucide="log-out"></i> Logout</button>
+    </div>
+</header>
+
+<main class="transactions-page">
+    <section class="hero-banner">
+        <div class="hero-copy">
+            <div class="hero-eyebrow">Transaction History</div>
+            <h1 class="hero-title">Track Every Transaction <i data-lucide="wallet" style="width:32px;height:32px;vertical-align:middle;color:#00eaff"></i></h1>
+            <p class="hero-description">View, monitor and download your IBI Bank transaction history.</p>
+            <div class="hero-bottom">
+                <button type="button" class="back-button" onclick="goBack()"><i data-lucide="arrow-left"></i> Back to Previous Page</button>
+                <span class="security-pill"><i data-lucide="shield-check"></i> Secure Banking</span>
+                <span class="security-pill"><i data-lucide="zap"></i> Real-Time Tracking</span>
+                <span class="security-pill"><i data-lucide="heart"></i> Always With You</span>
+            </div>
+        </div>
+        <div class="hero-quote">
+            <div class="quote-mark">“</div>
+            <div><p>Every transaction.<br>Complete transparency.<br>Your trust matters.</p><div class="quote-line"></div></div>
+        </div>
+    </section>
+
+    <section class="summary-grid" aria-label="Transaction summary">
+        <article class="summary-card">
+            <div class="summary-icon"><i data-lucide="clipboard-list"></i></div>
+            <div class="summary-copy"><div class="summary-label">Total Transactions</div><div class="summary-value" id="totalTransactions">—</div><div class="summary-note">All transaction records</div></div>
+        </article>
+        <article class="summary-card green">
+            <div class="summary-icon"><i data-lucide="check"></i></div>
+            <div class="summary-copy"><div class="summary-label">Successful Transactions</div><div class="summary-value" id="successfulTransactions">—</div><div class="summary-note" id="successNote">Records loaded</div></div>
+        </article>
+        <article class="summary-card purple">
+            <div class="summary-icon"><i data-lucide="clock-3"></i></div>
+            <div class="summary-copy"><div class="summary-label">Transaction Activity</div><div class="summary-value" id="transactionActivity">—</div><div class="summary-note">Records available</div></div>
+        </article>
+    </section>
+
+    <section class="transaction-panel">
+        <div class="panel-heading">
+            <div class="panel-title-wrap">
+                <div class="panel-icon"><i data-lucide="receipt-text"></i></div>
+                <div><h2>Recent Transactions</h2><p>View and monitor your IBI Bank transactions</p></div>
+            </div>
+            <div class="panel-controls">
+                <label class="table-search"><i data-lucide="search"></i><input id="tableSearch" type="search" placeholder="Search transactions..." aria-label="Search transaction table"></label>
+                <button id="downloadHistoryButton" class="download-button" type="button" onclick="openStatementModal()"><i data-lucide="download"></i> Download History</button>
+                <select id="typeFilter" class="type-filter" aria-label="Filter by transaction type"><option value="all">All Types</option></select>
+                <button id="refreshButton" class="refresh-button" type="button" onclick="loadTransactions(true)"><i data-lucide="refresh-cw"></i> Refresh</button>
+            </div>
+        </div>
+        <div id="content"><div class="message">Loading transactions...</div></div>
+        <div class="table-footer"><span id="recordCount">Loading records...</span><span>IBI Bank · Transaction Management</span></div>
+    </section>
+</main>
+
+<div class="modal-backdrop" id="statementModal" role="dialog" aria-modal="true" aria-labelledby="statementTitle">
+    <div class="statement-modal">
+        <div class="modal-header">
+            <h2 id="statementTitle"><i data-lucide="file-down" style="vertical-align:middle;color:#00eaff"></i> Download Statement</h2>
+            <button class="close-modal" type="button" aria-label="Close" onclick="closeStatementModal()"><i data-lucide="x"></i></button>
+        </div>
+        <p class="modal-description">Choose a date range and file format. Your statement will be generated from the transaction records currently returned by IBI Bank.</p>
+
+        <label class="field-label" for="statementPeriod">Statement period</label>
+        <select id="statementPeriod" class="statement-select">
+            <option value="1month">Last 1 month</option>
+            <option value="3months">Last 3 months</option>
+            <option value="6months">Last 6 months</option>
+            <option value="currentFY">Current financial year (1 April to 31 March)</option>
+            <option value="previousFY">Previous financial year</option>
+        </select>
+
+        <label class="field-label">File format</label>
+        <div class="format-options">
+            <button class="format-choice selected" id="csvChoice" type="button" onclick="selectFormat('csv')">
+                <strong><i data-lucide="file-spreadsheet" style="vertical-align:middle"></i> CSV file</strong>
+                <small>Open in Excel or spreadsheets</small>
+            </button>
+            <button class="format-choice" id="pdfChoice" type="button" onclick="selectFormat('pdf')">
+                <strong><i data-lucide="file-text" style="vertical-align:middle"></i> PDF statement</strong>
+                <small>Formatted printable statement</small>
+            </button>
+        </div>
+        <div class="statement-hint" id="statementPreview">Your statement will include the matching transaction records and the account details available in the API response. Balances are included only if supplied by the backend.</div>
+        <div class="statement-actions">
+            <button class="cancel-button" type="button" onclick="closeStatementModal()">Cancel</button>
+            <button class="generate-button" id="generateStatementButton" type="button" onclick="downloadStatement()"><i data-lucide="download"></i> Generate & Download</button>
+        </div>
+    </div>
+</div>
+
+<script>
+"use strict";
+
+const API = "http://127.0.0.1:5000";
+let allTransactions = [];
+let visibleTransactions = [];
+let loadInProgress = false;
+let selectedFormat = "csv";
+
+function readStoredObject(key) {
+    try {
+        const value = localStorage.getItem(key);
+        if (!value) return null;
+        try { return JSON.parse(value); }
+        catch { return value ? { email: value } : null; }
+    } catch { return null; }
+}
+
+const loggedInUser = readStoredObject("loggedInUser");
+const loggedInAdmin = readStoredObject("loggedInAdmin");
+
+if (!loggedInUser && !loggedInAdmin) {
+    window.location.href = "index.html";
+}
+
+function getProfileName() {
+    const account = loggedInAdmin || loggedInUser;
+    if (!account) return "IBI Bank Customer";
+    return account.name || account.full_name || account.username || account.email ||
+        (loggedInAdmin ? "IBI Bank Admin" : "IBI Bank Customer");
+}
+document.getElementById("profileName").textContent = getProfileName();
+
+function escapeHTML(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function goBack() {
+    if (window.history.length > 1) window.history.back();
+    else if (loggedInAdmin) window.location.href = "admin-dashboard.html";
+    else window.location.href = "dashboard.html";
+}
+
+function logout() {
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("loggedInAdmin");
+    window.location.href = "index.html";
+}
+
+function parseDate(value) {
+    if (!value) return null;
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function formatDate(value) {
+    const date = parseDate(value);
+    if (!date) return String(value || "-");
+    return date.toLocaleString("en-IN", {
+        day:"numeric", month:"numeric", year:"numeric",
+        hour:"numeric", minute:"2-digit", second:"2-digit"
+    });
+}
+
+function formatStatementDate(value) {
+    const date = parseDate(value);
+    if (!date) return String(value || "-");
+    return date.toLocaleString("en-IN", {
+        day:"2-digit", month:"short", year:"numeric",
+        hour:"2-digit", minute:"2-digit", hour12:false
+    });
+}
+
+function getTransactionDirection(transaction) {
+    const type = String(transaction.transaction_type || "").toUpperCase();
+    const description = String(transaction.description || "").toUpperCase();
+    let isCredit = ["CREDIT","DEPOSIT","INTEREST","REFUND","RECEIVED"].includes(type);
+    let isDebit = ["DEBIT","WITHDRAW","WITHDRAWAL","EMI","TRANSFER"].includes(type);
+
+    if (description.includes("RECEIVED") || description.includes("CREDIT")) {
+        isCredit = true; isDebit = false;
+    }
+    if (type === "EMI") { isDebit = true; isCredit = false; }
+    if (!isCredit && !isDebit) isDebit = true;
+    return {isCredit,isDebit};
+}
+
+function formatAmount(value) {
+    return Math.abs(Number(value) || 0).toLocaleString("en-IN", {
+        minimumFractionDigits:2, maximumFractionDigits:2
+    });
+}
+
+function getTypeClass(type) {
+    return String(type || "").toLowerCase().replace(/[^a-z0-9_-]/g,"") || "other";
+}
+
+/* Customers see only their own records. Admins can see the API's returned records. */
+function getAuthorizedTransactions(transactions) {
+    if (!loggedInAdmin && loggedInUser) {
+        const email = String(loggedInUser.email || "").trim().toLowerCase();
+        if (!email) return [];
+        return transactions.filter(transaction =>
+            String(transaction.email || "").trim().toLowerCase() === email
+        );
+    }
+    return transactions;
+}
+
+async function loadTransactions(showRefreshState = false) {
+    if (loadInProgress) return;
+    loadInProgress = true;
+
+    const content = document.getElementById("content");
+    const refreshButton = document.getElementById("refreshButton");
+    refreshButton.disabled = true;
+    if (showRefreshState) refreshButton.innerHTML = '<i data-lucide="refresh-cw"></i> Refreshing';
+
+    try {
+        const response = await fetch(API + "/api/transactions", {
+            headers: {"Accept":"application/json"}
+        });
+        if (!response.ok) throw new Error("Failed to load transactions (HTTP " + response.status + ").");
+
+        const data = await response.json();
+        const transactions = Array.isArray(data) ? data :
+            (Array.isArray(data.transactions) ? data.transactions : null);
+        if (!transactions) throw new Error("The transactions API did not return an array.");
+
+        allTransactions = getAuthorizedTransactions(transactions);
+        updateSummaryCards();
+        updateTypeFilter();
+        applyFilters();
+        updateStatementPreview();
+    } catch (error) {
+        content.innerHTML = '<div class="message">Unable to load transactions. Check that your IBI Bank server is running and that /api/transactions is working.</div>';
+        document.getElementById("recordCount").textContent = "Unable to load transaction records.";
+        document.getElementById("totalTransactions").textContent = "—";
+        document.getElementById("successfulTransactions").textContent = "—";
+        document.getElementById("transactionActivity").textContent = "—";
+        console.error("Transaction loading error:", error);
+    } finally {
+        loadInProgress = false;
+        refreshButton.disabled = false;
+        refreshButton.innerHTML = '<i data-lucide="refresh-cw"></i> Refresh';
+        if (window.lucide) lucide.createIcons();
+    }
+}
+
+function updateSummaryCards() {
+    const total = allTransactions.length;
+    const successful = allTransactions.filter(transaction => {
+        const status = String(transaction.status || "").toLowerCase();
+        return !status || !["failed","rejected","cancelled","canceled"].includes(status);
+    }).length;
+
+    document.getElementById("totalTransactions").textContent = total.toLocaleString("en-IN");
+    document.getElementById("successfulTransactions").textContent = successful.toLocaleString("en-IN");
+    document.getElementById("transactionActivity").textContent = total.toLocaleString("en-IN") + " Records";
+    document.getElementById("successNote").textContent =
+        total ? Math.round(successful / total * 100) + "% without failure status" : "No records available";
+}
+
+function updateTypeFilter() {
+    const select = document.getElementById("typeFilter");
+    const currentValue = select.value;
+    const types = [...new Set(allTransactions.map(t => String(t.transaction_type || "").trim()).filter(Boolean))]
+        .sort((a,b) => a.localeCompare(b));
+    select.innerHTML = '<option value="all">All Types</option>';
+    types.forEach(type => {
+        const option = document.createElement("option");
+        option.value = type.toLowerCase();
+        option.textContent = type;
+        select.appendChild(option);
+    });
+    select.value = currentValue === "all" || types.some(t => t.toLowerCase() === currentValue) ? currentValue : "all";
+}
+
+function applyFilters() {
+    const tableQuery = document.getElementById("tableSearch").value.trim().toLowerCase();
+    const globalQuery = document.getElementById("globalSearch").value.trim().toLowerCase();
+    const selectedType = document.getElementById("typeFilter").value.toLowerCase();
+    const query = [tableQuery,globalQuery].filter(Boolean).join(" ");
+
+    visibleTransactions = allTransactions.filter(transaction => {
+        const type = String(transaction.transaction_type || "").toLowerCase();
+        if (selectedType !== "all" && type !== selectedType) return false;
+        if (!query) return true;
+        const searchable = [
+            transaction.transaction_id, transaction.name, transaction.email,
+            transaction.account_number, transaction.transaction_type, transaction.amount,
+            transaction.description, transaction.transaction_date
+        ].join(" ").toLowerCase();
+        return searchable.includes(query);
+    });
+    renderTransactions();
+}
+
+function renderTransactions() {
+    const content = document.getElementById("content");
+    if (!visibleTransactions.length) {
+        const hasSearch = document.getElementById("tableSearch").value.trim() ||
+            document.getElementById("globalSearch").value.trim() ||
+            document.getElementById("typeFilter").value !== "all";
+        content.innerHTML = '<div class="message">' +
+            (hasSearch ? "No transactions match your search or selected filter." : "No transaction records found.") +
+            '</div>';
+        document.getElementById("recordCount").textContent = "Showing 0 transaction records.";
+        return;
+    }
+
+    let html = '<div class="transaction-table-wrapper"><table class="transaction-table"><thead><tr>' +
+        '<th>Transaction ID</th><th>Customer</th><th>Email</th><th>Account Number</th>' +
+        '<th>Transaction Type</th><th>Amount</th><th>Date</th><th>Description</th>' +
+        '</tr></thead><tbody>';
+
+    visibleTransactions.forEach(transaction => {
+        const {isCredit} = getTransactionDirection(transaction);
+        const amount = Number(transaction.amount || 0);
+        const type = String(transaction.transaction_type || "Other");
+        const amountClass = isCredit ? "transaction-credit" : "transaction-debit";
+        const amountPrefix = isCredit ? "+" : "-";
+        html += '<tr>' +
+            '<td class="transaction-id">#' + escapeHTML(transaction.transaction_id ?? "-") + '</td>' +
+            '<td>' + escapeHTML(transaction.name || "-") + '</td>' +
+            '<td class="email-cell">' + escapeHTML(transaction.email || "-") + '</td>' +
+            '<td class="account-cell">' + escapeHTML(transaction.account_number || "-") + '</td>' +
+            '<td><span class="type-badge ' + getTypeClass(type) + '">' + escapeHTML(type) + '</span></td>' +
+            '<td class="' + amountClass + '">' + amountPrefix + '₹' + formatAmount(amount) + '</td>' +
+            '<td class="date-cell">' + escapeHTML(formatDate(transaction.transaction_date)) + '</td>' +
+            '<td class="description-cell">' + escapeHTML(transaction.description || "-") + '</td>' +
+            '</tr>';
+    });
+
+    html += '</tbody></table></div>';
+    content.innerHTML = html;
+    document.getElementById("recordCount").textContent =
+        "Showing " + visibleTransactions.length.toLocaleString("en-IN") +
+        " of " + allTransactions.length.toLocaleString("en-IN") + " transactions";
+}
+
+/* Statement periods use calendar months and the Indian financial year (April–March). */
+function getStatementRange(period) {
+    const now = new Date();
+    const end = new Date(now.getTime());
+    let start = new Date(now.getTime());
+
+    if (period === "1month") start.setMonth(start.getMonth() - 1);
+    else if (period === "3months") start.setMonth(start.getMonth() - 3);
+    else if (period === "6months") start.setMonth(start.getMonth() - 6);
+    else if (period === "currentFY") {
+        const year = now.getFullYear();
+        start = new Date(year, now.getMonth() >= 3 ? 3 : -9, 1, 0, 0, 0, 0);
+    } else if (period === "previousFY") {
+        const year = now.getFullYear();
+        const currentFYStartYear = now.getMonth() >= 3 ? year : year - 1;
+        start = new Date(currentFYStartYear - 1, 3, 1, 0, 0, 0, 0);
+        end.setTime(new Date(currentFYStartYear, 3, 1, 0, 0, 0, 0).getTime() - 1);
+    }
+    return {start,end};
+}
+
+function getPeriodLabel(period) {
+    const labels = {
+        "1month":"Last 1 month",
+        "3months":"Last 3 months",
+        "6months":"Last 6 months",
+        "currentFY":"Current financial year",
+        "previousFY":"Previous financial year"
+    };
+    return labels[period] || period;
+}
+
+function getStatementTransactions() {
+    const period = document.getElementById("statementPeriod").value;
+    const range = getStatementRange(period);
+    return allTransactions.filter(transaction => {
+        const date = parseDate(transaction.transaction_date);
+        return date && date >= range.start && date <= range.end;
+    }).sort((a,b) => {
+        const da = parseDate(a.transaction_date);
+        const db = parseDate(b.transaction_date);
+        return db - da;
+    });
+}
+
+function updateStatementPreview() {
+    const preview = document.getElementById("statementPreview");
+    if (!preview) return;
+    const rows = getStatementTransactions();
+    preview.textContent = rows.length + " transaction record(s) match this period. Only details actually provided by the backend will be included; unavailable balances will not be fabricated.";
+}
+
+function openStatementModal() {
+    document.getElementById("statementModal").classList.add("open");
+    updateStatementPreview();
+    if (window.lucide) lucide.createIcons();
+}
+
+function closeStatementModal() {
+    document.getElementById("statementModal").classList.remove("open");
+}
+
+function selectFormat(format) {
+    selectedFormat = format;
+    document.getElementById("csvChoice").classList.toggle("selected",format === "csv");
+    document.getElementById("pdfChoice").classList.toggle("selected",format === "pdf");
+}
+
+function csvEscape(value) {
+    const text = String(value ?? "");
+    return '"' + text.replace(/"/g,'""') + '"';
+}
+
+function getStatementRows(transactions) {
+    return transactions.map(transaction => {
+        const {isCredit} = getTransactionDirection(transaction);
+        const amount = Math.abs(Number(transaction.amount) || 0);
+        return {
+            id: transaction.transaction_id ?? "",
+            date: formatStatementDate(transaction.transaction_date),
+            type: transaction.transaction_type || "Other",
+            description: transaction.description || "",
+            debit: !isCredit ? amount : "",
+            credit: isCredit ? amount : "",
+            customer: transaction.name || "",
+            email: transaction.email || "",
+            account: transaction.account_number || "",
+            balance: transaction.balance ?? transaction.closing_balance ?? ""
+        };
+    });
+}
+
+function downloadCSV(transactions,period) {
+    const rows = getStatementRows(transactions);
+    const customer = loggedInAdmin || loggedInUser || {};
+    const account = rows.find(row => row.account) || {};
+    const range = getStatementRange(period);
+    const metadata = [
+        ["IBI Bank — International Bank of India"],
+        ["Transaction Statement"],
+        ["Customer name",customer.name || customer.full_name || customer.username || account.customer || ""],
+        ["Email",customer.email || account.email || ""],
+        ["Account number",account.account || ""],
+        ["Statement period",getPeriodLabel(period)],
+        ["From",range.start.toLocaleDateString("en-IN")],
+        ["To",range.end.toLocaleDateString("en-IN")],
+        ["Generated on",new Date().toLocaleString("en-IN")],
+        [],
+        ["Transaction ID","Date & Time","Type","Description","Debit (INR)","Credit (INR)","Account Number","Customer","Email","Balance (INR)"]
+    ];
+
+    const csv = "\uFEFF" + metadata.map(row => row.map(csvEscape).join(",")).join("\r\n") +
+        "\r\n" + rows.map(row => [
+            row.id,row.date,row.type,row.description,row.debit,row.credit,row.account,row.customer,row.email,row.balance
+        ].map(csvEscape).join(",")).join("\r\n");
+
+    downloadBlob(new Blob([csv],{type:"text/csv;charset=utf-8;"}),makeFilename(period,"csv"));
+}
+
+function downloadPDF(transactions,period) {
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+        alert("PDF library could not load. Check your internet connection and try again, or choose CSV.");
+        return;
+    }
+
+    const {jsPDF} = window.jspdf;
+    const doc = new jsPDF({orientation:"landscape",unit:"pt",format:"a4"});
+    const rows = getStatementRows(transactions);
+    const customer = loggedInAdmin || loggedInUser || {};
+    const first = rows.find(row => row.account) || {};
+    const range = getStatementRange(period);
+
+    doc.setFillColor(2,18,57);
+    doc.rect(0,0,doc.internal.pageSize.getWidth(),92,"F");
+    doc.setTextColor(255,255,255);
+    doc.setFont("helvetica","bold");
+    doc.setFontSize(25);
+    doc.text("IBI BANK",38,38);
+    doc.setFontSize(10);
+    doc.setFont("helvetica","normal");
+    doc.text("International Bank of India",39,56);
+    doc.setFont("helvetica","bold");
+    doc.setFontSize(17);
+    doc.text("TRANSACTION STATEMENT",doc.internal.pageSize.getWidth()-38,39,{align:"right"});
+    doc.setFontSize(9);
+    doc.setFont("helvetica","normal");
+    doc.text("Generated " + new Date().toLocaleString("en-IN"),doc.internal.pageSize.getWidth()-38,58,{align:"right"});
+
+    doc.setTextColor(25,40,70);
+    doc.setFontSize(10);
+    const metaY = 115;
+    doc.text("Customer: " + (customer.name || customer.full_name || customer.username || first.customer || "Not provided"),38,metaY);
+    doc.text("Email: " + (customer.email || first.email || "Not provided"),38,metaY+17);
+    doc.text("Account number: " + (first.account || "Not provided"),38,metaY+34);
+    doc.text("Statement period: " + getPeriodLabel(period),doc.internal.pageSize.getWidth()/2,metaY);
+    doc.text("From: " + range.start.toLocaleDateString("en-IN") + "  To: " + range.end.toLocaleDateString("en-IN"),doc.internal.pageSize.getWidth()/2,metaY+17);
+
+    const totalDebits = rows.reduce((sum,row) => sum + (Number(row.debit) || 0),0);
+    const totalCredits = rows.reduce((sum,row) => sum + (Number(row.credit) || 0),0);
+    const money = amount => "INR " + Number(amount).toLocaleString("en-IN",{minimumFractionDigits:2,maximumFractionDigits:2});
+    const summaryY = 178;
+    doc.setFillColor(231,243,255);
+    doc.roundedRect(38,summaryY,doc.internal.pageSize.getWidth()-76,43,6,6,"F");
+    doc.setTextColor(15,47,96);
+    doc.setFont("helvetica","bold");
+    doc.text("Transactions: " + rows.length,50,summaryY+17);
+    doc.text("Total debits: " + money(totalDebits),230,summaryY+17);
+    doc.text("Total credits: " + money(totalCredits),450,summaryY+17);
+    doc.setFont("helvetica","normal");
+    doc.setFontSize(8);
+    doc.text("Opening/closing balance is shown only when provided by the backend.",50,summaryY+32);
+
+    const body = rows.map(row => [
+        "#" + row.id,row.date,row.type,row.description,
+        row.debit === "" ? "—" : money(row.debit),
+        row.credit === "" ? "—" : money(row.credit),
+        row.balance === "" ? "Not provided" : String(row.balance)
+    ]);
+
+    if (typeof doc.autoTable !== "function") {
+        alert("PDF table plugin could not load. Check your internet connection or select CSV.");
+        return;
+    }
+
+    doc.autoTable({
+        startY:summaryY+55,
+        head:[["Transaction ID","Date & time","Type","Description","Debit","Credit","Balance"]],
+        body,
+        theme:"grid",
+        margin:{left:38,right:38,bottom:40},
+        styles:{font:"helvetica",fontSize:8,cellPadding:5,overflow:"linebreak",textColor:[25,40,70],lineColor:[170,200,235]},
+        headStyles:{fillColor:[5,54,157],textColor:[255,255,255],fontStyle:"bold"},
+        alternateRowStyles:{fillColor:[239,247,255]},
+        columnStyles:{0:{cellWidth:64},1:{cellWidth:94},2:{cellWidth:62},3:{cellWidth:"auto"},4:{cellWidth:78},5:{cellWidth:78},6:{cellWidth:75}},
+        didDrawPage:function() {
+            const pageCount = doc.internal.getNumberOfPages();
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            doc.setDrawColor(0,170,220);
+            doc.line(38,pageHeight-30,pageWidth-38,pageHeight-30);
+            doc.setFontSize(8);
+            doc.setTextColor(80,100,135);
+            doc.text("IBI Bank • Keep your financial information secure",38,pageHeight-16);
+            doc.text("Page " + doc.internal.getCurrentPageInfo().pageNumber + " of " + pageCount,pageWidth-38,pageHeight-16,{align:"right"});
+        }
+    });
+
+    doc.save(makeFilename(period,"pdf"));
+}
+
+function makeFilename(period,extension) {
+    const date = new Date().toISOString().slice(0,10);
+    return "IBI_Bank_Transaction_Statement_" + period + "_" + date + "." + extension;
+}
+
+function downloadBlob(blob,filename) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url),1000);
+}
+
+function downloadStatement() {
+    const period = document.getElementById("statementPeriod").value;
+    const transactions = getStatementTransactions();
+
+    if (!transactions.length) {
+        alert("No transactions were found for the selected period. Try another period or refresh the transaction list.");
+        return;
+    }
+
+    if (selectedFormat === "csv") downloadCSV(transactions,period);
+    else downloadPDF(transactions,period);
+}
+
+document.getElementById("tableSearch").addEventListener("input",applyFilters);
+document.getElementById("globalSearch").addEventListener("input",applyFilters);
+document.getElementById("typeFilter").addEventListener("change",applyFilters);
+document.getElementById("statementPeriod").addEventListener("change",updateStatementPreview);
+
+document.getElementById("statementModal").addEventListener("click",event => {
+    if (event.target.id === "statementModal") closeStatementModal();
+});
+document.addEventListener("keydown",event => {
+    if (event.key === "Escape") closeStatementModal();
+});
+
+if (window.lucide) lucide.createIcons();
+loadTransactions();
+</script>
+</body>
+</html>

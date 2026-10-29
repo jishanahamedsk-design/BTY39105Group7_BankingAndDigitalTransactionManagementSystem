@@ -1,0 +1,1797 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#02091d">
+<title>IBI Bank — Customer Dashboard</title>
+
+<link rel="stylesheet" href="css/style.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root {
+    --bg: #02091d;
+    --panel: #061b49;
+    --cyan: #00eaff;
+    --blue: #087cff;
+    --text: #f5f8ff;
+    --muted: #a9c4ed;
+    --green: #00e6c3;
+    --red: #ff365f;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+    width: 100%;
+}
+
+body {
+    color: var(--text);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    background:
+        radial-gradient(ellipse at 50% -15%, rgba(0,93,255,.24), transparent 55%),
+        linear-gradient(135deg, #02091d, #03143a 60%, #02091d);
+    overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+.dashboard {
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 30px 24px;
+}
+
+/* =====================================================
+   TOP BAR — ALIGNED WITH THE FULL DASHBOARD
+===================================================== */
+
+.topbar {
+    width: 100%;
+    min-height: 88px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,234,255,.22);
+    margin: 0 0 16px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    flex: 0 0 auto;
+    min-width: 305px;
+    margin: 0;
+}
+
+.brand img {
+    width: 108px;
+    height: 76px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.brand-copy h1 {
+    margin: 0;
+    font-size: 31px;
+    line-height: 1.1;
+    letter-spacing: -.8px;
+    font-weight: 800;
+}
+
+.brand-copy p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #e1eaff;
+    white-space: nowrap;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1 1 0;
+    min-width: 160px;
+    max-width: none;
+    height: 48px;
+    margin: 0;
+    padding: 0 18px;
+    border: 1px solid rgba(0,157,255,.85);
+    border-radius: 28px;
+    background: linear-gradient(
+        100deg,
+        rgba(0,50,145,.9),
+        rgba(0,31,98,.8)
+    );
+    box-shadow: inset 0 0 16px rgba(0,105,255,.15);
+}
+
+.search-box > i {
+    width: 23px;
+    height: 23px;
+    color: #8fd5ff;
+    flex-shrink: 0;
+}
+
+.search-box input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    color: white;
+    background: transparent;
+    font-size: 13px;
+}
+
+.search-box input::placeholder { color: #e0eaff; }
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    flex: 0 0 auto;
+    margin: 0 0 0 auto;
+}
+
+.topbar-divider {
+    height: 42px;
+    border-left: 1px solid rgba(0,234,255,.35);
+}
+
+.profile-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    margin: 0;
+}
+
+.profile-avatar {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 48px;
+    border-radius: 50%;
+    border: 1px solid #00eaff;
+    color: white;
+    background: linear-gradient(145deg, #00dfff, #0754ff 70%, #562aff);
+    box-shadow: 0 0 18px rgba(0,184,255,.35);
+}
+
+.profile-avatar svg { width: 25px; height: 25px; }
+
+.profile-label {
+    min-width: 0;
+    color: #f4f7ff;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.profile-label strong {
+    display: block;
+    max-width: 155px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 15px;
+}
+
+.logout-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 44px;
+    padding: 0 17px;
+    margin: 0;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 12px;
+    color: white;
+    background: linear-gradient(110deg, #ff4777, #d90052);
+    box-shadow: 0 5px 18px rgba(255,0,85,.18);
+    font-size: 13px;
+    white-space: nowrap;
+    transition: transform .2s, filter .2s;
+}
+
+.logout-button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.12);
+}
+
+/* WELCOME BANNER */
+
+.welcome-banner {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    min-height: 228px;
+    margin-bottom: 17px;
+    padding: 24px 5%;
+    overflow: hidden;
+    border: 1px solid rgba(0,234,255,.9);
+    border-radius: 20px;
+    background:
+        radial-gradient(ellipse at 83% 55%, rgba(0,110,255,.4), transparent 38%),
+        radial-gradient(ellipse at 20% 100%, rgba(0,108,255,.35), transparent 45%),
+        linear-gradient(115deg, #061743, #062a85 56%, #080c57);
+    box-shadow: 0 0 28px rgba(0,110,255,.17), inset 0 0 30px rgba(0,112,255,.15);
+}
+
+.welcome-banner::before {
+    content: "";
+    position: absolute;
+    inset: -50% -10%;
+    z-index: -1;
+    background:
+        linear-gradient(145deg, transparent 40%, rgba(0,128,255,.2) 41%, transparent 60%),
+        linear-gradient(160deg, transparent 48%, rgba(0,234,255,.2) 49%, transparent 50%),
+        linear-gradient(170deg, transparent 65%, rgba(75,0,255,.25) 66%, transparent 80%);
+    transform: rotate(-4deg);
+    pointer-events: none;
+}
+
+.welcome-copy { min-width: 0; }
+
+.welcome-eyebrow {
+    margin: 0 0 2px;
+    color: #b9d7ff;
+    font-size: clamp(19px, 2vw, 28px);
+    font-weight: 650;
+}
+
+.welcome-copy h2 {
+    margin: 0;
+    font-size: clamp(31px, 3.8vw, 58px);
+    font-weight: 850;
+    line-height: 1.15;
+    letter-spacing: -1.6px;
+    overflow-wrap: anywhere;
+}
+
+.welcome-copy h2 span { color: #fff; }
+
+.welcome-copy > p {
+    margin: 8px 0 15px;
+    color: #00f0ff;
+    font-size: clamp(14px, 1.5vw, 21px);
+    font-weight: 650;
+}
+
+.trust-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.trust-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 16px 7px 7px;
+    border: 1px solid rgba(0,134,255,.14);
+    border-radius: 28px;
+    background: rgba(0,32,105,.55);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.trust-pill i {
+    display: grid;
+    place-items: center;
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #008dff, #3924ff);
+    box-shadow: 0 0 12px rgba(0,155,255,.35);
+}
+
+.trust-pill svg { width: 20px; height: 20px; }
+
+.trust-quote {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    flex: 0 0 28%;
+    max-width: 300px;
+    padding: 4px 0 4px 35px;
+    border-left: 1px solid #00eaff;
+}
+
+.quote-mark {
+    color: #91c7ff;
+    font-size: 58px;
+    line-height: .9;
+    font-weight: 900;
+}
+
+.trust-quote p {
+    margin: 4px 0 0;
+    font-size: clamp(17px, 1.8vw, 28px);
+    line-height: 1.4;
+    font-weight: 650;
+}
+
+.quote-line {
+    width: 74px;
+    height: 3px;
+    margin-top: 22px;
+    background: linear-gradient(90deg, #a500ff, #00eaff);
+}
+
+/* BALANCE + QUICK ACTIONS */
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 18px;
+    margin-bottom: 17px;
+}
+
+.panel {
+    min-width: 0;
+    border: 1px solid rgba(0,207,255,.85);
+    border-radius: 19px;
+    background:
+        radial-gradient(ellipse at 80% 15%, rgba(0,92,255,.22), transparent 40%),
+        linear-gradient(140deg, rgba(5,30,88,.97), rgba(2,15,53,.98));
+    box-shadow: inset 0 0 22px rgba(0,85,255,.13), 0 7px 25px rgba(0,0,0,.12);
+}
+
+.balance-card {
+    position: relative;
+    overflow: hidden;
+    padding: 23px 23px 17px;
+}
+
+.balance-card::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    width: 65%;
+    height: 150%;
+    right: -12%;
+    top: -35%;
+    pointer-events: none;
+    transform: rotate(28deg);
+    background: linear-gradient(90deg, transparent, rgba(0,145,255,.16), transparent);
+}
+
+.balance-main, .balance-meta {
+    position: relative;
+    z-index: 1;
+}
+
+.balance-main {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    min-height: 125px;
+}
+
+.balance-icon {
+    display: grid;
+    place-items: center;
+    width: 98px;
+    height: 98px;
+    flex: 0 0 98px;
+    border: 1px solid #00eaff;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00d9ff, #075cff 70%, #7b00ff);
+    box-shadow: 0 0 20px rgba(0,195,255,.4);
+}
+
+.balance-icon svg { width: 47px; height: 47px; }
+.balance-content { min-width: 0; }
+
+.balance-title-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    color: #d9e9ff;
+    font-size: 21px;
+}
+
+.balance-title-row button {
+    display: grid;
+    place-items: center;
+    border: 0;
+    color: #77edff;
+    background: transparent;
+}
+
+.balance-title-row button svg { width: 25px; height: 25px; }
+
+.balance-value {
+    margin-top: 8px;
+    font-size: clamp(25px, 3vw, 43px);
+    font-weight: 850;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.balance-subtitle {
+    margin-top: 7px;
+    color: #e1ebff;
+    font-size: 15px;
+}
+
+.balance-meta {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr .9fr;
+    gap: 0;
+    margin-top: 14px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0,234,255,.58);
+}
+
+.meta-item { min-width: 0; padding: 0 13px; }
+.meta-item:first-child { padding-left: 0; }
+.meta-item + .meta-item { border-left: 1px solid rgba(0,234,255,.22); }
+
+.meta-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #e1eaff;
+    font-size: 13px;
+}
+
+.meta-value {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    font-size: 17px;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+}
+
+.account-number-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.copy-account {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border: 0;
+    color: white;
+    background: transparent;
+}
+
+.copy-account svg { width: 22px; height: 22px; }
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    flex: 0 0 12px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 12px rgba(0,230,195,.5);
+}
+
+.status-inactive { background: #ff5575; box-shadow: none; }
+.status-active-text { color: var(--green); }
+.status-inactive-text { color: #ff7d91; }
+
+.quick-panel { padding: 12px 20px 17px; }
+
+.section-heading { margin: 0 4px 14px; }
+
+.section-heading h2 {
+    margin: 0;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -.5px;
+}
+
+.section-heading p {
+    margin: 5px 0 0;
+    color: #d3e3ff;
+    font-size: 13px;
+}
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.action-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    min-height: 78px;
+    padding: 11px 12px;
+    border: 1px solid rgba(0,160,255,.55);
+    border-radius: 15px;
+    overflow: hidden;
+    background: linear-gradient(115deg, rgba(0,72,175,.82), rgba(0,35,100,.85));
+    transition: transform .2s, border-color .2s, filter .2s;
+}
+
+.action-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: linear-gradient(120deg, rgba(255,255,255,.12), transparent 55%);
+    transition: opacity .2s;
+    pointer-events: none;
+}
+
+.action-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--cyan);
+    filter: brightness(1.13);
+}
+
+.action-card:hover::after { opacity: 1; }
+
+.action-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    border-radius: 13px;
+    color: white;
+    background: linear-gradient(140deg, #138bff, #003eff);
+    box-shadow: 0 0 18px rgba(0,110,255,.3);
+}
+
+.action-icon svg { width: 26px; height: 26px; }
+
+.action-title {
+    min-width: 0;
+    flex: 1;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.action-arrow { flex: 0 0 auto; color: #b9e6ff; }
+.action-arrow svg { width: 20px; height: 20px; }
+
+.action-beneficiaries {
+    background: linear-gradient(115deg, rgba(0,127,111,.68), rgba(0,49,78,.9));
+    border-color: rgba(0,255,190,.36);
+}
+
+.action-beneficiaries .action-icon {
+    background: linear-gradient(135deg, #00d7a0, #008c7b);
+}
+
+.action-accounts {
+    background: linear-gradient(115deg, rgba(98,0,177,.7), rgba(28,13,100,.9));
+    border-color: rgba(199,74,255,.42);
+}
+
+.action-accounts .action-icon {
+    background: linear-gradient(135deg, #d34dff, #7200ff);
+}
+
+.action-loans {
+    background: linear-gradient(115deg, rgba(156,74,0,.65), rgba(68,32,13,.9));
+    border-color: rgba(255,174,36,.55);
+}
+
+.action-loans .action-icon {
+    background: linear-gradient(135deg, #ffcf43, #ff7600);
+}
+
+.action-emi {
+    background: linear-gradient(115deg, rgba(0,105,160,.68), rgba(0,38,85,.9));
+    border-color: rgba(0,220,255,.42);
+}
+
+.action-emi .action-icon {
+    background: linear-gradient(135deg, #00eaff, #0061ff);
+}
+
+.action-transactions {
+    background: linear-gradient(115deg, rgba(176,0,76,.55), rgba(74,0,63,.9));
+    border-color: rgba(255,69,139,.4);
+}
+
+.action-transactions .action-icon {
+    background: linear-gradient(135deg, #ff4b98, #b900ff);
+}
+
+/* RECENT TRANSACTIONS */
+
+.transactions {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(0,207,255,.85);
+    border-radius: 19px;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(0,65,180,.2), transparent 60%),
+        linear-gradient(140deg, rgba(5,25,72,.98), rgba(2,13,43,.99));
+    box-shadow: inset 0 0 20px rgba(0,85,255,.1);
+}
+
+.transactions-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 15px 22px 13px;
+}
+
+.transactions-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+}
+
+.transactions-clock {
+    display: grid;
+    place-items: center;
+    width: 47px;
+    height: 47px;
+    flex: 0 0 47px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00cfff, #4a00ff);
+    box-shadow: 0 0 16px rgba(0,110,255,.35);
+}
+
+.transactions-clock svg { width: 27px; height: 27px; }
+
+.transactions-header h2 { margin: 0; font-size: 21px; }
+
+.transactions-header p {
+    margin: 4px 0 0;
+    color: #c2d8f9;
+    font-size: 13px;
+}
+
+.view-all {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 11px 19px;
+    border: 1px solid #00dfff;
+    border-radius: 28px;
+    color: white;
+    background: linear-gradient(100deg, rgba(0,73,173,.6), rgba(0,42,103,.7));
+    white-space: nowrap;
+    font-size: 13px;
+    transition: background .2s;
+}
+
+.view-all:hover { background: rgba(0,145,255,.25); }
+.view-all svg { color: var(--cyan); width: 20px; height: 20px; }
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    padding: 0 15px 14px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.transactions table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: collapse;
+}
+
+.transactions thead { background: linear-gradient(90deg, #083f9f, #073079); }
+
+.transactions th {
+    padding: 10px 17px;
+    color: #f0f6ff;
+    font-size: 13px;
+    font-weight: 650;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.transactions th:first-child { border-radius: 11px 0 0 11px; }
+.transactions th:last-child { border-radius: 0 11px 11px 0; }
+
+.transactions td {
+    padding: 9px 17px;
+    border-bottom: 1px solid rgba(0,115,255,.22);
+    color: #eff5ff;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.transactions tbody tr:last-child td { border-bottom: 0; }
+.transactions tbody tr:hover { background: rgba(0,112,255,.1); }
+.transactions td:first-child { white-space: nowrap; }
+.transactions td:nth-child(4) { white-space: nowrap; font-weight: 750; }
+.transactions td:last-child { white-space: nowrap; }
+
+.transaction-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.type-symbol {
+    display: grid;
+    place-items: center;
+    width: 37px;
+    height: 37px;
+    flex: 0 0 37px;
+    border-radius: 50%;
+    color: white;
+    background: linear-gradient(135deg, #00d7ae, #008a85);
+}
+
+.type-symbol svg { width: 21px; height: 21px; }
+
+.type-symbol.debit-symbol {
+    background: linear-gradient(135deg, #ff4d87, #f00042);
+}
+
+.type-label {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding: 5px 15px;
+    border-radius: 22px;
+    background: rgba(0,205,190,.15);
+    color: #42f2df;
+    white-space: nowrap;
+}
+
+.type-label.debit-label {
+    background: rgba(255,43,100,.13);
+    color: #ff688b;
+}
+
+.credit { color: #00f3d6 !important; }
+.debit { color: #ff3159 !important; }
+
+.transaction-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 108px;
+    padding: 8px 13px;
+    border-radius: 24px;
+    color: white;
+    background: linear-gradient(110deg, #008f88, #00776f);
+    font-size: 12px;
+}
+
+.empty-state {
+    padding: 28px 18px;
+    color: #b8d0f1;
+    font-size: 13px;
+    line-height: 1.7;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.page-footer {
+    padding: 18px 0 0;
+    color: #7897c2;
+    font-size: 11px;
+    text-align: center;
+}
+
+.toast {
+    position: fixed;
+    z-index: 2000;
+    right: 20px;
+    bottom: 20px;
+    max-width: calc(100vw - 40px);
+    padding: 12px 18px;
+    border: 1px solid rgba(0,234,255,.5);
+    border-radius: 12px;
+    color: white;
+    background: #062752;
+    box-shadow: 0 8px 30px rgba(0,0,0,.35);
+    font-size: 13px;
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: .2s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =====================================================
+   RESPONSIVE LAYOUT — NO PAGE ZOOM
+===================================================== */
+
+@media (max-width: 1250px) {
+    .dashboard { padding-right: 22px; padding-left: 22px; }
+
+    .overview-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .balance-card { min-height: 0; }
+
+    .quick-actions {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1050px) {
+    .topbar {
+        min-height: 0;
+        flex-wrap: wrap;
+        gap: 14px;
+        padding: 12px 0 15px;
+    }
+
+    .brand {
+        min-width: 0;
+        flex: 1 1 240px;
+    }
+
+    .brand img {
+        width: 82px;
+        height: 64px;
+    }
+
+    .brand-copy h1 { font-size: 27px; }
+    .brand-copy p { font-size: 11px; }
+
+    .search-box {
+        order: 3;
+        flex: 1 1 100%;
+        max-width: none;
+        height: 46px;
+    }
+
+    .topbar-right { gap: 12px; }
+
+    .welcome-banner { padding: 25px; }
+
+    .trust-quote {
+        flex-basis: 100%;
+        max-width: none;
+        padding: 12px 0 0;
+        border-left: 0;
+        border-top: 1px solid rgba(0,234,255,.55);
+    }
+
+    .trust-quote p { font-size: 18px; }
+    .trust-quote .quote-mark { font-size: 42px; }
+}
+
+@media (max-width: 850px) {
+    .dashboard { padding: 0 15px 20px; }
+
+    .profile-avatar {
+        width: 43px;
+        height: 43px;
+        flex-basis: 43px;
+    }
+
+    .profile-label strong {
+        max-width: 125px;
+        font-size: 13px;
+    }
+
+    .logout-button {
+        min-height: 42px;
+        padding: 0 12px;
+    }
+}
+
+@media (max-width: 560px) {
+    .dashboard { padding: 0 10px 18px; }
+
+    .topbar {
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+
+    .brand { gap: 8px; }
+
+    .brand img {
+        width: 58px;
+        height: 53px;
+    }
+
+    .brand-copy h1 { font-size: 22px; }
+    .brand-copy p { font-size: 9px; }
+
+    .topbar-right { gap: 8px; }
+    .topbar-divider { height: 32px; }
+    .profile-chip { gap: 7px; }
+
+    .profile-avatar {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+    }
+
+    .profile-avatar svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .profile-label { font-size: 9px; }
+
+    .profile-label strong {
+        max-width: 95px;
+        font-size: 11px;
+    }
+
+    .logout-button {
+        min-height: 36px;
+        padding: 0 9px;
+        font-size: 11px;
+        gap: 5px;
+    }
+
+    .logout-button svg { width: 16px; height: 16px; }
+
+    .welcome-banner {
+        gap: 17px;
+        padding: 22px 18px;
+        margin-bottom: 12px;
+        border-radius: 15px;
+    }
+
+    .welcome-eyebrow { font-size: 17px; }
+
+    .welcome-copy h2 {
+        font-size: 30px;
+        letter-spacing: -.8px;
+    }
+
+    .welcome-copy > p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .trust-pills { gap: 7px; }
+
+    .trust-pill {
+        gap: 7px;
+        padding: 5px 9px 5px 5px;
+        font-size: 10px;
+    }
+
+    .trust-pill i { width: 29px; height: 29px; }
+    .trust-pill svg { width: 16px; height: 16px; }
+
+    .overview-grid {
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .balance-card { padding: 17px 14px 14px; }
+
+    .balance-main {
+        gap: 13px;
+        min-height: 95px;
+    }
+
+    .balance-icon {
+        width: 65px;
+        height: 65px;
+        flex-basis: 65px;
+    }
+
+    .balance-icon svg { width: 33px; height: 33px; }
+
+    .balance-title-row {
+        gap: 7px;
+        font-size: 15px;
+    }
+
+    .balance-title-row button svg { width: 19px; height: 19px; }
+    .balance-value { font-size: 25px; }
+    .balance-subtitle { font-size: 12px; }
+
+    .balance-meta {
+        margin-top: 10px;
+        padding-top: 12px;
+    }
+
+    .meta-item { padding: 0 7px; }
+
+    .meta-label {
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    .meta-value { font-size: 11px; }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        flex-basis: 8px;
+    }
+
+    .copy-account svg { width: 17px; height: 17px; }
+    .quick-panel { padding: 14px 12px; }
+    .section-heading { margin: 0 2px 12px; }
+    .section-heading h2 { font-size: 19px; }
+    .section-heading p { font-size: 11px; }
+
+    .quick-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .action-card {
+        min-height: 70px;
+        gap: 8px;
+        padding: 9px 7px;
+        border-radius: 11px;
+    }
+
+    .action-icon {
+        width: 37px;
+        height: 37px;
+        flex-basis: 37px;
+        border-radius: 10px;
+    }
+
+    .action-icon svg { width: 20px; height: 20px; }
+    .action-title { font-size: 10px; }
+    .action-arrow svg { width: 15px; height: 15px; }
+
+    .transactions-header {
+        padding: 13px 11px;
+        align-items: flex-start;
+    }
+
+    .transactions-title-wrap { gap: 9px; }
+
+    .transactions-clock {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+    }
+
+    .transactions-clock svg { width: 21px; height: 21px; }
+    .transactions-header h2 { font-size: 16px; }
+    .transactions-header p { font-size: 10px; }
+
+    .view-all {
+        gap: 5px;
+        padding: 9px 10px;
+        font-size: 10px;
+    }
+
+    .view-all svg { width: 15px; height: 15px; }
+    .table-wrap { padding: 0 8px 10px; }
+
+    .transactions th,
+    .transactions td {
+        padding: 9px 10px;
+        font-size: 11px;
+    }
+
+    .type-symbol {
+        width: 29px;
+        height: 29px;
+        flex-basis: 29px;
+    }
+
+    .type-symbol svg { width: 16px; height: 16px; }
+    .type-label { min-height: 27px; padding: 4px 9px; }
+
+    .transaction-status {
+        min-width: 85px;
+        padding: 7px 9px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 370px) {
+    .brand-copy h1 { font-size: 19px; }
+    .brand-copy p { white-space: normal; }
+    .profile-label { display: none; }
+    .topbar-right { margin-left: auto; }
+    .logout-button { padding: 0 7px; }
+    .balance-meta { grid-template-columns: 1fr; gap: 9px; }
+
+    .meta-item,
+    .meta-item:first-child {
+        padding: 8px 0;
+    }
+
+    .meta-item + .meta-item {
+        border-left: 0;
+        border-top: 1px solid rgba(0,234,255,.2);
+    }
+
+    .action-card { gap: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+<main class="dashboard">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+        <a class="brand" href="dashboard.html" aria-label="IBI Bank dashboard">
+            <img src="images/ibi-logo.png" alt="IBI Bank logo"
+                 onerror="this.style.display='none'">
+            <div class="brand-copy">
+                <h1>IBI Bank</h1>
+                <p>International Bank of India</p>
+            </div>
+        </a>
+
+        <label class="search-box">
+            <i data-lucide="search"></i>
+            <input type="search" id="transactionSearch"
+                   placeholder="Search transactions, accounts, beneficiaries..."
+                   autocomplete="off"
+                   aria-label="Search recent transactions">
+        </label>
+
+        <div class="topbar-right">
+            <div class="topbar-divider"></div>
+
+            <div class="profile-chip">
+                <div class="profile-avatar" aria-hidden="true">
+                    <i data-lucide="user-round"></i>
+                </div>
+                <div class="profile-label">
+                    Welcome back,
+                    <strong id="profileName">Customer</strong>
+                </div>
+            </div>
+
+            <button class="logout-button" type="button" onclick="logout()">
+                <i data-lucide="log-out"></i>
+                Logout
+            </button>
+        </div>
+    </header>
+
+    <!-- WELCOME BANNER -->
+    <section class="welcome-banner">
+        <div class="welcome-copy">
+            <p class="welcome-eyebrow" id="greetingText">Welcome back,</p>
+            <h2><span id="bannerWelcome">Customer!</span> 👋</h2>
+            <p>Manage your finances with ease, security and speed.</p>
+
+            <div class="trust-pills">
+                <span class="trust-pill">
+                    <i data-lucide="shield-check"></i>
+                    Secure Banking
+                </span>
+                <span class="trust-pill">
+                    <i data-lucide="zap"></i>
+                    Fast Transactions
+                </span>
+                <span class="trust-pill">
+                    <i data-lucide="heart"></i>
+                    Always with You
+                </span>
+            </div>
+        </div>
+
+        <div class="trust-quote">
+            <span class="quote-mark">“</span>
+            <div>
+                <p>Your trust<br>Your progress<br>Our priority.</p>
+                <div class="quote-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BALANCE AND QUICK ACTIONS -->
+    <section class="overview-grid" aria-label="Account overview and quick actions">
+        <article class="panel balance-card">
+            <div class="balance-main">
+                <div class="balance-icon">
+                    <i data-lucide="wallet"></i>
+                </div>
+
+                <div class="balance-content">
+                    <div class="balance-title-row">
+                        <span>Available Balance</span>
+                        <button type="button" id="toggleBalance"
+                                aria-label="Hide balance"
+                                title="Show or hide balance">
+                            <i data-lucide="eye"></i>
+                        </button>
+                    </div>
+
+                    <div class="balance-value" id="balance" aria-live="polite">
+                        Loading...
+                    </div>
+                    <div class="balance-subtitle" id="balanceSubtitle">
+                        Loading account...
+                    </div>
+                </div>
+            </div>
+
+            <div class="balance-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Account Number</span>
+                    <div class="account-number-line">
+                        <strong class="meta-value" id="accountNumber">Loading...</strong>
+                        <button class="copy-account" id="copyAccountButton"
+                                type="button" aria-label="Copy account number"
+                                title="Copy account number" hidden>
+                            <i data-lucide="copy"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="meta-item">
+                    <span class="meta-label">Account Status</span>
+                    <strong class="meta-value" id="accountStatus">
+                        <span class="status-dot"></span>
+                        Loading...
+                    </strong>
+                </div>
+
+                <div class="meta-item">
+                    <span class="meta-label">Account Type</span>
+                    <strong class="meta-value" id="accountTypeShort">Loading...</strong>
+                </div>
+            </div>
+        </article>
+
+        <article class="panel quick-panel">
+            <div class="section-heading">
+                <h2>Quick Actions</h2>
+                <p>Get things done, faster</p>
+            </div>
+
+            <div class="quick-actions">
+                <a class="action-card" href="transfer.html">
+                    <span class="action-icon"><i data-lucide="send"></i></span>
+                    <span class="action-title">Fund Transfer</span>
+                    <span class="action-arrow"><i data-lucide="chevron-right"></i></span>
+                </a>
+
+                <a class="action-card action-beneficiaries" href="beneficiaries.html">
+                    <span class="action-icon"><i data-lucide="users-round"></i></span>
+                    <span class="action-title">Beneficiaries</span>
+                    <span class="action-arrow"><i data-lucide="chevron-right"></i></span>
+                </a>
+
+                <a class="action-card action-accounts" href="accounts.html">
+                    <span class="action-icon"><i data-lucide="credit-card"></i></span>
+                    <span class="action-title">My Accounts</span>
+                    <span class="action-arrow"><i data-lucide="chevron-right"></i></span>
+                </a>
+
+                <a class="action-card action-loans" href="loans.html">
+                    <span class="action-icon"><i data-lucide="landmark"></i></span>
+                    <span class="action-title">Loans</span>
+                    <span class="action-arrow"><i data-lucide="chevron-right"></i></span>
+                </a>
+
+                <a class="action-card action-emi" href="emi.html">
+                    <span class="action-icon"><i data-lucide="calendar-check"></i></span>
+                    <span class="action-title">EMI Payments</span>
+                    <span class="action-arrow"><i data-lucide="chevron-right"></i></span>
+                </a>
+
+                <a class="action-card action-transactions" href="transactions.html">
+                    <span class="action-icon"><i data-lucide="file-text"></i></span>
+                    <span class="action-title">Transactions</span>
+                    <span class="action-arrow"><i data-lucide="chevron-right"></i></span>
+                </a>
+            </div>
+        </article>
+    </section>
+
+    <!-- RECENT TRANSACTIONS -->
+    <section class="transactions" aria-labelledby="transactionsTitle">
+        <header class="transactions-header">
+            <div class="transactions-title-wrap">
+                <span class="transactions-clock">
+                    <i data-lucide="clock"></i>
+                </span>
+                <div>
+                    <h2 id="transactionsTitle">Recent Transactions</h2>
+                    <p>Your latest account activity</p>
+                </div>
+            </div>
+
+            <a class="view-all" href="transactions.html">
+                View All Transactions
+                <i data-lucide="arrow-right"></i>
+            </a>
+        </header>
+
+        <div id="transactionArea" aria-live="polite">
+            <div class="empty-state">Loading transactions...</div>
+        </div>
+    </section>
+
+    <footer class="page-footer">
+        IBI Bank · International Bank of India · Secure Digital Banking
+    </footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+const API_URL = "http://127.0.0.1:5000";
+
+let loggedInUser = null;
+let loggedInAdmin = null;
+
+try {
+    loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    loggedInAdmin = JSON.parse(localStorage.getItem("loggedInAdmin"));
+} catch (error) {
+    console.error("Unable to read saved login information.");
+}
+
+if (!loggedInUser && !loggedInAdmin) {
+    window.location.href = "index.html";
+}
+
+let myAccount = null;
+let allMyTransactions = [];
+let currentAccountNumber = "";
+let balanceHidden = false;
+let actualBalanceText = "";
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[character]);
+}
+
+function formatMoney(value) {
+    const amount = Number(value);
+
+    if (!Number.isFinite(amount)) return "₹0.00";
+
+    return "₹" + amount.toLocaleString("en-IN", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+function formatDate(value) {
+    if (!value) return "-";
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) return String(value);
+
+    return date.toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+}
+
+function setText(id, value) {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value ?? "-";
+}
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    window.clearTimeout(showToast.timeout);
+
+    showToast.timeout = window.setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+}
+
+const displayName = loggedInAdmin
+    ? (loggedInAdmin.name || "Administrator")
+    : (loggedInUser?.name || "Customer");
+
+setText("profileName", displayName);
+setText("greetingText", "Welcome back,");
+setText("bannerWelcome", displayName + "!");
+
+function renderAccountStatus(status) {
+    const element = document.getElementById("accountStatus");
+    const value = String(status || "Unknown");
+    const isActive = value.toLowerCase() === "active";
+
+    element.innerHTML =
+        '<span class="status-dot ' +
+        (isActive ? "" : "status-inactive") +
+        '"></span>' +
+        '<span class="' +
+        (isActive ? "status-active-text" : "status-inactive-text") +
+        '">' +
+        escapeHTML(value) +
+        '</span>';
+}
+
+function displayAdminDashboard() {
+    setText("balance", "Admin");
+    setText("balanceSubtitle", "Administrator access");
+    setText("accountNumber", "Not applicable");
+    setText("accountTypeShort", "Admin");
+
+    renderAccountStatus("Active");
+
+    document.getElementById("copyAccountButton").hidden = true;
+    document.getElementById("toggleBalance").hidden = true;
+
+    document.getElementById("transactionArea").innerHTML =
+        '<div class="empty-state">' +
+        'The administrator does not have a personal bank account linked to this dashboard.' +
+        '</div>';
+
+    const search = document.getElementById("transactionSearch");
+    search.disabled = true;
+    search.placeholder = "Search unavailable for administrators";
+}
+
+function displayNoAccount() {
+    setText("balance", "No account");
+    setText("balanceSubtitle", "No linked bank account was found");
+    setText("accountNumber", "Not available");
+    setText("accountTypeShort", "—");
+
+    renderAccountStatus("Not available");
+
+    document.getElementById("copyAccountButton").hidden = true;
+
+    document.getElementById("transactionArea").innerHTML =
+        '<div class="empty-state">' +
+        'No bank account is linked to this user yet. Please contact your bank if you believe this is incorrect.' +
+        '</div>';
+}
+
+async function loadDashboard() {
+    if (loggedInAdmin) {
+        displayAdminDashboard();
+        return;
+    }
+
+    try {
+        const accountResponse = await fetch(API_URL + "/api/accounts");
+
+        if (!accountResponse.ok) {
+            throw new Error("Unable to load accounts.");
+        }
+
+        const accounts = await accountResponse.json();
+
+        if (!Array.isArray(accounts)) {
+            throw new Error("Unexpected accounts response.");
+        }
+
+        myAccount = accounts.find(account =>
+            String(account.email || "").toLowerCase() ===
+            String(loggedInUser.email || "").toLowerCase()
+        );
+
+        if (!myAccount) {
+            displayNoAccount();
+            return;
+        }
+
+        actualBalanceText = formatMoney(myAccount.balance);
+
+        setText("balance", actualBalanceText);
+        setText("balanceSubtitle", myAccount.type_name || "Bank account");
+
+        currentAccountNumber = String(myAccount.account_number || "");
+
+        setText("accountNumber", currentAccountNumber || "Not available");
+        setText("accountTypeShort", myAccount.type_name || "Savings");
+
+        renderAccountStatus(myAccount.status);
+
+        document.getElementById("copyAccountButton").hidden =
+            !currentAccountNumber;
+
+        const transactionResponse = await fetch(API_URL + "/api/transactions");
+
+        if (!transactionResponse.ok) {
+            throw new Error("Unable to load transactions.");
+        }
+
+        const transactions = await transactionResponse.json();
+
+        if (!Array.isArray(transactions)) {
+            throw new Error("Unexpected transactions response.");
+        }
+
+        allMyTransactions = transactions.filter(transaction =>
+            Number(transaction.account_id) === Number(myAccount.account_id)
+        );
+
+        displayTransactions(
+            allMyTransactions,
+            document.getElementById("transactionSearch").value
+        );
+
+    } catch (error) {
+        console.error("Dashboard loading failed:", error);
+
+        setText("balance", "Unavailable");
+        setText("balanceSubtitle", "Could not load account information");
+
+        document.getElementById("transactionArea").innerHTML =
+            '<div class="empty-state">' +
+            'Unable to load dashboard data. Please check your connection and confirm that the banking server is running.' +
+            '</div>';
+    }
+}
+
+function isCreditTransaction(transaction) {
+    const type = String(transaction.transaction_type || "")
+        .trim()
+        .toUpperCase();
+
+    const description = String(transaction.description || "")
+        .trim()
+        .toUpperCase();
+
+    if (
+        type.includes("EMI") ||
+        type.includes("TRANSFER") ||
+        type.includes("WITHDRAW") ||
+        type.includes("DEBIT") ||
+        type.includes("PAYMENT")
+    ) {
+        return false;
+    }
+
+    if (
+        type.includes("CREDIT") ||
+        type.includes("DEPOSIT") ||
+        type.includes("INTEREST") ||
+        type.includes("REFUND") ||
+        type.includes("RECEIVED")
+    ) {
+        return true;
+    }
+
+    return (
+        description.includes("RECEIVED") ||
+        description.includes("CREDIT") ||
+        description.includes("DEPOSIT") ||
+        description.includes("REFUND") ||
+        description.includes("INTEREST") ||
+        description.includes("SALARY")
+    );
+}
+
+function transactionIcon(transaction, credit) {
+    const text = (
+        String(transaction.transaction_type || "") + " " +
+        String(transaction.description || "")
+    ).toLowerCase();
+
+    if (text.includes("emi")) return "calendar-check";
+    if (text.includes("transfer")) return "send";
+    if (text.includes("interest")) return "percent";
+    if (text.includes("salary")) return "wallet";
+    if (text.includes("bill")) return "zap";
+
+    return credit ? "arrow-down-left" : "arrow-up-right";
+}
+
+function transactionStatus(transaction) {
+    return String(
+        transaction.status ||
+        transaction.transaction_status ||
+        "Completed"
+    );
+}
+
+function displayTransactions(transactions, searchTerm = "") {
+    const area = document.getElementById("transactionArea");
+
+    const sorted = [...(transactions || [])].sort((a, b) => {
+        const dateA = new Date(a.transaction_date || 0).getTime();
+        const dateB = new Date(b.transaction_date || 0).getTime();
+
+        return (Number.isFinite(dateB) ? dateB : 0) -
+               (Number.isFinite(dateA) ? dateA : 0);
+    });
+
+    const query = String(searchTerm || "").trim().toLowerCase();
+
+    const filtered = sorted.filter(transaction => {
+        const searchableText = [
+            transaction.transaction_type,
+            transaction.description,
+            transaction.amount,
+            formatMoney(transaction.amount),
+            formatDate(transaction.transaction_date),
+            transaction.status,
+            transaction.transaction_status
+        ].join(" ").toLowerCase();
+
+        return searchableText.includes(query);
+    });
+
+    const latestTransactions = filtered.slice(0, 5);
+
+    if (latestTransactions.length === 0) {
+        area.innerHTML =
+            '<div class="empty-state">' +
+            (query
+                ? "No recent transactions match your search."
+                : "No transactions found for this account.") +
+            '</div>';
+        return;
+    }
+
+    let html = `
+        <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date &amp; Time</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>`;
+
+    latestTransactions.forEach(transaction => {
+        const credit = isCreditTransaction(transaction);
+        const sign = credit ? "+" : "−";
+        const amount = Math.abs(Number(transaction.amount) || 0);
+        const type = transaction.transaction_type || "Transaction";
+        const description = transaction.description || "—";
+        const icon = transactionIcon(transaction, credit);
+        const status = transactionStatus(transaction);
+
+        const isCompleted =
+            status.toLowerCase() === "completed" ||
+            status.toLowerCase() === "success";
+
+        html += `
+            <tr>
+                <td>${escapeHTML(formatDate(transaction.transaction_date))}</td>
+                <td>
+                    <span class="transaction-type">
+                        <span class="type-symbol ${credit ? "" : "debit-symbol"}">
+                            <i data-lucide="${icon}"></i>
+                        </span>
+                        <span class="type-label ${credit ? "" : "debit-label"}">
+                            ${escapeHTML(type)}
+                        </span>
+                    </span>
+                </td>
+                <td>${escapeHTML(description)}</td>
+                <td class="${credit ? "credit" : "debit"}">
+                    ${sign} ${escapeHTML(formatMoney(amount))}
+                </td>
+                <td>
+                    <span class="transaction-status"
+                        style="${isCompleted
+                            ? ""
+                            : "background:linear-gradient(110deg,#8b6500,#604500);"}">
+                        ${escapeHTML(status)}
+                    </span>
+                </td>
+            </tr>`;
+    });
+
+    html += `</tbody></table></div>`;
+
+    area.innerHTML = html;
+
+    if (window.lucide) window.lucide.createIcons();
+}
+
+/* Search recent transactions as the user types. */
+document.getElementById("transactionSearch").addEventListener("input", event => {
+    displayTransactions(allMyTransactions, event.target.value);
+});
+
+/* Copy account number. */
+document.getElementById("copyAccountButton").addEventListener("click", async () => {
+    if (!currentAccountNumber) return;
+
+    try {
+        if (
+            navigator.clipboard &&
+            typeof navigator.clipboard.writeText === "function"
+        ) {
+            await navigator.clipboard.writeText(currentAccountNumber);
+            showToast("Account number copied.");
+        } else {
+            throw new Error("Clipboard unavailable.");
+        }
+    } catch (error) {
+        showToast("Unable to copy. Please select the account number manually.");
+    }
+});
+
+/* Show or hide the balance. */
+document.getElementById("toggleBalance").addEventListener("click", () => {
+    if (!actualBalanceText) return;
+
+    balanceHidden = !balanceHidden;
+
+    setText("balance", balanceHidden ? "₹ ••••••" : actualBalanceText);
+
+    const button = document.getElementById("toggleBalance");
+
+    button.innerHTML = balanceHidden
+        ? '<i data-lucide="eye-off"></i>'
+        : '<i data-lucide="eye"></i>';
+
+    button.setAttribute(
+        "aria-label",
+        balanceHidden ? "Show balance" : "Hide balance"
+    );
+
+    if (window.lucide) window.lucide.createIcons();
+});
+
+/* Logout. */
+function logout() {
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("loggedInAdmin");
+    window.location.href = "index.html";
+}
+
+/* Initialize icons and load live banking data. */
+if (window.lucide) window.lucide.createIcons();
+loadDashboard();
+
+
+</script>
+
+</body>
+</html>

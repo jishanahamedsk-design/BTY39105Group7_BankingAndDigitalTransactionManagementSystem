@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#02091d">
+<title>IBI Bank — International Bank of India</title>
+
+<style>
+:root {
+    --bg:#02091d;
+    --panel:#03132f;
+    --cyan:#00dfff;
+    --blue:#075cff;
+    --text:#f4f8ff;
+    --muted:#a9c9ed;
+    --border:rgba(0,204,255,.85);
+    --danger:#ff596e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{min-height:100%;scroll-behavior:smooth}
+body{
+    min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+    background:radial-gradient(ellipse at 23% 58%,rgba(0,87,190,.3),transparent 42%),
+    radial-gradient(ellipse at 80% 36%,rgba(0,54,153,.3),transparent 43%),
+    linear-gradient(120deg,#010817,#031b42 55%,#010a20);overflow-x:hidden
+}
+body::before{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:linear-gradient(135deg,transparent 0 38%,rgba(0,104,255,.09) 38.1%,transparent 38.3%),
+    linear-gradient(315deg,transparent 0 24%,rgba(0,104,255,.08) 24.1%,transparent 24.3%)
+}
+a{color:inherit}
+button,input{font:inherit}
+button{-webkit-tap-highlight-color:transparent}
+
+/* HEADER */
+.site-header{
+    width:100%;min-height:84px;padding:12px clamp(20px,4vw,70px);
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+    background:rgba(1,8,23,.96);border-bottom:1px solid var(--border);
+    box-shadow:0 5px 22px rgba(0,76,255,.16)
+}
+.brand{display:flex;align-items:center;gap:15px;min-width:0;flex-shrink:0;text-decoration:none}
+.brand img{display:block;width:88px;height:60px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 0 9px rgba(0,100,255,.35))}
+.brand-name{color:#f5f8ff;font-size:15px;font-weight:700;letter-spacing:2px;white-space:nowrap}
+.brand-name span{color:var(--cyan)}
+.nav-links{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.nav-links a{padding:10px 15px;color:#e8f1ff;text-decoration:none;font-size:13px;border-bottom:2px solid transparent;transition:.2s}
+.nav-links a:first-child{color:var(--cyan);border-bottom-color:var(--cyan)}
+.nav-links a:hover{color:var(--cyan);border-bottom-color:var(--cyan)}
+
+/* MAIN LAYOUT */
+.main-content{
+    width:100%;max-width:1600px;min-height:calc(100vh - 153px);margin:0 auto;
+    padding:30px clamp(25px,5vw,80px);
+    display:grid;grid-template-columns:minmax(0,1.1fr) minmax(390px,.9fr);
+    align-items:center;gap:clamp(30px,5vw,75px)
+}
+.brand-section{width:100%;min-width:0;padding:10px 0;text-align:center}
+.logo-stage{width:100%;max-width:590px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center}
+.hero-logo{display:block;width:100%;max-width:510px;height:clamp(190px,25vw,300px);object-fit:contain;filter:drop-shadow(0 0 20px rgba(0,101,255,.28))}
+.brand-heading{color:#f3f7ff;font-size:clamp(25px,3vw,43px);font-weight:400;letter-spacing:clamp(4px,.65vw,9px);line-height:1.3}
+.brand-subheading{margin-top:2px;color:#00c8f2;font-size:clamp(20px,2.2vw,31px);font-weight:700;letter-spacing:6px}
+.brand-divider{width:min(76%,470px);margin:14px auto;display:flex;align-items:center;gap:14px;color:#e1edff;font-size:11px;letter-spacing:3px;white-space:nowrap}
+.brand-divider::before,.brand-divider::after{content:"";height:2px;flex:1;background:linear-gradient(90deg,transparent,var(--cyan))}
+.brand-divider::after{background:linear-gradient(90deg,var(--cyan),transparent)}
+.brand-tagline{margin-top:23px;font-size:clamp(20px,2vw,29px)}
+.brand-tagline span{color:var(--cyan);font-weight:700}
+.brand-caption{margin-top:12px;color:#59cfff;font-size:15px;letter-spacing:2px}
+.brand-caption span{margin:0 10px;color:#b3d8ff}
+
+/* FEATURE CARDS */
+.features{width:100%;max-width:630px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:28px auto 0}
+.feature-card{min-width:0;min-height:132px;padding:15px 8px;border:1px solid rgba(0,181,255,.75);border-radius:16px;background:linear-gradient(145deg,rgba(3,35,91,.78),rgba(1,12,36,.88));box-shadow:inset 0 0 20px rgba(0,79,255,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow-wrap:anywhere}
+.feature-icon{width:43px;height:43px;margin-bottom:10px;border-radius:50%;border:1px solid var(--cyan);color:var(--cyan);display:grid;place-items:center;font-size:22px;box-shadow:0 0 14px rgba(0,170,255,.22)}
+.feature-card h3{margin-bottom:6px;font-size:12px}
+.feature-card p{color:#badcff;font-size:11px;line-height:1.5}
+
+/* LOGIN CARD */
+.login-section{width:100%;max-width:520px;min-width:0;justify-self:center}
+.login-card{position:relative;width:100%;padding:clamp(25px,3vw,40px);border:1px solid var(--border);border-radius:24px;background:radial-gradient(ellipse at top right,rgba(0,58,190,.18),transparent 42%),linear-gradient(145deg,rgba(2,19,51,.98),rgba(1,8,26,.99));box-shadow:0 0 28px rgba(0,90,255,.22),inset 0 0 28px rgba(0,65,180,.08)}
+.login-card::before{content:"";position:absolute;top:-2px;left:30%;width:40%;height:3px;background:linear-gradient(90deg,transparent,var(--cyan),#5e48ff,transparent);filter:drop-shadow(0 0 8px var(--cyan))}
+.login-card h1{font-size:clamp(28px,2.7vw,38px);margin-bottom:10px;letter-spacing:-.5px}
+.login-subtitle{color:#62caff;font-size:16px;margin-bottom:26px}
+.login-tabs{display:flex;gap:8px;margin-bottom:25px}
+.login-tab{flex:1;min-width:0;min-height:47px;padding:10px;border-radius:10px;border:1px solid rgba(0,169,255,.5);background:rgba(0,23,55,.8);color:#c3dcfa;font-size:13px;font-weight:600;cursor:pointer;transition:.2s}
+.login-tab.active{background:linear-gradient(110deg,#04c6ee,#075cff);border-color:var(--cyan);color:white;box-shadow:0 0 15px rgba(0,119,255,.2)}
+.login-tab:hover{border-color:var(--cyan)}
+
+/* INPUT FIELDS */
+.field{margin-bottom:20px}
+.field label{display:block;margin-bottom:9px;color:#e6f1ff;font-size:13px;font-weight:700}
+.input-wrap{position:relative;width:100%}
+.input-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--cyan);font-size:20px;pointer-events:none}
+.input-wrap input{width:100%;height:54px;padding:0 48px;border:1px solid #008cff;border-radius:11px;outline:none;background:rgba(0,26,59,.83);color:white;font-size:14px;transition:border-color .2s,box-shadow .2s}
+.input-wrap input::placeholder{color:#a9c9ed;opacity:1}
+.input-wrap input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,211,255,.1)}
+.input-wrap input:disabled{opacity:.7}
+
+/* PASSWORD EYE */
+.password-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:35px;height:35px;padding:6px;display:flex;align-items:center;justify-content:center;border:0;border-radius:7px;background:transparent;color:var(--cyan);cursor:pointer;z-index:5}
+.password-toggle:hover{background:rgba(0,223,255,.1);color:white}
+.password-toggle:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.password-toggle svg{display:block;width:22px;height:22px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+
+/* FORM OPTIONS */
+.form-options{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:3px 0 25px;font-size:12px}
+.remember-option{display:inline-flex;align-items:center;gap:9px;color:#cce2ff;cursor:pointer}
+.remember-option input{width:18px;height:18px;accent-color:#087bff;cursor:pointer}
+.text-link{color:var(--cyan);text-decoration:none}
+.text-link:hover{text-decoration:underline}
+.forgot-password-link{font-weight:700}
+
+/* BUTTONS */
+.login-btn{width:100%;min-height:57px;border:1px solid rgba(0,224,255,.7);border-radius:13px;background:linear-gradient(105deg,#08c8eb,#075cff 78%);color:white;font-size:18px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(0,82,255,.16);transition:transform .2s,box-shadow .2s}
+.login-btn:hover{transform:translateY(-1px);box-shadow:0 0 22px rgba(0,189,255,.3)}
+.login-btn:disabled{opacity:.65;cursor:wait;transform:none}
+.or-divider{display:flex;align-items:center;gap:16px;margin:25px 0 22px;color:#b9dcff;font-size:14px}
+.or-divider::before,.or-divider::after{content:"";flex:1;height:1px;background:rgba(0,171,255,.45)}
+.create-account-btn{width:100%;min-height:55px;display:flex;align-items:center;justify-content:center;gap:12px;border:1px solid var(--cyan);border-radius:12px;background:rgba(0,21,52,.65);color:white;text-decoration:none;font-size:15px;font-weight:600;transition:background .2s,box-shadow .2s}
+.create-account-btn span{color:var(--cyan);font-size:21px}
+.create-account-btn:hover{background:rgba(0,94,180,.2);box-shadow:0 0 17px rgba(0,200,255,.12)}
+
+/* STATUS MESSAGE */
+#message{display:none;margin-top:17px;padding:12px;border-radius:8px;font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+#message.visible{display:block}
+#message.success{color:#a5ffdc;border:1px solid rgba(30,230,160,.4);background:rgba(0,140,90,.12)}
+#message.error{color:#ffb6c0;border:1px solid rgba(255,75,105,.45);background:rgba(160,15,45,.12)}
+.support-note{margin-top:18px;text-align:center;color:#a9c9ed;font-size:12px;line-height:1.8}
+.support-note a{color:var(--cyan);text-decoration:none;font-weight:700}
+.support-note a:hover{text-decoration:underline}
+
+/* FOOTER */
+.site-footer{width:100%;min-height:69px;padding:18px clamp(20px,4vw,70px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px 24px;background:rgba(1,7,20,.96);border-top:1px solid rgba(0,171,255,.6);color:#b7d1ee;font-size:12px}
+.footer-links{display:flex;flex-wrap:wrap;gap:0;align-items:center}
+.footer-links>a,.contact-toggle{padding:0 15px;border:0;border-right:1px solid rgba(0,205,255,.4);background:transparent;color:#b7d1ee;text-decoration:none;font-size:12px;cursor:pointer;line-height:1.8}
+.footer-links>a:first-child{padding-left:0}
+.footer-links>a:hover,.contact-toggle:hover{color:var(--cyan)}
+.contact-dropdown{position:relative;display:inline-flex;align-items:center}
+.contact-toggle{border-right:0;padding-right:0}
+.contact-toggle:focus-visible,.contact-menu a:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+.contact-menu{position:absolute;z-index:1000;right:0;bottom:calc(100% + 12px);width:245px;padding:8px;display:flex;flex-direction:column;gap:4px;border:1px solid var(--border);border-radius:12px;background:#03132f;box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.contact-menu[hidden]{display:none!important}
+.footer-links .contact-menu a{display:block;width:100%;padding:11px 12px;border:0;border-radius:7px;color:#d7eaff;text-decoration:none;font-size:13px;line-height:1.5;white-space:normal}
+.footer-links .contact-menu a:hover{color:var(--cyan);background:rgba(0,111,255,.15)}
+.contact-menu small{display:block;margin-top:3px;color:#8fb8df;font-size:11px}
+
+/* OTP AND PASSWORD RESET MODAL */
+.modal-backdrop{position:fixed;inset:0;z-index:2000;padding:20px;display:flex;align-items:center;justify-content:center;background:rgba(0,4,18,.76);backdrop-filter:blur(7px)}
+.verify-modal{position:relative;width:100%;max-width:420px;max-height:calc(100vh - 40px);overflow-y:auto;padding:27px 22px 22px;border:1px solid #008dff;border-radius:19px;background:radial-gradient(ellipse at top,rgba(0,73,190,.22),transparent 55%),linear-gradient(145deg,#031b43,#010b22);box-shadow:0 0 28px rgba(0,110,255,.4),inset 0 0 22px rgba(0,78,255,.08);text-align:center}
+.verify-modal::before{content:"";position:absolute;top:-2px;left:25%;width:50%;height:3px;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.modal-close{position:absolute;top:9px;right:12px;border:0;background:transparent;color:var(--cyan);font-size:27px;cursor:pointer}
+.modal-close:disabled{opacity:.5;cursor:wait}
+.modal-icon{width:59px;height:59px;margin:0 auto 12px;display:grid;place-items:center;border:1px solid var(--blue);border-radius:50%;color:var(--cyan);font-size:27px;box-shadow:0 0 15px rgba(0,112,255,.35)}
+.verify-modal h2{margin-bottom:9px;font-size:21px}
+.modal-description{color:#d0e4ff;font-size:13px;line-height:1.55;overflow-wrap:anywhere}
+#verificationEmail{color:#83dfff;font-weight:700;overflow-wrap:anywhere}
+.otp-inputs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;margin:20px 0 17px}
+.otp-input{width:100%;min-width:0;height:43px;padding:0;border:1px solid #006acb;border-radius:8px;background:rgba(0,24,60,.95);color:white;text-align:center;font-size:20px;font-weight:700;outline:none}
+.otp-input:focus{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(0,223,255,.16),0 0 12px rgba(0,223,255,.3)}
+.verify-submit{width:100%;min-height:51px;border:1px solid var(--cyan);border-radius:11px;background:linear-gradient(105deg,#08c8eb,#075cff);color:white;font-weight:700;cursor:pointer;transition:.2s}
+.verify-submit:hover{box-shadow:0 0 18px rgba(0,200,255,.3)}
+.verify-submit:disabled{opacity:.65;cursor:wait}
+.resend-row{margin-top:15px;color:#c6dfff;font-size:12px;line-height:1.7}
+.resend-btn{border:0;background:transparent;color:var(--cyan);font-weight:700;text-decoration:underline;cursor:pointer}
+.resend-btn:disabled{opacity:.55;cursor:wait}
+#verificationMessage{min-height:19px;margin-top:9px;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+#verificationMessage.error{color:#ff8d9b}
+#verificationMessage.success{color:#63f0b7}
+
+/* RESET PASSWORD FIELDS */
+.reset-password-field{margin:13px 0;text-align:left}
+.reset-password-field label{display:block;margin-bottom:7px;color:#d0e4ff;font-size:12px;font-weight:700}
+.reset-password-field input{width:100%;min-height:44px;padding:11px 42px 11px 12px;border:1px solid #006acb;border-radius:9px;outline:none;background:rgba(0,24,60,.95);color:#fff;font-size:14px}
+.reset-password-field input::placeholder{color:#a9c9ed}
+.reset-password-field input:focus{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(0,223,255,.16)}
+.reset-password-field input:disabled{opacity:.6;cursor:not-allowed}
+.reset-password-hint{margin:8px 0 14px;color:#a9c9ed;font-size:11px;line-height:1.5;text-align:left}
+.reset-password-wrap{position:relative}
+.reset-password-wrap .password-toggle{right:5px}
+.password-rules{margin:8px 0 15px;padding:11px;border:1px solid rgba(0,150,255,.28);border-radius:9px;background:rgba(0,16,43,.6);text-align:left}
+.password-rules-title{margin-bottom:8px;color:#d0e4ff;font-size:11px;font-weight:700}
+.password-rule{display:flex;align-items:center;gap:7px;margin:5px 0;color:#a9c9ed;font-size:11px;line-height:1.4}
+.password-rule .rule-mark{width:15px;flex:0 0 15px;color:#ff8495;font-weight:700;text-align:center}
+.password-rule.valid{color:#78f0bc}
+.password-rule.valid .rule-mark{color:#78f0bc}
+.stage-indicator{display:flex;justify-content:center;gap:7px;margin:0 0 17px}
+.stage-dot{width:7px;height:7px;border-radius:50%;background:rgba(123,180,255,.35)}
+.stage-dot.active{width:21px;border-radius:8px;background:var(--cyan);box-shadow:0 0 10px rgba(0,223,255,.45)}
+.success-panel{padding:8px 0 3px}
+.success-symbol{width:68px;height:68px;margin:0 auto 16px;display:grid;place-items:center;border:1px solid #34e6a1;border-radius:50%;color:#63f0b7;font-size:35px;box-shadow:0 0 20px rgba(52,230,161,.15)}
+.success-panel h2{margin-bottom:12px}
+.success-panel p{margin:0 auto 18px;color:#c8e0ff;font-size:13px;line-height:1.7;overflow-wrap:anywhere}
+.success-panel .verify-submit{margin-top:8px}
+#resetEmailStatus{margin-top:10px;color:#9fc9ed;font-size:11px;line-height:1.5}
+.reset-warning{color:#ffc0c8!important}
+
+/* TABLET */
+@media(max-width:1050px){
+    .main-content{grid-template-columns:minmax(0,1fr) minmax(340px,.95fr);gap:25px;padding:30px 24px}
+    .brand-name{font-size:11px;letter-spacing:1.5px;white-space:normal}
+    .brand img{width:65px;height:49px}
+    .hero-logo{height:210px}
+    .features{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .feature-card{min-height:110px}
+    .nav-links a{padding:8px;font-size:11px}
+    .brand-heading{letter-spacing:4px}
+    .brand-subheading{letter-spacing:5px}
+}
+
+/* MOBILE */
+@media(max-width:760px){
+    .site-header{padding:12px 5%;min-height:auto;flex-wrap:wrap;justify-content:center;text-align:center;gap:12px}
+    .brand{justify-content:center;max-width:100%}
+    .brand img{width:60px;height:45px}
+    .brand-name{font-size:11px;line-height:1.5;letter-spacing:1.5px;text-align:left}
+    .nav-links{width:100%;justify-content:center;flex-wrap:wrap}
+    .nav-links a{font-size:10px;padding:7px 9px}
+    .main-content{min-height:auto;grid-template-columns:minmax(0,1fr);gap:25px;padding:25px 18px 32px}
+    .brand-section{padding:0}
+    .hero-logo{height:190px}
+    .brand-heading{font-size:clamp(23px,6vw,35px);letter-spacing:5px}
+    .brand-subheading{font-size:20px;letter-spacing:5px}
+    .brand-tagline{margin-top:20px}
+    .features{margin-top:22px}
+    .login-section{max-width:500px}
+    .login-card{padding:26px 22px;border-radius:18px}
+    .login-card h1{font-size:30px}
+    .site-footer{justify-content:center;text-align:center}
+    .footer-links{justify-content:center;row-gap:12px}
+    .contact-menu{right:0;max-width:min(245px,85vw)}
+}
+
+/* SMALL MOBILE */
+@media(max-width:400px){
+    .login-tabs{gap:7px}
+    .login-tab{padding:9px 5px;font-size:12px}
+    .input-wrap input{height:52px;font-size:13px;padding-left:42px;padding-right:44px}
+    .form-options{font-size:11px}
+    .brand-divider{letter-spacing:2px;font-size:9px}
+    .features{gap:8px}
+    .feature-card{padding:12px 5px}
+    .login-card{padding:22px 15px}
+    .footer-links>a,.contact-toggle{padding-left:9px;padding-right:9px}
+    .footer-links>a:first-child{padding-left:0}
+    .contact-toggle{padding-right:0}
+    .verify-modal{padding:25px 15px 19px}
+    .otp-inputs{gap:5px}
+    .otp-input{height:40px}
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+    <a class="brand" href="index.html" aria-label="IBI Bank Home">
+        <img src="images/ibi-logo.png" alt="IBI Bank logo">
+        <span class="brand-name">INTERNATIONAL <span>BANK OF INDIA</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+    <a href="index.html" aria-current="page">Personal</a>
+    <a href="business.html">Business</a>
+    <a href="nri.html">NRI</a>
+    <a href="about.html">About Us</a>
+</nav>
+</header>
+
+<main class="main-content">
+    <section class="brand-section" aria-label="IBI Bank introduction">
+        <div class="logo-stage">
+            <img class="hero-logo" src="images/ibi-logo.png" alt="International Bank of India logo">
+        </div>
+        <h2 class="brand-heading">INTERNATIONAL</h2>
+        <p class="brand-subheading">BANK OF INDIA</p>
+        <div class="brand-divider">YOUR TRUST&nbsp; OUR GLOBAL REACH</div>
+        <p class="brand-tagline">Banking <span>Beyond Borders</span></p>
+        <p class="brand-caption">Secure <span>|</span> Simple <span>|</span> Global</p>
+
+        <div class="features">
+            <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">♢</div>
+                <h3>Safe &amp; Secure</h3><p>Your money,<br>our priority</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">◎</div>
+                <h3>Global Access</h3><p>Bank anytime,<br>anywhere</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">ϟ</div>
+                <h3>Fast &amp; Reliable</h3><p>Seamless<br>transactions</p>
+            </article>
+            <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">♧</div>
+                <h3>24/7 Support</h3><p>We're always<br>here for you</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="login-section" aria-label="Account login">
+        <div class="login-card">
+            <h1>Welcome Back</h1>
+            <p class="login-subtitle">Login to your IBI account</p>
+
+            <div class="login-tabs" role="tablist" aria-label="Login type">
+                <button type="button" id="userTab" class="login-tab active"
+                    role="tab" aria-selected="true" aria-controls="userLoginForm">Customer Login</button>
+                <button type="button" id="adminTab" class="login-tab"
+                    role="tab" aria-selected="false" aria-controls="adminLoginForm">Admin Login</button>
+            </div>
+
+            <form id="userLoginForm">
+                <div class="field">
+                    <label for="userEmail">Email Address</label>
+                    <div class="input-wrap">
+                        <span class="input-icon" aria-hidden="true">✉</span>
+                        <input type="email" id="userEmail" name="email"
+                            placeholder="Enter your email address" autocomplete="username" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="userPassword">Password</label>
+                    <div class="input-wrap">
+                        <span class="input-icon" aria-hidden="true">🔒</span>
+                        <input type="password" id="userPassword" name="password"
+                            placeholder="Enter your password" autocomplete="current-password" required>
+                        <button type="button" class="password-toggle"
+                            aria-label="Show password" aria-pressed="false"
+                            data-password-target="userPassword">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-option">
+                        <input type="checkbox" id="rememberUser" checked>
+                        <span>Remember Me</span>
+                    </label>
+                    <a class="text-link forgot-password-link" href="#forgot-password"
+                       data-reset-role="user">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn" id="userLoginBtn">Login&nbsp; →</button>
+            </form>
+
+            <form id="adminLoginForm" hidden>
+                <div class="field">
+                    <label for="adminEmail">Admin Email Address</label>
+                    <div class="input-wrap">
+                        <span class="input-icon" aria-hidden="true">✉</span>
+                        <input type="email" id="adminEmail" name="adminEmail"
+                            placeholder="Enter admin email" autocomplete="username" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="adminPassword">Admin Password</label>
+                    <div class="input-wrap">
+                        <span class="input-icon" aria-hidden="true">🔒</span>
+                        <input type="password" id="adminPassword" name="adminPassword"
+                            placeholder="Enter your password" autocomplete="current-password" required>
+                        <button type="button" class="password-toggle"
+                            aria-label="Show password" aria-pressed="false"
+                            data-password-target="adminPassword">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-option">
+                        <input type="checkbox" id="rememberAdmin">
+                        <span>Remember Me</span>
+                    </label>
+                    <a class="text-link forgot-password-link" href="#forgot-password"
+                       data-reset-role="admin">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn" id="adminLoginBtn">Admin Login&nbsp; →</button>
+            </form>
+
+            <div id="message" role="status" aria-live="polite"></div>
+            <div class="or-divider">OR</div>
+            <a class="create-account-btn" href="signup.html">
+                <span aria-hidden="true">♙＋</span> Create New Account
+            </a>
+
+            <!-- UPDATED CUSTOMER SUPPORT EMAIL -->
+            <p class="support-note">
+                Facing a problem?
+                <a href="mailto:ibibankofficial@gmail.com?subject=IBI%20Bank%20Customer%20Support">Contact Customer Support</a>
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>© 2026 International Bank of India. All rights reserved.</p>
+    <nav class="footer-links" aria-label="Footer navigation">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <div class="contact-dropdown" id="contactDropdown">
+            <button type="button" class="contact-toggle" id="contactToggle"
+                aria-expanded="false" aria-controls="contactMenu">Contact Us ▾</button>
+            <div class="contact-menu" id="contactMenu" hidden>
+                <a href="mailto:ibibankofficial@gmail.com?subject=IBI%20Bank%20Customer%20Support">
+                    ✉ Email Us<small>ibibankofficial@gmail.com</small>
+                </a>
+                <a href="https://www.instagram.com/ibibankofficial/" target="_blank" rel="noopener noreferrer">
+                    ◎ Instagram<small>@ibibankofficial</small>
+                </a>
+            </div>
+        </div>
+    </nav>
+</footer>
+
+<!-- LOGIN OTP / PASSWORD RESET MODAL -->
+<div class="modal-backdrop" id="verificationModal" hidden>
+    <section class="verify-modal" role="dialog" aria-modal="true" aria-labelledby="verificationTitle">
+        <button type="button" class="modal-close" id="closeVerificationModal"
+            aria-label="Close verification window">×</button>
+
+        <div id="resetFlowStage">
+            <div class="stage-indicator" id="resetStageIndicator" hidden aria-label="Password reset progress">
+                <span class="stage-dot active" id="resetDot1"></span>
+                <span class="stage-dot" id="resetDot2"></span>
+            </div>
+
+            <div class="modal-icon" id="verificationIcon" aria-hidden="true">✉</div>
+            <h2 id="verificationTitle">Verify Your Login</h2>
+            <p class="modal-description" id="verificationDescription">
+                We'll send a 6-digit verification code to<br>
+                <span id="verificationEmail"></span>
+            </p>
+
+            <form id="verificationForm" novalidate>
+                <div id="otpCodeSection">
+                    <div class="otp-inputs" aria-label="Six-digit verification code">
+                        <input class="otp-input" inputmode="numeric" pattern="[0-9]*" maxlength="1"
+                            aria-label="Digit 1" autocomplete="one-time-code" required>
+                        <input class="otp-input" inputmode="numeric" pattern="[0-9]*" maxlength="1"
+                            aria-label="Digit 2" required>
+                        <input class="otp-input" inputmode="numeric" pattern="[0-9]*" maxlength="1"
+                            aria-label="Digit 3" required>
+                        <input class="otp-input" inputmode="numeric" pattern="[0-9]*" maxlength="1"
+                            aria-label="Digit 4" required>
+                        <input class="otp-input" inputmode="numeric" pattern="[0-9]*" maxlength="1"
+                            aria-label="Digit 5" required>
+                        <input class="otp-input" inputmode="numeric" pattern="[0-9]*" maxlength="1"
+                            aria-label="Digit 6" required>
+                    </div>
+                </div>
+
+                <div id="resetPasswordFields" hidden>
+                    <div class="reset-password-field">
+                        <label for="newResetPassword">New Password</label>
+                        <div class="reset-password-wrap">
+                            <input type="password" id="newResetPassword" name="newResetPassword"
+                                minlength="8" maxlength="128" autocomplete="new-password"
+                                placeholder="Enter new password" disabled>
+                            <button type="button" class="password-toggle"
+                                aria-label="Show password" aria-pressed="false"
+                                data-password-target="newResetPassword">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="reset-password-field">
+                        <label for="confirmResetPassword">Confirm New Password</label>
+                        <div class="reset-password-wrap">
+                            <input type="password" id="confirmResetPassword" name="confirmResetPassword"
+                                minlength="8" maxlength="128" autocomplete="new-password"
+                                placeholder="Re-enter new password" disabled>
+                            <button type="button" class="password-toggle"
+                                aria-label="Show password" aria-pressed="false"
+                                data-password-target="confirmResetPassword">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="password-rules" id="passwordRules" aria-live="polite">
+                        <p class="password-rules-title">Password must include:</p>
+                        <p class="password-rule" data-rule="length"><span class="rule-mark">○</span> 8–128 characters</p>
+                        <p class="password-rule" data-rule="upper"><span class="rule-mark">○</span> An uppercase letter (A–Z)</p>
+                        <p class="password-rule" data-rule="lower"><span class="rule-mark">○</span> A lowercase letter (a–z)</p>
+                        <p class="password-rule" data-rule="number"><span class="rule-mark">○</span> A number (0–9)</p>
+                        <p class="password-rule" data-rule="special"><span class="rule-mark">○</span> A special character</p>
+                        <p class="password-rule" data-rule="match"><span class="rule-mark">○</span> Passwords match</p>
+                    </div>
+
+                    <p class="reset-password-hint">
+                        Choose a unique password that you do not use on other websites.
+                    </p>
+                </div>
+
+                <button type="submit" class="verify-submit" id="verifyCodeButton">
+                    Verify &amp; Continue
+                </button>
+            </form>
+
+            <p id="verificationMessage" role="status" aria-live="polite"></p>
+            <div class="resend-row" id="resendRow">
+                Didn't receive the code?
+                <button type="button" class="resend-btn" id="resendCodeButton">Resend Code</button>
+            </div>
+        </div>
+
+        <div class="success-panel" id="resetSuccessStage" hidden>
+            <div class="success-symbol" aria-hidden="true">✓</div>
+            <h2>Password Changed!</h2>
+            <p id="passwordChangedText">
+                Your password has been changed successfully.
+            </p>
+            <p id="resetEmailStatus"></p>
+            <button type="button" class="verify-submit" id="continueResetSuccess">
+                Continue
+            </button>
+        </div>
+
+        <div class="success-panel" id="resetEmailSuccessStage" hidden>
+            <div class="success-symbol" aria-hidden="true">✉</div>
+            <h2>Confirmation Email Sent</h2>
+            <p>
+                A password-change confirmation email has been sent to
+                <strong id="confirmationEmailAddress"></strong>.
+                If you did not make this change, contact your bank immediately.
+            </p>
+            <button type="button" class="verify-submit" id="finishResetButton">
+                Return to Login
+            </button>
+        </div>
+    </section>
+</div>
+
+<script>
+"use strict";
+
+const API_BASE = "http://127.0.0.1:5000";
+
+const API_ROUTES = {
+    customerLogin: "/api/auth/login",
+    adminLogin: "/api/auth/admin-login",
+    verifyLoginCode: "/api/auth/verify-email-code",
+    resendLoginCode: "/api/auth/resend-login-code",
+    forgotPassword: "/api/auth/forgot-password",
+    verifyPasswordResetCode: "/api/auth/verify-password-reset-code",
+    resetPassword: "/api/auth/reset-password"
+};
+
+const $ = id => document.getElementById(id);
+
+let currentVerificationEmail = "";
+let currentLoginRole = "user";
+let verificationPurpose = "login";
+let verificationStage = "otp";
+let passwordResetToken = "";
+let resetConfirmationEmailSent = false;
+let loginRequestInProgress = false;
+let verificationRequestInProgress = false;
+let resetRequestInProgress = false;
+
+const verificationModal = $("verificationModal");
+const otpInputs = Array.from(document.querySelectorAll(".otp-input"));
+
+function normalizeEmail(value) {
+    return String(value || "").trim().toLowerCase();
+}
+
+function showMessage(text, type = "error") {
+    $("message").textContent = text;
+    $("message").className = "visible " + type;
+}
+
+function clearMessage() {
+    $("message").textContent = "";
+    $("message").className = "";
+}
+
+function setVerificationMessage(text, type = "") {
+    $("verificationMessage").textContent = text;
+    $("verificationMessage").className = type;
+}
+
+async function readResponse(response) {
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok || data.success === false) {
+        const error = new Error(
+            data.message || data.error || "The request could not be completed."
+        );
+        error.status = response.status;
+        error.data = data;
+        throw error;
+    }
+
+    return data;
+}
+
+async function postJson(path, payload) {
+    const response = await fetch(API_BASE + path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+
+    return readResponse(response);
+}
+
+/* LOGIN TABS */
+function showUserLogin() {
+    $("userLoginForm").hidden = false;
+    $("adminLoginForm").hidden = true;
+
+    $("userTab").classList.add("active");
+    $("adminTab").classList.remove("active");
+
+    $("userTab").setAttribute("aria-selected", "true");
+    $("adminTab").setAttribute("aria-selected", "false");
+
+    clearMessage();
+}
+
+function showAdminLogin() {
+    $("userLoginForm").hidden = true;
+    $("adminLoginForm").hidden = false;
+
+    $("userTab").classList.remove("active");
+    $("adminTab").classList.add("active");
+
+    $("userTab").setAttribute("aria-selected", "false");
+    $("adminTab").setAttribute("aria-selected", "true");
+
+    clearMessage();
+}
+
+$("userTab").addEventListener("click", showUserLogin);
+$("adminTab").addEventListener("click", showAdminLogin);
+
+/* PASSWORD SHOW / HIDE */
+function togglePassword(inputId, button) {
+    const input = $(inputId);
+    if (!input || !button) return;
+
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+
+    button.setAttribute("aria-label", show ? "Hide password" : "Show password");
+    button.setAttribute("aria-pressed", String(show));
+
+    button.innerHTML = show
+        ? `<svg viewBox="0 0 24 24" aria-hidden="true">
+             <path d="M3 3l18 18"></path>
+             <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+             <path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7-0.8 1.5-1.8 2.8-3.1 3.9"></path>
+             <path d="M6.6 6.6C3.6 8.5 2 12 2 12a15.5 15.5 0 0 0 10 7 10.8 10.8 0 0 0 4-.8"></path>
+           </svg>`
+        : `<svg viewBox="0 0 24 24" aria-hidden="true">
+             <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+             <circle cx="12" cy="12" r="3"></circle>
+           </svg>`;
+}
+
+document.querySelectorAll("[data-password-target]").forEach(button => {
+    button.addEventListener("click", () => {
+        togglePassword(button.dataset.passwordTarget, button);
+    });
+});
+
+/* CONTACT MENU */
+(function () {
+    const dropdown = $("contactDropdown");
+    const toggle = $("contactToggle");
+    const menu = $("contactMenu");
+
+    function closeMenu() {
+        menu.hidden = true;
+        toggle.setAttribute("aria-expanded", "false");
+    }
+
+    toggle.addEventListener("click", event => {
+        event.stopPropagation();
+        const shouldOpen = menu.hidden;
+        menu.hidden = !shouldOpen;
+        toggle.setAttribute("aria-expanded", String(shouldOpen));
+    });
+
+    document.addEventListener("click", event => {
+        if (!dropdown.contains(event.target)) closeMenu();
+    });
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") closeMenu();
+    });
+
+    menu.addEventListener("click", event => {
+        if (event.target.closest("a")) closeMenu();
+    });
+})();
+
+/* REMEMBER CUSTOMER EMAIL ONLY */
+try {
+    const rememberedEmail = localStorage.getItem("ibiRememberedEmail");
+
+    if (rememberedEmail) {
+        $("userEmail").value = rememberedEmail;
+        $("rememberUser").checked = true;
+    }
+} catch {
+    // Browser storage may be unavailable.
+}
+
+/* PASSWORD RULE CHECKLIST */
+function getPasswordRules(password, confirmation) {
+    return {
+        length: password.length >= 8 && password.length <= 128,
+        upper: /[A-Z]/.test(password),
+        lower: /[a-z]/.test(password),
+        number: /\d/.test(password),
+        special: /[^A-Za-z0-9]/.test(password),
+        match: password.length > 0 && password === confirmation
+    };
+}
+
+function updatePasswordRules() {
+    const password = $("newResetPassword").value;
+    const confirmation = $("confirmResetPassword").value;
+    const rules = getPasswordRules(password, confirmation);
+
+    document.querySelectorAll(".password-rule").forEach(item => {
+        const key = item.dataset.rule;
+        const valid = Boolean(rules[key]);
+        item.classList.toggle("valid", valid);
+
+        const mark = item.querySelector(".rule-mark");
+        if (mark) mark.textContent = valid ? "✓" : "○";
+    });
+
+    return rules;
+}
+
+$("newResetPassword").addEventListener("input", updatePasswordRules);
+$("confirmResetPassword").addEventListener("input", updatePasswordRules);
+
+/* RESET FLOW UI */
+function clearOtpInputs() {
+    otpInputs.forEach(input => {
+        input.value = "";
+    });
+}
+
+function clearPasswordResetState() {
+    passwordResetToken = "";
+    resetConfirmationEmailSent = false;
+    verificationStage = "otp";
+
+    $("newResetPassword").value = "";
+    $("confirmResetPassword").value = "";
+
+    updatePasswordRules();
+}
+
+function configurePasswordResetFields(show) {
+    const fields = $("resetPasswordFields");
+
+    fields.hidden = !show;
+
+    [$("newResetPassword"), $("confirmResetPassword")].forEach(input => {
+        input.disabled = !show;
+        input.required = show;
+        if (!show) input.value = "";
+    });
+
+    if (!show) updatePasswordRules();
+}
+
+function setResetStage(stage) {
+    verificationStage = stage;
+
+    const isReset = verificationPurpose === "password_reset";
+    const isOtp = stage === "otp";
+    const isPassword = stage === "password";
+
+    $("otpCodeSection").hidden = !isOtp;
+    $("resetPasswordFields").hidden = !isPassword;
+    $("resendRow").hidden = !isOtp;
+
+    $("resetStageIndicator").hidden = !isReset;
+
+    if (isReset) {
+        $("resetDot1").classList.toggle("active", isOtp);
+        $("resetDot2").classList.toggle("active", isPassword);
+    }
+
+    if (isOtp && isReset) {
+        $("verificationTitle").textContent = "Verify Reset Code";
+        $("verificationDescription").innerHTML =
+            'Enter the 6-digit password-reset code sent to<br><span id="verificationEmail"></span>';
+        $("verificationEmail").textContent = currentVerificationEmail;
+        $("verificationIcon").textContent = "✉";
+        $("verifyCodeButton").textContent = "Verify Code";
+    } else if (isPassword && isReset) {
+        $("verificationTitle").textContent = "Create New Password";
+        $("verificationDescription").innerHTML =
+            'Create a new password for<br><span id="verificationEmail"></span>';
+        $("verificationEmail").textContent = currentVerificationEmail;
+        $("verificationIcon").textContent = "🔐";
+        $("verifyCodeButton").textContent = "Reset Password";
+        updatePasswordRules();
+    } else {
+        $("verificationTitle").textContent = "Verify Your Login";
+        $("verificationDescription").innerHTML =
+            'We sent a 6-digit verification code to<br><span id="verificationEmail"></span>';
+        $("verificationEmail").textContent = currentVerificationEmail;
+        $("verificationIcon").textContent = "✉";
+        $("verifyCodeButton").textContent = "Verify & Continue";
+    }
+
+    setVerificationMessage("");
+}
+
+/* OTP MODAL */
+function showOtpModal(email, purpose) {
+    currentVerificationEmail = normalizeEmail(email);
+    verificationPurpose = purpose;
+    clearOtpInputs();
+
+    $("resetFlowStage").hidden = false;
+    $("resetSuccessStage").hidden = true;
+    $("resetEmailSuccessStage").hidden = true;
+    $("closeVerificationModal").hidden = false;
+    $("closeVerificationModal").disabled = false;
+    $("resendCodeButton").disabled = false;
+    $("verifyCodeButton").disabled = false;
+
+    clearPasswordResetState();
+    configurePasswordResetFields(false);
+
+    if (purpose === "password_reset") {
+        setResetStage("otp");
+    } else {
+        $("resetStageIndicator").hidden = true;
+        $("verificationTitle").textContent = "Verify Your Login";
+        $("verificationDescription").innerHTML =
+            'We sent a 6-digit verification code to<br><span id="verificationEmail"></span>';
+        $("verificationEmail").textContent = currentVerificationEmail;
+        $("verificationIcon").textContent = "✉";
+        $("verifyCodeButton").textContent = "Verify & Continue";
+        $("resendRow").hidden = false;
+        $("otpCodeSection").hidden = false;
+    }
+
+    verificationModal.hidden = false;
+
+    setTimeout(() => {
+        if (!verificationModal.hidden) otpInputs[0].focus();
+    }, 50);
+}
+
+function closeVerificationModal(force = false) {
+    if (verificationRequestInProgress && !force) return;
+
+    verificationModal.hidden = true;
+    clearOtpInputs();
+    configurePasswordResetFields(false);
+    clearPasswordResetState();
+    setVerificationMessage("");
+
+    $("resetFlowStage").hidden = false;
+    $("resetSuccessStage").hidden = true;
+    $("resetEmailSuccessStage").hidden = true;
+}
+
+$("closeVerificationModal").addEventListener("click", () => {
+    closeVerificationModal();
+});
+
+verificationModal.addEventListener("click", event => {
+    if (event.target === verificationModal) {
+        closeVerificationModal();
+    }
+});
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !verificationModal.hidden) {
+        closeVerificationModal();
+    }
+});
+
+/* OTP INPUTS */
+otpInputs.forEach((input, index) => {
+    input.addEventListener("input", () => {
+        input.value = input.value.replace(/\D/g, "").slice(-1);
+
+        if (input.value && index < otpInputs.length - 1) {
+            otpInputs[index + 1].focus();
+        }
+    });
+
+    input.addEventListener("keydown", event => {
+        if (event.key === "Backspace" && !input.value && index > 0) {
+            otpInputs[index - 1].focus();
+        }
+
+        if (event.key === "ArrowLeft" && index > 0) {
+            otpInputs[index - 1].focus();
+        }
+
+        if (event.key === "ArrowRight" && index < otpInputs.length - 1) {
+            otpInputs[index + 1].focus();
+        }
+    });
+
+    input.addEventListener("paste", event => {
+        event.preventDefault();
+
+        const digits = (event.clipboardData.getData("text") || "")
+            .replace(/\D/g, "")
+            .slice(0, 6);
+
+        clearOtpInputs();
+
+        digits.split("").forEach((digit, i) => {
+            if (otpInputs[i]) otpInputs[i].value = digit;
+        });
+
+        otpInputs[Math.min(digits.length, otpInputs.length - 1)].focus();
+    });
+});
+
+function getOtpCode() {
+    return otpInputs.map(input => input.value).join("");
+}
+
+/* SAVE SESSION */
+function saveSession(data, role, email) {
+    if (!data || typeof data.token !== "string" || !data.token.trim()) {
+        throw new Error("The server did not return an authentication token.");
+    }
+
+    const user = data.user;
+
+    if (!user || typeof user !== "object" || Array.isArray(user)) {
+        throw new Error("The server did not return account details.");
+    }
+
+    const actualRole = String(user.role || "").trim().toLowerCase();
+
+    if (role === "user" && actualRole !== "user") {
+        throw new Error("The account role returned by the server is incorrect.");
+    }
+
+    if (
+        role === "admin" &&
+        actualRole !== "admin" &&
+        actualRole !== "main_admin"
+    ) {
+        throw new Error("The account role returned by the server is incorrect.");
+    }
+
+    if (role !== "user" && role !== "admin") {
+        throw new Error("Invalid login type.");
+    }
+
+    try {
+        localStorage.setItem("authToken", data.token);
+
+        if (role === "admin") {
+            localStorage.setItem("loggedInAdmin", JSON.stringify({
+                ...user,
+                role: actualRole
+            }));
+
+            localStorage.removeItem("loggedInUser");
+            localStorage.removeItem("ibiRememberedEmail");
+        } else {
+            localStorage.setItem("loggedInUser", JSON.stringify(user));
+            localStorage.removeItem("loggedInAdmin");
+
+            if ($("rememberUser").checked) {
+                localStorage.setItem("ibiRememberedEmail", normalizeEmail(email));
+            } else {
+                localStorage.removeItem("ibiRememberedEmail");
+            }
+        }
+    } catch (error) {
+        console.error("Session storage error:", error);
+        throw new Error(
+            "Could not save your login session. Please check browser storage."
+        );
+    }
+}
+
+/* CUSTOMER LOGIN */
+$("userLoginForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    clearMessage();
+
+    if (loginRequestInProgress) return;
+
+    const email = normalizeEmail($("userEmail").value);
+    const password = $("userPassword").value;
+    const button = $("userLoginBtn");
+
+    if (!email || !$("userEmail").checkValidity()) {
+        showMessage("Enter a valid email address.", "error");
+        $("userEmail").focus();
+        return;
+    }
+
+    if (!password) {
+        showMessage("Enter your password.", "error");
+        $("userPassword").focus();
+        return;
+    }
+
+    loginRequestInProgress = true;
+    button.disabled = true;
+    button.textContent = "Signing in...";
+
+    try {
+        const data = await postJson(API_ROUTES.customerLogin, { email, password });
+
+        if (data.otpRequired !== true) {
+            throw new Error(
+                "The backend did not confirm that OTP verification is required."
+            );
+        }
+
+        currentLoginRole = "user";
+        showOtpModal(email, "login");
+
+        setVerificationMessage(
+            data.message || "A login verification code has been sent to your email.",
+            "success"
+        );
+    } catch (error) {
+        console.error("Customer login error:", error);
+        showMessage(
+            error.message || "Unable to log in. Check your details and try again.",
+            "error"
+        );
+    } finally {
+        loginRequestInProgress = false;
+        button.disabled = false;
+        button.textContent = "Login →";
+    }
+});
+
+/* ADMIN LOGIN */
+$("adminLoginForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    clearMessage();
+
+    if (loginRequestInProgress) return;
+
+    const email = normalizeEmail($("adminEmail").value);
+    const password = $("adminPassword").value;
+    const button = $("adminLoginBtn");
+
+    if (!email || !$("adminEmail").checkValidity()) {
+        showMessage("Enter a valid administrator email.", "error");
+        $("adminEmail").focus();
+        return;
+    }
+
+    if (!password) {
+        showMessage("Enter your administrator password.", "error");
+        $("adminPassword").focus();
+        return;
+    }
+
+    loginRequestInProgress = true;
+    button.disabled = true;
+    button.textContent = "Signing in...";
+
+    try {
+        const data = await postJson(API_ROUTES.adminLogin, { email, password });
+
+        if (data.otpRequired !== true) {
+            throw new Error(
+                "The backend did not confirm that administrator OTP verification is required."
+            );
+        }
+
+        currentLoginRole = "admin";
+        showOtpModal(email, "login");
+
+        setVerificationMessage(
+            data.message || "An administrator login code has been sent to your email.",
+            "success"
+        );
+    } catch (error) {
+        console.error("Admin login error:", error);
+        showMessage(
+            error.message || "Administrator login failed. Check your details.",
+            "error"
+        );
+    } finally {
+        loginRequestInProgress = false;
+        button.disabled = false;
+        button.textContent = "Admin Login →";
+    }
+});
+
+/* FORGOT PASSWORD — CUSTOMER AND ADMIN */
+document.querySelectorAll(".forgot-password-link").forEach(link => {
+    link.addEventListener("click", async event => {
+        event.preventDefault();
+        clearMessage();
+
+        if (verificationRequestInProgress || link.dataset.busy === "true") return;
+
+        const role = link.dataset.resetRole;
+        const emailInput = role === "admin" ? $("adminEmail") : $("userEmail");
+        const email = normalizeEmail(emailInput.value);
+
+        if (!email || !emailInput.checkValidity()) {
+            showMessage("Enter your registered email address first.", "error");
+            emailInput.focus();
+            return;
+        }
+
+        link.dataset.busy = "true";
+        link.style.pointerEvents = "none";
+        link.style.opacity = ".6";
+
+        try {
+            const data = await postJson(API_ROUTES.forgotPassword, { email });
+
+            currentLoginRole = role;
+            showOtpModal(email, "password_reset");
+
+            setVerificationMessage(
+                data.message ||
+                "If the account is eligible, a password-reset code has been requested. Please check your email.",
+                "success"
+            );
+        } catch (error) {
+            console.error("Forgot password error:", error);
+            showMessage(
+                error.message || "Could not request a password reset. Please try again.",
+                "error"
+            );
+        } finally {
+            delete link.dataset.busy;
+            link.style.pointerEvents = "";
+            link.style.opacity = "";
+        }
+    });
+});
+
+/* RESEND OTP */
+$("resendCodeButton").addEventListener("click", async () => {
+    const button = $("resendCodeButton");
+
+    if (
+        button.disabled ||
+        verificationRequestInProgress ||
+        !currentVerificationEmail ||
+        verificationModal.hidden ||
+        verificationStage !== "otp"
+    ) {
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Sending...";
+
+    try {
+        const path = verificationPurpose === "password_reset"
+            ? API_ROUTES.forgotPassword
+            : API_ROUTES.resendLoginCode;
+
+        const data = await postJson(path, {
+            email: currentVerificationEmail
+        });
+
+        setVerificationMessage(
+            data.message || "If the account is eligible, a new code has been requested.",
+            "success"
+        );
+
+        clearOtpInputs();
+        otpInputs[0].focus();
+    } catch (error) {
+        console.error("Resend OTP error:", error);
+        setVerificationMessage(
+            error.message || "Could not resend the code. Please try again.",
+            "error"
+        );
+    } finally {
+        button.disabled = false;
+        button.textContent = "Resend Code";
+    }
+});
+
+/* SHOW PASSWORD-CHANGED SUCCESS SCREEN */
+function showPasswordChangedSuccess(data) {
+    resetConfirmationEmailSent = data.confirmationEmailSent === true;
+
+    $("resetFlowStage").hidden = true;
+    $("resetSuccessStage").hidden = false;
+    $("resetEmailSuccessStage").hidden = true;
+
+    $("closeVerificationModal").hidden = true;
+    $("passwordChangedText").textContent =
+        data.message && data.passwordChanged === true
+            ? "Your password has been changed successfully."
+            : "Your password has been changed successfully. You can now log in with your new password.";
+
+    if (resetConfirmationEmailSent) {
+        $("resetEmailStatus").textContent =
+            "A confirmation email has also been sent to your registered email address.";
+        $("resetEmailStatus").classList.remove("reset-warning");
+        $("continueResetSuccess").textContent = "View Email Confirmation";
+    } else {
+        $("resetEmailStatus").textContent =
+            "Your password has changed, but the confirmation email could not be sent. You can still log in with your new password.";
+        $("resetEmailStatus").classList.add("reset-warning");
+        $("continueResetSuccess").textContent = "Return to Login";
+    }
+
+    setVerificationMessage("");
+    passwordResetToken = "";
+}
+
+/* SUCCESS SCREEN 4 -> SCREEN 5 */
+$("continueResetSuccess").addEventListener("click", () => {
+    if (resetConfirmationEmailSent) {
+        $("resetSuccessStage").hidden = true;
+        $("resetEmailSuccessStage").hidden = false;
+        $("confirmationEmailAddress").textContent = currentVerificationEmail;
+        return;
+    }
+
+    finishPasswordReset();
+});
+
+$("finishResetButton").addEventListener("click", finishPasswordReset);
+
+function finishPasswordReset() {
+    const email = currentVerificationEmail;
+    const role = currentLoginRole;
+
+    closeVerificationModal(true);
+
+    if (role === "admin") {
+        showAdminLogin();
+        $("adminEmail").value = email;
+        $("adminPassword").value = "";
+        $("adminPassword").focus();
+    } else {
+        showUserLogin();
+        $("userEmail").value = email;
+        $("userPassword").value = "";
+        $("userPassword").focus();
+    }
+
+    showMessage(
+        "Your password reset is complete. Please log in using your new password.",
+        "success"
+    );
+}
+
+/* VERIFY LOGIN OTP OR VERIFY RESET OTP / CHANGE PASSWORD */
+$("verificationForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    if (verificationRequestInProgress || resetRequestInProgress) return;
+
+    const button = $("verifyCodeButton");
+
+    if (verificationPurpose === "password_reset" && verificationStage === "password") {
+        await submitNewPassword();
+        return;
+    }
+
+    const code = getOtpCode();
+
+    if (!/^\d{6}$/.test(code)) {
+        setVerificationMessage("Enter all six digits of the code.", "error");
+
+        const firstEmpty = otpInputs.find(input => !input.value);
+        if (firstEmpty) firstEmpty.focus();
+        return;
+    }
+
+    verificationRequestInProgress = true;
+    button.disabled = true;
+    $("closeVerificationModal").disabled = true;
+    $("resendCodeButton").disabled = true;
+    button.textContent = "Verifying...";
+
+    try {
+        if (verificationPurpose === "password_reset") {
+            const data = await postJson(API_ROUTES.verifyPasswordResetCode, {
+                email: currentVerificationEmail,
+                code
+            });
+
+            if (data.success !== true || typeof data.resetToken !== "string" || !data.resetToken) {
+                throw new Error(
+                    data.message || "The code could not be verified. Please request a new code."
+                );
+            }
+
+            passwordResetToken = data.resetToken;
+            clearOtpInputs();
+
+            configurePasswordResetFields(true);
+            setResetStage("password");
+
+            $("closeVerificationModal").disabled = false;
+            $("resendCodeButton").disabled = false;
+            $("newResetPassword").focus();
+
+            setVerificationMessage(
+                "Code verified successfully. Create your new password below.",
+                "success"
+            );
+
+            return;
+        }
+
+        const data = await postJson(API_ROUTES.verifyLoginCode, {
+            email: currentVerificationEmail,
+            code
+        });
+
+        if (data.success !== true) {
+            throw new Error(data.message || "The login code could not be verified.");
+        }
+
+        saveSession(data, currentLoginRole, currentVerificationEmail);
+
+        setVerificationMessage("Verification successful. Redirecting...", "success");
+
+        const destination = currentLoginRole === "admin"
+            ? "ADMIN/dashboard.html"
+            : "dashboard.html";
+
+        setTimeout(() => {
+            window.location.href = destination;
+        }, 500);
+
+    } catch (error) {
+        console.error("OTP verification error:", error);
+        setVerificationMessage(
+            error.message || "Verification failed. Please try again.",
+            "error"
+        );
+    } finally {
+        verificationRequestInProgress = false;
+
+        if (!verificationModal.hidden && $("resetSuccessStage").hidden &&
+            $("resetEmailSuccessStage").hidden) {
+            $("closeVerificationModal").disabled = false;
+            $("resendCodeButton").disabled = false;
+            button.disabled = false;
+
+            if (verificationPurpose === "password_reset") {
+                button.textContent = verificationStage === "password"
+                    ? "Reset Password"
+                    : "Verify Code";
+            } else {
+                button.textContent = "Verify & Continue";
+            }
+        }
+    }
+});
+
+/* SUBMIT NEW PASSWORD AFTER OTP VERIFICATION */
+async function submitNewPassword() {
+    if (!passwordResetToken) {
+        setVerificationMessage(
+            "Your reset session has expired. Please request a new password-reset code.",
+            "error"
+        );
+        return;
+    }
+
+    const passwordField = $("newResetPassword");
+    const confirmField = $("confirmResetPassword");
+    const newPassword = passwordField.value;
+    const confirmPassword = confirmField.value;
+    const rules = updatePasswordRules();
+
+    if (newPassword.length < 8 || newPassword.length > 128) {
+        setVerificationMessage(
+            "Your password must contain between 8 and 128 characters.",
+            "error"
+        );
+        passwordField.focus();
+        return;
+    }
+
+    if (!rules.upper || !rules.lower || !rules.number || !rules.special) {
+        setVerificationMessage(
+            "Your password must include uppercase, lowercase, numeric and special characters.",
+            "error"
+        );
+        passwordField.focus();
+        return;
+    }
+
+    if (!confirmPassword) {
+        setVerificationMessage("Please confirm your new password.", "error");
+        confirmField.focus();
+        return;
+    }
+
+    if (newPassword !== confirmPassword) {
+        setVerificationMessage("The passwords do not match.", "error");
+        confirmField.focus();
+        return;
+    }
+
+    if (resetRequestInProgress) return;
+
+    resetRequestInProgress = true;
+    const button = $("verifyCodeButton");
+
+    button.disabled = true;
+    $("closeVerificationModal").disabled = true;
+    button.textContent = "Resetting Password...";
+
+    try {
+        const data = await postJson(API_ROUTES.resetPassword, {
+            email: currentVerificationEmail,
+            resetToken: passwordResetToken,
+            newPassword,
+            confirmPassword
+        });
+
+        if (data.success !== true || data.passwordChanged !== true) {
+            throw new Error(
+                data.message || "The server did not confirm that your password changed."
+            );
+        }
+
+        passwordResetToken = "";
+        passwordField.value = "";
+        confirmField.value = "";
+        updatePasswordRules();
+
+        showPasswordChangedSuccess(data);
+
+    } catch (error) {
+        console.error("Password reset error:", error);
+
+        setVerificationMessage(
+            error.message || "Unable to reset your password. Please try again.",
+            "error"
+        );
+
+        if (
+            error.status === 401 ||
+            error.status === 403 ||
+            /token.*(expired|invalid)|expired.*token/i.test(error.message)
+        ) {
+            passwordResetToken = "";
+            configurePasswordResetFields(false);
+            clearOtpInputs();
+            setResetStage("otp");
+
+            setVerificationMessage(
+                "Your reset session may have expired. Request a new code and verify it again.",
+                "error"
+            );
+        }
+    } finally {
+        resetRequestInProgress = false;
+
+        if (!$("resetSuccessStage").hidden || !$("resetEmailSuccessStage").hidden) {
+            button.disabled = false;
+            $("closeVerificationModal").disabled = false;
+            return;
+        }
+
+        button.disabled = false;
+        $("closeVerificationModal").disabled = false;
+        button.textContent = verificationStage === "password"
+            ? "Reset Password"
+            : "Verify Code";
+    }
+}
+
+/* INITIAL STATE */
+showUserLogin();
+configurePasswordResetFields(false);
+clearPasswordResetState();
+</script>
+</body>
+</html>

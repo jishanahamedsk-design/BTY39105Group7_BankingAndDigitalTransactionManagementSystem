@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#02091d">
+    <meta name="description" content="Read the IBI Bank Privacy Policy to understand how information is handled by our educational digital banking demonstration application.">
+    <title>Privacy Policy | IBI Bank — International Bank of India</title>
+
+    <style>
+        :root {
+            --bg: #02091d;
+            --panel: #03132f;
+            --panel-light: #061b49;
+            --cyan: #00dfff;
+            --blue: #075cff;
+            --text: #eaf5ff;
+            --muted: #a9bdd6;
+            --border: rgba(0, 223, 255, 0.25);
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse at 15% 0%, rgba(7, 92, 255, 0.16), transparent 42%),
+                radial-gradient(ellipse at 90% 30%, rgba(0, 223, 255, 0.07), transparent 35%),
+                var(--bg);
+            line-height: 1.75;
+        }
+
+        a {
+            color: var(--cyan);
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--cyan);
+            outline-offset: 4px;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(2, 9, 29, 0.96);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(14px);
+        }
+
+        .header-inner {
+            width: min(1180px, calc(100% - 36px));
+            min-height: 88px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-width: 0;
+        }
+
+        .brand img {
+            display: block;
+            width: 76px;
+            height: 66px;
+            object-fit: contain;
+        }
+
+        .brand-copy {
+            line-height: 1.35;
+        }
+
+        .brand-copy strong {
+            display: block;
+            color: #fff;
+            font-size: 19px;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-copy span {
+            display: block;
+            color: var(--cyan);
+            font-size: 11px;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 17px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: #fff;
+            background: linear-gradient(120deg, #061b49, #03132f);
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .back-link:hover {
+            border-color: var(--cyan);
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            width: min(1180px, calc(100% - 36px));
+            margin: 32px auto 22px;
+            padding: 34px clamp(20px, 4vw, 44px);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            background:
+                radial-gradient(ellipse at 95% 0%, rgba(0, 223, 255, 0.12), transparent 45%),
+                linear-gradient(130deg, #061b49, #03132f 70%);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .eyebrow {
+            color: var(--cyan);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            margin: 10px 0 5px;
+            font-size: clamp(29px, 4.5vw, 45px);
+            line-height: 1.2;
+            color: #fff;
+        }
+
+        .hero h2 {
+            margin: 0 0 15px;
+            color: var(--cyan);
+            font-size: clamp(15px, 2.3vw, 20px);
+            font-weight: 600;
+        }
+
+        .hero p {
+            max-width: 850px;
+            margin: 8px 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .metadata {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .metadata span {
+            padding: 7px 12px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            background: rgba(2, 9, 29, 0.45);
+            color: #dceeff;
+            font-size: 12px;
+        }
+
+        .notice {
+            width: min(1180px, calc(100% - 36px));
+            margin: 0 auto 22px;
+            padding: 18px 21px;
+            border: 1px solid rgba(0, 223, 255, 0.38);
+            border-left: 4px solid var(--cyan);
+            border-radius: 12px;
+            background: rgba(3, 19, 47, 0.9);
+            color: #dbeaff;
+            font-size: 13px;
+        }
+
+        .notice strong {
+            color: var(--cyan);
+        }
+
+        .layout {
+            width: min(1180px, calc(100% - 36px));
+            margin: 0 auto 45px;
+            display: grid;
+            grid-template-columns: 250px minmax(0, 1fr);
+            align-items: start;
+            gap: 22px;
+        }
+
+        .contents {
+            position: sticky;
+            top: 108px;
+            padding: 21px 17px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: rgba(3, 19, 47, 0.94);
+        }
+
+        .contents h2 {
+            margin: 0 0 13px;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .contents ol {
+            margin: 0;
+            padding-left: 19px;
+        }
+
+        .contents li {
+            padding: 4px 0;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .contents a {
+            color: #c6d9f1;
+        }
+
+        .policy {
+            min-width: 0;
+            padding: clamp(20px, 3.5vw, 40px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: linear-gradient(150deg, rgba(3, 19, 47, 0.97), rgba(2, 9, 29, 0.98));
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .policy section {
+            padding: 0 0 24px;
+            margin: 0 0 25px;
+            border-bottom: 1px solid rgba(169, 189, 214, 0.13);
+            scroll-margin-top: 110px;
+        }
+
+        .policy section:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .policy h2 {
+            margin: 0 0 13px;
+            color: var(--cyan);
+            font-size: clamp(18px, 2.5vw, 22px);
+            line-height: 1.4;
+        }
+
+        .policy h3 {
+            margin: 20px 0 7px;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .policy p {
+            margin: 9px 0 13px;
+            color: #c8d8ec;
+            font-size: 13.5px;
+        }
+
+        .policy ul,
+        .policy ol {
+            padding-left: 24px;
+            margin: 10px 0 15px;
+        }
+
+        .policy li {
+            padding: 3px 0;
+            color: #c8d8ec;
+            font-size: 13.5px;
+        }
+
+        .policy strong {
+            color: #fff;
+        }
+
+        .policy code {
+            padding: 2px 5px;
+            border-radius: 4px;
+            background: #061b49;
+            color: var(--cyan);
+            font-size: 12px;
+            overflow-wrap: anywhere;
+        }
+
+        .policy-note {
+            margin: 14px 0;
+            padding: 14px 16px;
+            border: 1px solid rgba(0, 223, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(6, 27, 73, 0.48);
+        }
+
+        .contact-card {
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #061b49;
+        }
+
+        .contact-card p {
+            margin: 5px 0;
+        }
+
+        .site-footer {
+            padding: 27px 18px;
+            border-top: 1px solid var(--border);
+            background: rgba(2, 9, 29, 0.96);
+            text-align: center;
+        }
+
+        .footer-brand {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 22px;
+            margin: 13px 0;
+            font-size: 12px;
+        }
+
+        .site-footer p {
+            margin: 7px 0;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 30;
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: #fff;
+            background: linear-gradient(135deg, #075cff, #03132f);
+            font-size: 21px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 850px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .contents {
+                position: static;
+            }
+
+            .contents ol {
+                columns: 2;
+                column-gap: 28px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .header-inner {
+                width: calc(100% - 24px);
+                min-height: 76px;
+                gap: 8px;
+            }
+
+            .brand {
+                gap: 7px;
+            }
+
+            .brand img {
+                width: 52px;
+                height: 54px;
+            }
+
+            .brand-copy strong {
+                font-size: 15px;
+            }
+
+            .brand-copy span {
+                max-width: 165px;
+                font-size: 8px;
+                letter-spacing: 0.5px;
+            }
+
+            .back-link {
+                padding: 9px 10px;
+                font-size: 11px;
+            }
+
+            .hero,
+            .notice,
+            .layout {
+                width: calc(100% - 24px);
+            }
+
+            .hero {
+                margin-top: 18px;
+                padding: 24px 19px;
+            }
+
+            .contents ol {
+                columns: 1;
+            }
+
+            .policy {
+                padding: 21px 17px;
+            }
+
+            .policy p,
+            .policy li {
+                font-size: 13px;
+            }
+
+            .back-to-top {
+                right: 14px;
+                bottom: 14px;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #111;
+            }
+
+            .site-header,
+            .contents,
+            .site-footer,
+            .back-link,
+            .back-to-top {
+                display: none !important;
+            }
+
+            .hero,
+            .notice,
+            .layout {
+                width: 100%;
+                margin: 0 auto 15px;
+            }
+
+            .hero,
+            .notice,
+            .policy {
+                background: #fff;
+                color: #111;
+                box-shadow: none;
+                border: 1px solid #bbb;
+            }
+
+            .hero h1,
+            .hero h2,
+            .policy h2,
+            .policy h3,
+            .policy strong,
+            .policy p,
+            .policy li,
+            .hero p {
+                color: #111;
+            }
+
+            .layout {
+                display: block;
+            }
+
+            .policy section {
+                break-inside: avoid;
+            }
+
+            a {
+                color: #111;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header class="site-header">
+    <div class="header-inner">
+        <a class="brand" href="index.html" aria-label="IBI Bank home">
+            <img src="images/ibi-logo.png"
+                 alt="IBI Bank logo"
+                 onerror="this.onerror=null;this.alt='IBI Bank logo';">
+            <span class="brand-copy">
+                <strong>IBI Bank</strong>
+                <span>International Bank of India</span>
+            </span>
+        </a>
+
+        <a class="back-link" href="index.html">← Back to Login</a>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="eyebrow">Privacy · Transparency · Responsible Use</div>
+        <h1>Privacy Policy</h1>
+        <h2>IBI Bank — International Bank of India</h2>
+        <p>
+            This policy explains what information our educational banking
+            demonstration application may process, why it is used, how it
+            may be stored and protected, and how users can submit privacy
+            enquiries.
+        </p>
+
+        <div class="metadata">
+            <span>Effective Date: October 23, 2026</span>
+            <span>Last Updated: October 23, 2026</span>
+            <span>Document: Website Privacy Policy</span>
+        </div>
+    </section>
+
+    <div class="notice">
+        <strong>Important demonstration notice:</strong>
+        IBI Bank is an educational and demonstration banking application
+        unless its operator separately establishes otherwise. It is not
+        represented by this page as a licensed bank or regulated financial
+        institution. Do not use the application for real banking transactions
+        or enter real banking credentials, PINs, card security codes, or
+        other financial authentication secrets.
+    </div>
+
+    <div class="layout">
+        <aside class="contents" aria-label="Privacy policy contents">
+            <h2>On this page</h2>
+            <ol>
+                <li><a href="#introduction">Introduction and scope</a></li>
+                <li><a href="#information">Information processed</a></li>
+                <li><a href="#collection">Collection methods</a></li>
+                <li><a href="#purposes">Purposes of use</a></li>
+                <li><a href="#legal">Legal framework</a></li>
+                <li><a href="#storage">Storage and access</a></li>
+                <li><a href="#security">Security safeguards</a></li>
+                <li><a href="#credentials">Passwords and OTPs</a></li>
+                <li><a href="#sharing">Information sharing</a></li>
+                <li><a href="#browser">Cookies and browser storage</a></li>
+                <li><a href="#retention">Retention and deletion</a></li>
+                <li><a href="#rights">Privacy requests and rights</a></li>
+                <li><a href="#third-parties">External websites</a></li>
+                <li><a href="#children">Children's privacy</a></li>
+                <li><a href="#transfers">International transfers</a></li>
+                <li><a href="#incidents">Security incidents</a></li>
+                <li><a href="#changes">Policy changes</a></li>
+                <li><a href="#contact">Contact and enquiries</a></li>
+                <li><a href="#limitations">Limitations</a></li>
+            </ol>
+        </aside>
+
+        <article class="policy">
+            <section id="introduction">
+                <h2>1. Introduction and Scope</h2>
+                <p>
+                    IBI Bank — International Bank of India ("IBI Bank,"
+                    "we," "our," or "us") refers in this policy to the
+                    operator of this website and its educational application.
+                    The identity and legal status of the operator should be
+                    confirmed separately where formal legal identification
+                    is required.
+                </p>
+                <p>
+                    This Privacy Policy describes the categories of personal
+                    information the application may process, the purposes
+                    for processing, possible recipients, retention
+                    considerations, security measures, and available
+                    privacy-request channels.
+                </p>
+                <p>
+                    The application demonstrates features such as customer
+                    and administrator access, account records, transaction
+                    history, beneficiaries, fund-transfer demonstrations,
+                    loan records, EMI management, and administrative
+                    operations. Actual processing depends on the features
+                    enabled in the deployed version.
+                </p>
+                <p>
+                    This policy applies to the IBI Bank website and
+                    associated application services controlled by its
+                    operator. It does not automatically govern independent
+                    third-party websites, email providers, hosting services,
+                    or social-media platforms.
+                </p>
+            </section>
+
+            <section id="information">
+                <h2>2. Information We May Process</h2>
+
+                <h3>2.1 Personal and customer details</h3>
+                <p>
+                    Depending on the forms and features used, the application
+                    may process a user's name, email address, telephone
+                    number, residential or mailing address, customer
+                    identifier, and other details submitted through an
+                    enabled feature.
+                </p>
+
+                <h3>2.2 Authentication and account-access information</h3>
+                <p>
+                    Authentication-related information may include a login
+                    email address, user identifier, assigned role, account
+                    status, password-verification data, login OTP records,
+                    password-reset verification records, session or token
+                    information, and relevant security events.
+                </p>
+                <p>
+                    OTP records may include an intended recipient, purpose,
+                    expiry time, verification-attempt count, and consumption
+                    status. A verification code should not be treated as
+                    safe to disclose merely because it is sent by email.
+                </p>
+
+                <h3>2.3 Account and branch records</h3>
+                <p>
+                    The application may maintain demonstration account
+                    identifiers, account numbers, account types, customer
+                    and branch references, account status, recorded
+                    balances, and related creation or modification details.
+                </p>
+
+                <h3>2.4 Transaction and transfer records</h3>
+                <p>
+                    Where supported, transaction records may include
+                    transaction identifiers, types, amounts, dates,
+                    descriptions, source and destination account references,
+                    transfer status, and recorded balance changes.
+                    Application records are not proof that money moved
+                    through a real banking network.
+                </p>
+
+                <h3>2.5 Beneficiary information</h3>
+                <p>
+                    Beneficiary-management features may process beneficiary
+                    names, account references or account numbers, status,
+                    and details associated with transfer demonstrations.
+                    Only use fictional or appropriately authorized test
+                    information.
+                </p>
+
+                <h3>2.6 Loan and EMI information</h3>
+                <p>
+                    Loan features may process loan categories, amounts,
+                    interest rates, repayment terms, instalment amounts,
+                    due dates, payment statuses, outstanding amounts, and
+                    associated customer references.
+                </p>
+
+                <h3>2.7 Technical and operational information</h3>
+                <p>
+                    Depending on server, hosting, and application
+                    configuration, technical records may include IP
+                    addresses, browser and device information, request
+                    timestamps, error logs, and diagnostic data. We do not
+                    claim that every category is collected in every
+                    deployment.
+                </p>
+            </section>
+
+            <section id="collection">
+                <h2>3. How Information Is Collected</h2>
+                <ul>
+                    <li><strong>Direct submission:</strong> Information entered into registration, login, profile, beneficiary, transfer, loan, or other forms.</li>
+                    <li><strong>Application processing:</strong> Information read or updated by the backend when an authorized application request is handled.</li>
+                    <li><strong>Authentication:</strong> Information processed during password verification, OTP verification, login, and password-reset workflows.</li>
+                    <li><strong>Technical operations:</strong> Records generated by the web server, database, hosting environment, or security tools, where configured.</li>
+                    <li><strong>Administration:</strong> Information created, reviewed, or corrected by an authorized administrator or database operator.</li>
+                </ul>
+                <p>
+                    We do not claim to use advertising trackers, analytics
+                    platforms, or additional data sources unless those
+                    technologies are actually enabled.
+                </p>
+            </section>
+
+            <section id="purposes">
+                <h2>4. Why Information Is Used</h2>
+                <p>Information may be processed for relevant application purposes, including:</p>
+                <ul>
+                    <li>Creating and managing demonstration user accounts.</li>
+                    <li>Authenticating users and enforcing role-based access.</li>
+                    <li>Sending and verifying email OTPs where configured.</li>
+                    <li>Supporting password resets and account recovery.</li>
+                    <li>Displaying customer profiles and account records.</li>
+                    <li>Maintaining beneficiary and transfer demonstrations.</li>
+                    <li>Recording transactions, loans, and EMI information.</li>
+                    <li>Maintaining application integrity and troubleshooting errors.</li>
+                    <li>Testing, maintaining, and improving application functionality.</li>
+                    <li>Responding to privacy enquiries and meeting applicable legal requirements.</li>
+                </ul>
+                <p>
+                    Information should be limited to what is reasonably
+                    necessary for the relevant purpose and should not be
+                    reused for unrelated purposes without an appropriate
+                    legal basis and any notice or consent required by law.
+                </p>
+            </section>
+
+            <section id="legal">
+                <h2>5. Legal Framework and Processing Basis</h2>
+                <p>
+                    The website operator should identify and document the
+                    applicable legal basis for each processing activity.
+                    Depending on the circumstances and the law in force,
+                    this may involve consent, a requested service, a legal
+                    obligation, or another legally recognized basis.
+                </p>
+                <p>
+                    Submitting a form does not automatically constitute
+                    consent to every possible use of the information.
+                    Where consent is required, the operator should provide
+                    an appropriate notice and a clear method to give or
+                    withdraw consent as permitted by law.
+                </p>
+                <p>
+                    For users in India, the operator should assess the
+                    Digital Personal Data Protection Act, 2023, the
+                    Digital Personal Data Protection Rules, 2025, their
+                    applicable commencement notifications, and other
+                    relevant laws. Applicable obligations must be assessed
+                    according to the relevant commencement dates and
+                    circumstances.
+                </p>
+                <p>
+                    This general policy is not legal advice and does not
+                    certify that the website operator is compliant with
+                    every applicable legal requirement.
+                </p>
+            </section>
+
+            <section id="storage">
+                <h2>6. Data Storage, Database Access, and Administration</h2>
+                <p>
+                    The current development architecture uses a Node.js
+                    and Express backend with a MySQL database. In the
+                    deployed application, information may be stored in
+                    that database or in other configured storage systems.
+                </p>
+                <p>
+                    Database records may cover customers, users, accounts,
+                    branches, transactions, beneficiaries, transfers,
+                    loans, EMI payments, and authentication verification
+                    records.
+                </p>
+                <p>Appropriate safeguards should include:</p>
+                <ul>
+                    <li>Restricting database access to authorized services and personnel.</li>
+                    <li>Using parameterized SQL queries or prepared statements.</li>
+                    <li>Validating and authorizing backend requests.</li>
+                    <li>Protecting database credentials and environment files.</li>
+                    <li>Using separate development and production configurations where appropriate.</li>
+                    <li>Restricting administrative permissions according to job responsibilities.</li>
+                    <li>Maintaining appropriate backup, recovery, and deletion procedures.</li>
+                </ul>
+                <p>
+                    Describing these safeguards does not mean every measure
+                    is already deployed. Actual protections must be
+                    verified against the running code, database
+                    configuration, hosting provider, and operational
+                    practices.
+                </p>
+            </section>
+
+            <section id="security">
+                <h2>7. Information Security</h2>
+                <p>
+                    The operator should use appropriate technical and
+                    organizational measures to reduce the risk of
+                    unauthorized access, disclosure, alteration, loss,
+                    or misuse of information.
+                </p>
+                <ul>
+                    <li><strong>Password security:</strong> Use an appropriate password-hashing algorithm and suitable parameters rather than readable plaintext passwords.</li>
+                    <li><strong>Authorization:</strong> Check user identity, role, permissions, and ownership on the backend for protected operations.</li>
+                    <li><strong>OTP controls:</strong> Apply expiry, attempt limits, verification, and single-use handling where implemented.</li>
+                    <li><strong>Transport security:</strong> Use HTTPS on deployed sites that transmit personal or authentication information.</li>
+                    <li><strong>Database security:</strong> Restrict database privileges and protect credentials.</li>
+                    <li><strong>Session security:</strong> Use appropriate token or session expiry, logout, and revocation controls.</li>
+                    <li><strong>Safe error handling:</strong> Avoid disclosing credentials, OTPs, stack traces, or sensitive internal details to users.</li>
+                    <li><strong>Maintenance:</strong> Review dependencies, configuration, and relevant vulnerabilities.</li>
+                </ul>
+                <p>
+                    No website or electronic storage method can be
+                    guaranteed completely secure. Users should report
+                    suspected unauthorized access or security issues
+                    through the contact channel below, without sending
+                    passwords or verification codes.
+                </p>
+            </section>
+
+            <section id="credentials">
+                <h2>8. Passwords, OTPs, and Sensitive Financial Information</h2>
+                <p>
+                    Never enter real banking passwords, ATM or debit-card
+                    PINs, card security codes, internet-banking credentials,
+                    or other real financial authentication secrets into
+                    this demonstration application.
+                </p>
+                <p>
+                    Use fictional accounts and test data wherever possible.
+                    Do not reuse passwords from real financial services.
+                    Do not share OTPs with anyone, including someone
+                    claiming to represent the application operator.
+                </p>
+                <p>
+                    The application may send email OTPs for account
+                    verification, login, or password recovery where those
+                    workflows are enabled. Never include OTPs or passwords
+                    in support emails.
+                </p>
+                <p>
+                    Security claims in this policy are subject to the
+                    actual deployed implementation. This policy does not
+                    guarantee that every possible security feature exists
+                    or that a demonstration account is protected like an
+                    account at a regulated bank.
+                </p>
+            </section>
+
+            <section id="sharing">
+                <h2>9. Information Sharing and Disclosure</h2>
+                <p>
+                    Information may be accessible to the following
+                    recipients where applicable and appropriately authorized:
+                </p>
+                <ul>
+                    <li><strong>Authorized administrators:</strong> For legitimate account administration, troubleshooting, and system maintenance.</li>
+                    <li><strong>Technical service providers:</strong> Hosting, database, infrastructure, or email delivery providers, if used and if they process relevant information.</li>
+                    <li><strong>Security personnel:</strong> To investigate technical incidents or maintain application security.</li>
+                    <li><strong>Legal authorities:</strong> Where disclosure is required by applicable law or valid legal process.</li>
+                </ul>
+                <p>
+                    Information should be disclosed only to the extent
+                    reasonably necessary for the relevant purpose and
+                    subject to applicable requirements.
+                </p>
+                <p>
+                    We do not claim that information is never shared,
+                    that no service provider can access it, or that a
+                    particular third-party provider is used unless the
+                    actual arrangements support that statement.
+                </p>
+                <p>
+                    We do not represent that personal information is sold
+                    or used for advertising. The operator should verify
+                    actual practices and disclose any relevant sharing
+                    or advertising technologies that are implemented.
+                </p>
+            </section>
+
+            <section id="browser">
+                <h2>10. Cookies and Browser Storage</h2>
+                <p>
+                    The application may use browser storage or cookies
+                    to maintain application state, remember preferences,
+                    or support authentication and navigation.
+                </p>
+                <p>
+                    The current frontend has used browser
+                    <code>localStorage</code> keys such as
+                    <code>authToken</code>, <code>loggedInUser</code>,
+                    and <code>loggedInAdmin</code>. Actual keys and
+                    storage behavior depend on the page and version
+                    being used.
+                </p>
+                <p>
+                    Browser storage is different from server-side database
+                    storage. Data stored in <code>localStorage</code>
+                    can persist after a browser tab closes and may be
+                    accessible to JavaScript running on the same origin.
+                    A cross-site scripting vulnerability can therefore
+                    create risks for tokens stored there.
+                </p>
+                <p>
+                    The operator should assess whether authentication
+                    tokens should instead be held in appropriately
+                    configured secure, HttpOnly cookies or another
+                    suitable session mechanism. This policy does not
+                    assert that such a change has already been made.
+                </p>
+                <p>
+                    Clearing browser storage may sign you out or affect
+                    application functionality. Browser cookie settings
+                    can be used to manage cookies where they are used.
+                    We do not claim to use advertising cookies, analytics
+                    trackers, or cross-site tracking unless those
+                    technologies are actually enabled.
+                </p>
+            </section>
+
+            <section id="retention">
+                <h2>11. Data Retention and Deletion</h2>
+                <p>
+                    Information should be retained only for as long as
+                    reasonably necessary for its disclosed purposes,
+                    subject to applicable legal requirements and
+                    legitimate operational needs.
+                </p>
+                <p>Retention may differ by information type:</p>
+                <ul>
+                    <li>User and customer records may remain until an authorized deletion or account-management action occurs.</li>
+                    <li>Transaction and related account records may remain to preserve application history and integrity.</li>
+                    <li>OTP records may be retained according to verification, expiry, security, and cleanup procedures.</li>
+                    <li>Technical logs may follow server or hosting retention settings.</li>
+                    <li>Backup copies may remain until the applicable backup-retention period expires.</li>
+                </ul>
+                <p>
+                    The operator should define and implement actual
+                    retention periods. This policy does not promise that
+                    every record is immediately deleted when a request
+                    is submitted.
+                </p>
+                <p>
+                    Deleting a visible record may not remove related
+                    database entries, transaction history, logs, or
+                    backups. Such information may need separate handling,
+                    subject to integrity requirements and applicable law.
+                </p>
+            </section>
+
+            <section id="rights">
+                <h2>12. Privacy Requests and User Rights</h2>
+                <p>
+                    Users may contact the operator to ask about the
+                    processing of their information or to request an
+                    appropriate action. Depending on applicable law
+                    and the circumstances, requests may include:
+                </p>
+                <ul>
+                    <li>Access to information about relevant processing.</li>
+                    <li>Correction of inaccurate personal details.</li>
+                    <li>Deletion of eligible personal information.</li>
+                    <li>Withdrawal of consent where consent is the relevant basis and withdrawal is available.</li>
+                    <li>Information about recipients or processing purposes where applicable.</li>
+                    <li>Submission of a privacy concern or complaint.</li>
+                </ul>
+                <p>
+                    Before acting on a request, the operator may need
+                    to verify the requester's identity and determine
+                    whether the request is legally permitted and
+                    technically possible. Some records may need to be
+                    retained for legitimate or legally required reasons.
+                </p>
+                <p>
+                    Where applicable law provides additional rights,
+                    grievance mechanisms, or response timelines, the
+                    operator should follow those requirements.
+                    A request sent to the contact email below does not
+                    itself guarantee a particular outcome or response time.
+                </p>
+            </section>
+
+            <section id="third-parties">
+                <h2>13. Third-Party Websites and External Links</h2>
+                <p>
+                    The website may link to third-party services, including
+                    the IBI Bank Instagram page:
+                    <a href="https://www.instagram.com/ibibankofficial/"
+                       target="_blank"
+                       rel="noopener noreferrer">instagram.com/ibibankofficial</a>.
+                </p>
+                <p>
+                    External websites operate under their own terms,
+                    privacy policies, and data-handling practices.
+                    We do not control those practices merely by linking
+                    to an external site. Review the destination site's
+                    privacy information before sharing personal data.
+                </p>
+                <p>
+                    Email delivery, website hosting, and other
+                    infrastructure may also involve third-party services
+                    depending on the actual deployment configuration.
+                </p>
+            </section>
+
+            <section id="children">
+                <h2>14. Children's Privacy</h2>
+                <p>
+                    The application is not intended to collect children's
+                    personal information in violation of applicable law.
+                    Where age-related restrictions, parental consent,
+                    or additional safeguards are legally required, the
+                    operator should implement them before processing
+                    the relevant information.
+                </p>
+                <p>
+                    A parent or legal guardian who believes that a child
+                    has submitted information inappropriately may contact
+                    the operator to request a review. Any action will
+                    depend on the circumstances, applicable law, and
+                    the operator's ability to identify the relevant records.
+                </p>
+            </section>
+
+            <section id="transfers">
+                <h2>15. International Data Transfers</h2>
+                <p>
+                    Depending on the hosting provider, email service,
+                    infrastructure, and other integrations, information
+                    may be processed or stored outside the user's
+                    state or country.
+                </p>
+                <p>
+                    The operator should identify relevant storage and
+                    processing locations and comply with applicable
+                    transfer restrictions and safeguards. This policy
+                    does not assert that international transfers occur
+                    unless the actual arrangements establish that they do.
+                </p>
+            </section>
+
+            <section id="incidents">
+                <h2>16. Security Incidents and Data Breaches</h2>
+                <p>
+                    If the operator becomes aware of a security incident
+                    affecting personal information, the incident should
+                    be assessed and handled in accordance with its
+                    severity and the applicable legal requirements.
+                </p>
+                <p>Appropriate incident handling may include:</p>
+                <ul>
+                    <li>Investigating the nature and scope of the incident.</li>
+                    <li>Containing the incident and securing affected systems.</li>
+                    <li>Assessing possible effects on affected individuals.</li>
+                    <li>Preserving relevant evidence and investigating the cause.</li>
+                    <li>Notifying affected individuals or authorities where required by law.</li>
+                    <li>Taking corrective measures to reduce the risk of recurrence.</li>
+                </ul>
+                <p>
+                    Notification obligations and timelines depend on the
+                    applicable law, relevant commencement dates, and
+                    circumstances of the incident.
+                </p>
+            </section>
+
+            <section id="changes">
+                <h2>17. Changes to This Privacy Policy</h2>
+                <p>
+                    This policy may be updated when the application's
+                    functionality, information-handling practices,
+                    hosting configuration, or applicable legal
+                    requirements change.
+                </p>
+                <p>
+                    The revised version should be published on this page
+                    with an updated "Last Updated" date. Where required
+                    by applicable law, material changes should be
+                    communicated through an appropriate method.
+                </p>
+                <p>
+                    Users should review this page periodically. Changes
+                    to this policy do not remove rights that cannot
+                    lawfully be excluded.
+                </p>
+            </section>
+
+            <section id="contact">
+                <h2>18. Contact and Privacy Enquiries</h2>
+                <p>
+                    For questions, privacy concerns, correction requests,
+                    or deletion enquiries, contact the IBI Bank website
+                    operator using the details below.
+                </p>
+
+                <div class="contact-card">
+                    <p><strong>Organization:</strong> IBI Bank — International Bank of India</p>
+                    <p>
+                        <strong>Email:</strong>
+                        <a href="mailto:ibibankofficial@gmail.com?subject=IBI%20Bank%20Privacy%20Enquiry">
+                            ibibankofficial@gmail.com
+                        </a>
+                    </p>
+                    <p>
+                        <strong>Instagram:</strong>
+                        <a href="https://www.instagram.com/ibibankofficial/"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            @ibibankofficial
+                        </a>
+                    </p>
+                </div>
+
+                <p>
+                    Describe your enquiry clearly and provide only the
+                    minimum information necessary to help identify the
+                    issue. Do not email passwords, PINs, OTPs, card
+                    security codes, or other authentication secrets.
+                </p>
+                <p>
+                    The email and Instagram links are contact channels
+                    only. Their inclusion does not establish that a
+                    statutory grievance officer, formal banking complaint
+                    process, or regulated financial service has been
+                    appointed. Any legally required contact or grievance
+                    details should be added by the operator where applicable.
+                </p>
+            </section>
+
+            <section id="limitations">
+                <h2>19. Policy Limitations and Interpretation</h2>
+                <p>
+                    This policy describes intended privacy practices for
+                    the IBI Bank educational banking application. It
+                    should be interpreted consistently with the features
+                    actually enabled, the deployed source code, the
+                    storage and hosting configuration, and applicable law.
+                </p>
+                <p>
+                    Nothing in this policy guarantees absolute security,
+                    confirms that every recommended safeguard has been
+                    implemented, or represents that IBI Bank is a
+                    licensed bank or regulated financial institution.
+                </p>
+                <p>
+                    If the actual data-handling practices differ from
+                    this policy, the operator should investigate the
+                    discrepancy, correct it where appropriate, and
+                    provide any notices required by law.
+                </p>
+                <p>
+                    This policy is general information and is not a
+                    substitute for legal advice. The operator should
+                    obtain qualified legal advice before relying on
+                    this policy for a real public-facing financial service.
+                </p>
+            </section>
+        </article>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-brand">IBI Bank — International Bank of India</div>
+
+    <nav class="footer-links" aria-label="Footer navigation">
+        <a href="index.html">Home / Login</a>
+        <a href="privacy.html" aria-current="page">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="mailto:ibibankofficial@gmail.com?subject=IBI%20Bank%20Enquiry">
+            Contact Us
+        </a>
+        <a href="https://www.instagram.com/ibibankofficial/"
+           target="_blank"
+           rel="noopener noreferrer">Instagram</a>
+    </nav>
+
+    <p>
+        Effective October 23, 2026 · Last Updated October 23, 2026
+    </p>
+    <p>
+        Educational banking demonstration application. Do not submit
+        real banking credentials or sensitive financial authentication data.
+    </p>
+</footer>
+
+<button class="back-to-top" id="backToTop"
+        type="button" aria-label="Back to top" title="Back to top">
+    ↑
+</button>
+
+<script>
+    "use strict";
+
+    const backToTopButton = document.getElementById("backToTop");
+
+    function updateBackToTopButton() {
+        backToTopButton.classList.toggle(
+            "visible",
+            window.scrollY > 350
+        );
+    }
+
+    window.addEventListener("scroll", updateBackToTopButton, {
+        passive: true
+    });
+
+    backToTopButton.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
+    updateBackToTopButton();
+</script>
+</body>
+</html>

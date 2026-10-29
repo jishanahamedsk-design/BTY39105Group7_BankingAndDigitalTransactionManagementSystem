@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#02091d">
+<title>IBI Bank — International Bank of India | Sign Up</title>
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+:root {
+    --bg: #02091d;
+    --panel: rgba(2, 16, 48, .96);
+    --cyan: #00eaff;
+    --blue: #087bff;
+    --text: #f5f8ff;
+    --muted: #bdcbe8;
+    --border: rgba(0, 194, 255, .9);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(ellipse at 50% 40%, #062d79 0%, #031641 40%, #02091d 78%);
+}
+
+button, input {
+    font: inherit;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* HEADER */
+
+.site-header {
+    min-height: 82px;
+    padding: 8px 4%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: rgba(1, 10, 35, .95);
+    border-bottom: 2px solid #087bff;
+    box-shadow: 0 0 16px rgba(0, 116, 255, .6);
+    position: relative;
+    z-index: 2;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-logo {
+    width: 68px;
+    height: 64px;
+    object-fit: contain;
+}
+
+.header-brand h2 {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.header-brand p {
+    margin: 3px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.header-nav {
+    display: flex;
+    gap: clamp(18px, 4vw, 60px);
+    align-items: center;
+}
+
+.header-nav a {
+    color: #f3f6ff;
+    text-decoration: none;
+    padding: 12px 0;
+}
+
+.header-nav a.active {
+    color: var(--cyan);
+    border-bottom: 2px solid var(--cyan);
+    font-weight: bold;
+}
+
+.language {
+    color: #e8f3ff;
+    white-space: nowrap;
+}
+
+/* PAGE LAYOUT */
+
+.auth-container {
+    min-height: calc(100vh - 132px);
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(420px, 610px) minmax(210px, .8fr);
+    align-items: center;
+    gap: 30px;
+    padding: 18px 5.3%;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-container::before,
+.auth-container::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    border: 1px solid rgba(0, 116, 255, .22);
+    transform: rotate(-25deg);
+    width: 700px;
+    height: 220px;
+    border-radius: 50%;
+}
+
+.auth-container::before {
+    left: -250px;
+    bottom: -120px;
+    box-shadow: 0 0 35px rgba(0, 65, 255, .3);
+}
+
+.auth-container::after {
+    right: -320px;
+    top: -140px;
+    box-shadow: 0 0 35px rgba(0, 65, 255, .3);
+}
+
+.brand-panel,
+.auth-box,
+.feature-panel {
+    position: relative;
+    z-index: 1;
+}
+
+/* LARGE BRANDING */
+
+.brand-panel {
+    text-align: center;
+}
+
+.brand-large-logo {
+    width: min(100%, 330px);
+    height: 180px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 16px rgba(0, 105, 255, .7));
+}
+
+.brand-caption {
+    margin-top: 10px;
+    font-size: clamp(23px, 2.3vw, 35px);
+    font-weight: 800;
+    letter-spacing: 5px;
+}
+
+.brand-subcaption {
+    color: var(--cyan);
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-top: 8px;
+}
+
+.brand-tagline {
+    color: #d3def8;
+    letter-spacing: 4px;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.brand-slogan {
+    margin-top: 48px;
+    font-size: 24px;
+}
+
+.brand-slogan strong {
+    color: var(--cyan);
+}
+
+.brand-small-line {
+    width: 150px;
+    height: 5px;
+    border-radius: 20px;
+    margin: 25px auto;
+    background: linear-gradient(90deg, var(--cyan), #1654ff, #8b00ff);
+}
+
+/* SIGNUP CARD */
+
+.auth-box {
+    width: 100%;
+    max-width: 610px;
+    justify-self: center;
+    padding: 14px 9% 18px;
+    border: 1px solid var(--cyan);
+    border-radius: 22px;
+    background:
+        linear-gradient(145deg, rgba(4, 32, 92, .97), rgba(1, 10, 31, .98));
+    box-shadow:
+        0 0 12px rgba(0, 234, 255, .65),
+        inset 0 0 24px rgba(0, 80, 255, .14);
+}
+
+.bank-brand {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.bank-logo {
+    display: block;
+    width: 72px;
+    height: 64px;
+    object-fit: contain;
+    margin: 0 auto 4px;
+    filter: drop-shadow(0 0 9px rgba(0, 150, 255, .65));
+}
+
+.bank-name {
+    margin: 0;
+    font-size: 29px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.bank-full-name {
+    margin-top: 4px;
+    font-size: 13px;
+    color: #d4e0f9;
+}
+
+.auth-box h1 {
+    text-align: center;
+    margin: 12px 0 6px;
+    font-size: 32px;
+}
+
+.auth-subtitle {
+    text-align: center;
+    margin: 0 0 16px;
+    color: #e0eaff;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* FORM FIELDS */
+
+.field-group {
+    margin-top: 12px;
+}
+
+.field-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.input-wrap {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 49px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(0, 15, 43, .88);
+    overflow: hidden;
+    transition: box-shadow .2s, border-color .2s;
+}
+
+.input-wrap:focus-within {
+    border-color: var(--cyan);
+    box-shadow: 0 0 12px rgba(0, 234, 255, .25);
+}
+
+.input-icon {
+    width: 53px;
+    min-width: 53px;
+    min-height: 47px;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 119, 255, .22);
+    color: var(--cyan);
+    font-size: 24px;
+}
+
+.input-wrap input {
+    min-width: 0;
+    width: 100%;
+    border: 0;
+    outline: none;
+    padding: 12px 10px;
+    background: transparent;
+    color: #fff;
+    font-size: 14px;
+}
+
+.input-wrap input::placeholder {
+    color: #aab8d5;
+}
+
+.input-wrap input:focus {
+    box-shadow: none;
+}
+
+.password-toggle {
+    flex: 0 0 42px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 8px;
+}
+
+.email-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 105px;
+    gap: 10px;
+}
+
+.verify-email-btn {
+    border: 1px solid var(--cyan);
+    border-radius: 11px;
+    color: var(--cyan);
+    background: rgba(0, 102, 255, .16);
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 234, 255, .2);
+}
+
+.verify-email-btn:hover {
+    background: rgba(0, 234, 255, .13);
+}
+
+.email-status {
+    min-height: 18px;
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+.email-status.unverified {
+    color: #ff627e;
+}
+
+.email-status.verified {
+    color: #20e8a1;
+}
+
+.password-info-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 43px;
+    gap: 9px;
+}
+
+.password-info-btn {
+    align-self: center;
+    width: 43px;
+    height: 43px;
+    border: 1px solid #087bff;
+    border-radius: 10px;
+    background: #031b4b;
+    color: var(--cyan);
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 117, 255, .4);
+}
+
+.password-requirements {
+    display: none;
+    margin-top: 9px;
+    padding: 12px;
+    border: 1px solid #087bff;
+    border-radius: 10px;
+    background: rgba(0, 13, 41, .96);
+    color: #eaf3ff;
+    font-size: 12px;
+}
+
+.password-requirements.show {
+    display: block;
+}
+
+.password-requirements p {
+    margin: 0 0 8px;
+}
+
+.password-requirements ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.password-requirements li {
+    margin: 7px 0;
+    color: #b5c5e3;
+}
+
+.password-requirements li::before {
+    content: "○";
+    display: inline-block;
+    width: 21px;
+    color: #8294b9;
+}
+
+.password-requirements li.valid {
+    color: #fff;
+}
+
+.password-requirements li.valid::before {
+    content: "✓";
+    color: #17e8a0;
+    font-weight: bold;
+}
+
+.auth-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    min-height: 55px;
+    padding: 13px;
+    margin-top: 18px;
+    border: 0;
+    border-radius: 13px;
+    background: linear-gradient(100deg, #00d8ee, #087aff, #00c8ff);
+    color: #fff;
+    font-weight: 800;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 14px rgba(0, 195, 255, .35);
+    transition: transform .2s, filter .2s;
+}
+
+.auth-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.auth-btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#signupMessage {
+    text-align: center;
+    margin: 10px 0 0;
+    min-height: 18px;
+    font-size: 13px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 15px;
+    color: #e0eaff;
+    font-size: 14px;
+}
+
+.auth-link a {
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* RIGHT SIDE FEATURES */
+
+.feature-panel {
+    display: grid;
+    gap: 15px;
+}
+
+.feature-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 14px;
+    min-height: 105px;
+    border: 1px solid #087bff;
+    border-radius: 15px;
+    background: rgba(3, 24, 67, .75);
+    box-shadow: inset 0 0 20px rgba(0, 89, 255, .12);
+}
+
+.feature-icon {
+    width: 62px;
+    height: 62px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 29px;
+    background: linear-gradient(135deg, #00dfff, #0629ff);
+    box-shadow: 0 0 15px rgba(0, 145, 255, .4);
+}
+
+.feature-card h3 {
+    font-size: 15px;
+    margin: 0 0 8px;
+}
+
+.feature-card p {
+    margin: 0;
+    color: #c7d4ee;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* EMAIL VERIFICATION MODAL */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(0, 4, 18, .78);
+    backdrop-filter: blur(7px);
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.verify-modal {
+    width: 100%;
+    max-width: 335px;
+    padding: 23px 25px 25px;
+    position: relative;
+    text-align: center;
+    border: 1px solid var(--cyan);
+    border-radius: 19px;
+    background: linear-gradient(145deg, #041d50, #010a20);
+    box-shadow: 0 0 20px rgba(0, 178, 255, .55);
+}
+
+.modal-close {
+    position: absolute;
+    right: 12px;
+    top: 9px;
+    border: 0;
+    background: transparent;
+    color: #aabce0;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.modal-email-icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 12px;
+    border: 2px solid var(--cyan);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--cyan);
+    font-size: 28px;
+    box-shadow: 0 0 12px rgba(0, 234, 255, .35);
+}
+
+.verify-modal h2 {
+    margin: 0 0 10px;
+    font-size: 21px;
+}
+
+.verify-modal p {
+    color: #e0eaff;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 16px;
+}
+
+.otp-inputs {
+    display: flex;
+    gap: 7px;
+    justify-content: center;
+    margin: 18px 0;
+}
+
+.otp-inputs input {
+    width: 35px;
+    height: 43px;
+    text-align: center;
+    border: 1px solid #087bff;
+    border-radius: 8px;
+    outline: none;
+    color: #fff;
+    background: rgba(0, 10, 32, .9);
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.otp-inputs input:focus {
+    border-color: var(--cyan);
+    box-shadow: 0 0 9px rgba(0, 234, 255, .4);
+}
+
+.modal-verify-btn {
+    width: 100%;
+    padding: 13px;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(100deg, #00d9ed, #087aff);
+    color: #fff;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.resend-row {
+    border-top: 1px solid rgba(0, 119, 255, .5);
+    margin-top: 16px;
+    padding-top: 13px;
+    color: #c5d4ef;
+    font-size: 12px;
+}
+
+.resend-row button {
+    border: 0;
+    background: none;
+    color: var(--cyan);
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.resend-row button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+#otpMessage {
+    margin-top: 10px;
+    min-height: 17px;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+/* FOOTER */
+
+.site-footer {
+    min-height: 50px;
+    padding: 14px 3.5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-top: 1px solid #087bff;
+    background: rgba(1, 9, 29, .95);
+    color: #bac9e8;
+    font-size: 12px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-links a {
+    color: #bac9e8;
+    text-decoration: none;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1150px) {
+    .auth-container {
+        grid-template-columns: minmax(0, 1fr) minmax(400px, 610px);
+    }
+
+    .brand-panel {
+        display: none;
+    }
+
+    .feature-panel {
+        display: none;
+    }
+}
+
+@media (max-width: 650px) {
+    .site-header {
+        padding: 8px 15px;
+    }
+
+    .header-logo {
+        width: 49px;
+        height: 49px;
+    }
+
+    .header-brand h2 {
+        font-size: 20px;
+    }
+
+    .header-brand p {
+        font-size: 10px;
+    }
+
+    .header-nav {
+        display: none;
+    }
+
+    .auth-container {
+        display: flex;
+        justify-content: center;
+        padding: 18px 12px;
+    }
+
+    .auth-box {
+        padding: 18px 20px;
+        border-radius: 17px;
+    }
+
+    .auth-box h1 {
+        font-size: 27px;
+    }
+
+    .bank-name {
+        font-size: 25px;
+    }
+
+    .auth-subtitle {
+        font-size: 13px;
+    }
+
+    .field-group label {
+        font-size: 14px;
+    }
+
+    .email-row {
+        grid-template-columns: minmax(0, 1fr) 88px;
+        gap: 7px;
+    }
+
+    .input-icon {
+        width: 43px;
+        min-width: 43px;
+    }
+
+    .site-footer {
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 360px) {
+    .auth-box {
+        padding: 16px 13px;
+    }
+
+    .otp-inputs {
+        gap: 4px;
+    }
+
+    .otp-inputs input {
+        width: 31px;
+        height: 40px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="header-brand">
+        <img class="header-logo"
+             src="images/ibi-logo.png"
+             alt="IBI Bank Logo">
+        <div>
+            <h2>IBI Bank</h2>
+            <p>International Bank of India</p>
+        </div>
+    </div>
+
+    <nav class="header-nav" aria-label="Main navigation">
+        <a class="active" href="signup.html">Personal</a>
+        <a href="#" data-informational-link>Business</a>
+        <a href="#" data-informational-link>NRI</a>
+        <a href="#" data-informational-link>About Us</a>
+    </nav>
+
+    <div class="language">🌐 &nbsp; EN⌄</div>
+</header>
+
+<main class="auth-container">
+
+    <section class="brand-panel" aria-label="IBI Bank branding">
+        <img class="brand-large-logo"
+             src="images/ibi-logo.png"
+             alt="IBI Bank Logo">
+
+        <div class="brand-caption">IBI</div>
+        <div class="brand-subcaption">BANK OF INDIA</div>
+        <div class="brand-tagline">YOUR TRUST &nbsp; OUR GLOBAL REACH</div>
+        <div class="brand-small-line"></div>
+        <div class="brand-slogan">Banking <strong>Beyond Borders</strong></div>
+        <p class="brand-tagline">Secure &nbsp; | &nbsp; Simple &nbsp; | &nbsp; Global</p>
+    </section>
+
+    <section class="auth-box">
+
+        <div class="bank-brand">
+            <img class="bank-logo"
+                 src="images/ibi-logo.png"
+                 alt="IBI Bank Logo">
+
+            <h2 class="bank-name">IBI Bank</h2>
+            <div class="bank-full-name">International Bank of India</div>
+        </div>
+
+        <h1>Create Account</h1>
+
+        <p class="auth-subtitle">
+            Create your IBI Bank account for secure digital banking
+        </p>
+
+        <form id="signupForm" novalidate>
+
+            <div class="field-group">
+                <label for="name">Full Name</label>
+                <div class="input-wrap">
+                    <span class="input-icon" aria-hidden="true">♙</span>
+                    <input type="text"
+                           id="name"
+                           name="name"
+                           placeholder="Enter your full name"
+                           autocomplete="name"
+                           maxlength="100"
+                           required>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label for="email">Email</label>
+
+                <div class="email-row">
+                    <div class="input-wrap">
+                        <span class="input-icon" aria-hidden="true">✉</span>
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               placeholder="Enter your email"
+                               autocomplete="email"
+                               maxlength="254"
+                               required>
+                    </div>
+
+                    <button type="button"
+                            class="verify-email-btn"
+                            id="sendVerificationBtn">
+                        Verify
+                    </button>
+                </div>
+
+                <div id="emailStatus"
+                     class="email-status unverified"
+                     role="status">
+                    ⚠ Email not verified
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label for="phone">Phone Number</label>
+                <div class="input-wrap">
+                    <span class="input-icon" aria-hidden="true">♧</span>
+                    <input type="tel"
+                           id="phone"
+                           name="phone"
+                           placeholder="Enter your phone number"
+                           autocomplete="tel"
+                           maxlength="15"
+                           required>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label for="password">Password</label>
+
+                <div class="password-info-row">
+                    <div class="input-wrap">
+                        <span class="input-icon" aria-hidden="true">♙</span>
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               placeholder="Minimum 6 characters"
+                               autocomplete="new-password"
+                               minlength="6"
+                               required>
+                        <button type="button"
+                                class="password-toggle"
+                                data-toggle-password="password"
+                                aria-label="Show password">◎</button>
+                    </div>
+
+                    <button type="button"
+                            id="passwordInfoBtn"
+                            class="password-info-btn"
+                            aria-label="Show password requirements"
+                            aria-expanded="false">ⓘ</button>
+                </div>
+
+                <div class="password-requirements" id="passwordRequirements">
+                    <p><strong>🛡 Password Requirements</strong></p>
+                    <p>Your password must include:</p>
+                    <ul>
+                        <li data-rule="length">At least 6 characters</li>
+                        <li data-rule="upper">At least one uppercase letter (A-Z)</li>
+                        <li data-rule="lower">At least one lowercase letter (a-z)</li>
+                        <li data-rule="number">At least one number (0-9)</li>
+                        <li data-rule="special">At least one special character (! @ # $ % ^ &amp; *)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="input-wrap">
+                    <span class="input-icon" aria-hidden="true">♙</span>
+                    <input type="password"
+                           id="confirmPassword"
+                           name="confirmPassword"
+                           placeholder="Re-enter your password"
+                           autocomplete="new-password"
+                           required>
+                    <button type="button"
+                            class="password-toggle"
+                            data-toggle-password="confirmPassword"
+                            aria-label="Show confirm password">◎</button>
+                </div>
+            </div>
+
+            <button type="submit" class="auth-btn" id="signupButton">
+                <span aria-hidden="true">♙</span>
+                <span>Create IBI Bank Account</span>
+                <span aria-hidden="true">➜</span>
+            </button>
+
+        </form>
+
+        <p id="signupMessage" role="status" aria-live="polite"></p>
+
+        <div class="auth-link">
+            Already have an account?
+            <a href="index.html">Login</a>
+        </div>
+    </section>
+
+    <aside class="feature-panel" aria-label="Banking benefits">
+        <div class="feature-card">
+            <div class="feature-icon">♢</div>
+            <div>
+                <h3>Safe &amp; Secure</h3>
+                <p>Your money,<br>our priority</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">◎</div>
+            <div>
+                <h3>Global Access</h3>
+                <p>Bank anytime,<br>anywhere</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">ϟ</div>
+            <div>
+                <h3>Fast &amp; Reliable</h3>
+                <p>Seamless<br>transactions</p>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">♧</div>
+            <div>
+                <h3>24/7 Support</h3>
+                <p>We're always<br>here for you</p>
+            </div>
+        </div>
+    </aside>
+
+</main>
+
+<footer class="site-footer">
+    <span>© 2026 International Bank of India. All rights reserved.</span>
+
+    <div class="footer-links">
+        <a href="#" data-informational-link>Privacy Policy</a>
+        <a href="#" data-informational-link>Terms &amp; Conditions</a>
+        <a href="#" data-informational-link>Contact Us</a>
+    </div>
+</footer>
+
+<!-- EMAIL VERIFICATION MODAL -->
+<div class="modal-overlay" id="verificationModal" aria-hidden="true">
+    <section class="verify-modal"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="verifyTitle">
+
+        <button type="button"
+                class="modal-close"
+                id="closeVerificationModal"
+                aria-label="Close verification dialog">×</button>
+
+        <div class="modal-email-icon" aria-hidden="true">✉</div>
+
+        <h2 id="verifyTitle">Verify your email</h2>
+
+        <p>
+            Enter the 6-digit verification code sent to
+            <strong id="verificationEmailLabel"></strong>.
+        </p>
+
+        <form id="otpForm">
+            <div class="otp-inputs" aria-label="Six-digit verification code">
+                <input aria-label="Code digit 1" inputmode="numeric" autocomplete="one-time-code" maxlength="1" required>
+                <input aria-label="Code digit 2" inputmode="numeric" maxlength="1" required>
+                <input aria-label="Code digit 3" inputmode="numeric" maxlength="1" required>
+                <input aria-label="Code digit 4" inputmode="numeric" maxlength="1" required>
+                <input aria-label="Code digit 5" inputmode="numeric" maxlength="1" required>
+                <input aria-label="Code digit 6" inputmode="numeric" maxlength="1" required>
+            </div>
+
+            <button type="submit"
+                    class="modal-verify-btn"
+                    id="verifyOtpBtn">
+                Verify Email
+            </button>
+        </form>
+
+        <div id="otpMessage" role="status" aria-live="polite"></div>
+
+        <div class="resend-row">
+            Didn't receive the code?
+            <button type="button" id="resendCodeBtn">Resend code</button>
+        </div>
+    </section>
+</div>
+
+<script>
+"use strict";
+
+/*
+ * API configuration.
+ * Update these endpoint paths if your backend uses different routes.
+ */
+const API = "http://127.0.0.1:5000";
+
+const ENDPOINTS = {
+    signup: `${API}/api/auth/signup`,
+    sendVerification: `${API}/api/auth/send-verification-code`,
+    verifyEmail: `${API}/api/auth/verify-email`
+};
+
+const form = document.getElementById("signupForm");
+const signupButton = document.getElementById("signupButton");
+const signupMessage = document.getElementById("signupMessage");
+const emailInput = document.getElementById("email");
+const emailStatus = document.getElementById("emailStatus");
+
+const verificationModal = document.getElementById("verificationModal");
+const verificationEmailLabel = document.getElementById("verificationEmailLabel");
+const otpForm = document.getElementById("otpForm");
+const otpMessage = document.getElementById("otpMessage");
+const otpInputs = [...document.querySelectorAll(".otp-inputs input")];
+
+let verifiedEmail = "";
+let verificationRequestEmail = "";
+let verificationRequestInProgress = false;
+
+function showSignupMessage(message, type = "error") {
+    signupMessage.textContent = message;
+    signupMessage.style.color =
+        type === "success" ? "#20e8a1" :
+        type === "info" ? "#00eaff" :
+        "#ff627e";
+}
+
+function showOtpMessage(message, type = "error") {
+    otpMessage.textContent = message;
+    otpMessage.style.color =
+        type === "success" ? "#20e8a1" :
+        type === "info" ? "#00eaff" :
+        "#ff627e";
+}
+
+function setEmailVerified(email) {
+    verifiedEmail = email.trim().toLowerCase();
+    emailStatus.textContent = "✓ Email verified";
+    emailStatus.className = "email-status verified";
+}
+
+function setEmailUnverified() {
+    verifiedEmail = "";
+    emailStatus.textContent = "⚠ Email not verified";
+    emailStatus.className = "email-status unverified";
+}
+
+function openVerificationModal(email) {
+    verificationEmailLabel.textContent = email;
+    verificationModal.classList.add("show");
+    verificationModal.setAttribute("aria-hidden", "false");
+    otpForm.reset();
+    showOtpMessage("", "info");
+    otpInputs[0].focus();
+}
+
+function closeVerificationModal() {
+    verificationModal.classList.remove("show");
+    verificationModal.setAttribute("aria-hidden", "true");
+}
+
+async function readResponse(response) {
+    const text = await response.text();
+
+    let data = {};
+
+    try {
+        data = text ? JSON.parse(text) : {};
+    } catch {
+        throw new Error("The server returned an invalid response.");
+    }
+
+    if (!response.ok || data.success === false) {
+        throw new Error(data.message || `Request failed (${response.status}).`);
+    }
+
+    return data;
+}
+
+async function postJSON(url, payload) {
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    });
+
+    return readResponse(response);
+}
+
+/* Password show/hide buttons */
+document.querySelectorAll("[data-toggle-password]").forEach(button => {
+    button.addEventListener("click", () => {
+        const input = document.getElementById(
+            button.dataset.togglePassword
+        );
+
+        if (!input) return;
+
+        const shouldShow = input.type === "password";
+        input.type = shouldShow ? "text" : "password";
+        button.textContent = shouldShow ? "◉" : "◎";
+        button.setAttribute(
+            "aria-label",
+            shouldShow ? "Hide password" : "Show password"
+        );
+    });
+});
+
+/* Password requirement popover */
+const passwordInfoBtn = document.getElementById("passwordInfoBtn");
+const passwordRequirements = document.getElementById("passwordRequirements");
+const passwordInput = document.getElementById("password");
+
+passwordInfoBtn.addEventListener("click", () => {
+    const visible = passwordRequirements.classList.toggle("show");
+    passwordInfoBtn.setAttribute("aria-expanded", String(visible));
+});
+
+passwordInput.addEventListener("input", () => {
+    const value = passwordInput.value;
+
+    const checks = {
+        length: value.length >= 6,
+        upper: /[A-Z]/.test(value),
+        lower: /[a-z]/.test(value),
+        number: /[0-9]/.test(value),
+        special: /[^A-Za-z0-9]/.test(value)
+    };
+
+    Object.entries(checks).forEach(([rule, valid]) => {
+        const item = document.querySelector(`[data-rule="${rule}"]`);
+        if (item) item.classList.toggle("valid", valid);
+    });
+});
+
+/* Any change to the email invalidates its previous verification. */
+emailInput.addEventListener("input", () => {
+    const currentEmail = emailInput.value.trim().toLowerCase();
+
+    if (currentEmail !== verifiedEmail) {
+        setEmailUnverified();
+    }
+
+    if (currentEmail !== verificationRequestEmail) {
+        verificationRequestEmail = "";
+    }
+});
+
+/* Send a verification code through the backend. */
+document.getElementById("sendVerificationBtn").addEventListener("click", async () => {
+    const email = emailInput.value.trim().toLowerCase();
+
+    if (!emailInput.checkValidity() || !email) {
+        emailInput.reportValidity();
+        return;
+    }
+
+    if (verificationRequestInProgress) return;
+
+    const button = document.getElementById("sendVerificationBtn");
+    verificationRequestInProgress = true;
+    button.disabled = true;
+    button.textContent = "Sending…";
+
+    try {
+        const data = await postJSON(ENDPOINTS.sendVerification, { email });
+
+        verificationRequestEmail = email;
+
+        /*
+         * Only treat the address as verified after the user submits
+         * the code and the backend confirms it.
+         */
+        openVerificationModal(email);
+        showOtpMessage(
+            data.message || "A verification code has been requested.",
+            "info"
+        );
+    } catch (error) {
+        showSignupMessage(
+            error.message || "Could not send the verification code."
+        );
+    } finally {
+        verificationRequestInProgress = false;
+        button.disabled = false;
+        button.textContent = "Verify";
+    }
+});
+
+/* Automatically move between six OTP boxes. */
+otpInputs.forEach((input, index) => {
+    input.addEventListener("input", () => {
+        input.value = input.value.replace(/\D/g, "").slice(0, 1);
+
+        if (input.value && index < otpInputs.length - 1) {
+            otpInputs[index + 1].focus();
+        }
+    });
+
+    input.addEventListener("keydown", event => {
+        if (event.key === "Backspace" && !input.value && index > 0) {
+            otpInputs[index - 1].focus();
+        }
+    });
+
+    input.addEventListener("paste", event => {
+        const pasted = event.clipboardData
+            .getData("text")
+            .replace(/\D/g, "")
+            .slice(0, 6);
+
+        if (!pasted) return;
+
+        event.preventDefault();
+
+        pasted.split("").forEach((digit, digitIndex) => {
+            if (otpInputs[digitIndex]) {
+                otpInputs[digitIndex].value = digit;
+            }
+        });
+
+        otpInputs[Math.min(pasted.length, 5)].focus();
+    });
+});
+
+/* Verify the OTP with the backend. */
+otpForm.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const email = emailInput.value.trim().toLowerCase();
+    const code = otpInputs.map(input => input.value).join("");
+
+    if (email !== verificationRequestEmail) {
+        showOtpMessage("Email changed. Please request a new code.");
+        setEmailUnverified();
+        return;
+    }
+
+    if (!/^\d{6}$/.test(code)) {
+        showOtpMessage("Enter the complete 6-digit verification code.");
+        return;
+    }
+
+    const button = document.getElementById("verifyOtpBtn");
+    button.disabled = true;
+    button.textContent = "Verifying…";
+
+    try {
+        const data = await postJSON(ENDPOINTS.verifyEmail, {
+            email,
+            code
+        });
+
+        if (data.success !== true) {
+            throw new Error(data.message || "Email verification failed.");
+        }
+
+        setEmailVerified(email);
+        closeVerificationModal();
+        showSignupMessage(
+            "Email verified. You can now create your account.",
+            "success"
+        );
+    } catch (error) {
+        showOtpMessage(error.message || "Invalid or expired code.");
+    } finally {
+        button.disabled = false;
+        button.textContent = "Verify Email";
+    }
+});
+
+/* Resend a verification code. */
+document.getElementById("resendCodeBtn").addEventListener("click", async event => {
+    const button = event.currentTarget;
+    const email = emailInput.value.trim().toLowerCase();
+
+    if (!email || email !== verificationRequestEmail) {
+        showOtpMessage("Email changed. Close this dialog and verify again.");
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Sending…";
+
+    try {
+        const data = await postJSON(ENDPOINTS.sendVerification, { email });
+        showOtpMessage(
+            data.message || "A new verification code has been requested.",
+            "info"
+        );
+    } catch (error) {
+        showOtpMessage(error.message || "Could not resend the code.");
+    } finally {
+        button.disabled = false;
+        button.textContent = "Resend code";
+    }
+});
+
+document.getElementById("closeVerificationModal")
+    .addEventListener("click", closeVerificationModal);
+
+verificationModal.addEventListener("click", event => {
+    if (event.target === verificationModal) {
+        closeVerificationModal();
+    }
+});
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        closeVerificationModal();
+    }
+});
+
+/* Signup */
+form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = emailInput.value.trim().toLowerCase();
+    const phone = document.getElementById("phone").value.trim();
+    const password = passwordInput.value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (!name || !email || !phone || !password || !confirmPassword) {
+        showSignupMessage("Please complete all required fields.");
+        return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showSignupMessage("Please enter a valid email address.");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        showSignupMessage("Passwords do not match.");
+        return;
+    }
+
+    if (password.length < 6) {
+        showSignupMessage("Password must be at least 6 characters.");
+        return;
+    }
+
+    if (email !== verifiedEmail) {
+        setEmailUnverified();
+        showSignupMessage("Please verify your email before creating an account.");
+        return;
+    }
+
+    signupButton.disabled = true;
+    showSignupMessage("Creating your account…", "info");
+
+    try {
+        /*
+         * The backend must independently check that this email is verified.
+         * Never trust a browser-side flag as proof of email verification.
+         */
+        const data = await postJSON(ENDPOINTS.signup, {
+            name,
+            email,
+            phone,
+            password,
+            confirmPassword,
+            emailVerified: true
+        });
+
+        if (data.success) {
+            showSignupMessage(
+                data.message || "Account created successfully. Redirecting to login…",
+                "success"
+            );
+
+            form.reset();
+            setEmailUnverified();
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1500);
+        } else {
+            throw new Error(data.message || "Signup failed.");
+        }
+    } catch (error) {
+        showSignupMessage(
+            error.message ||
+            "Cannot connect to the server. Make sure the backend is running."
+        );
+    } finally {
+        signupButton.disabled = false;
+    }
+});
+
+/* Keep placeholder navigation links from jumping to the top. */
+document.querySelectorAll("[data-informational-link]").forEach(link => {
+    link.addEventListener("click", event => {
+        event.preventDefault();
+    });
+});
+</script>
+
+</body>
+</html>

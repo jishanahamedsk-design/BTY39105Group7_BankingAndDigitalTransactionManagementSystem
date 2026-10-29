@@ -1,0 +1,1617 @@
+/* =========================================================
+   IBI BANK
+   FUTURISTIC DARK FINTECH UI
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    color: #eaf6ff;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(0, 229, 255, 0.10),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(79, 70, 229, 0.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(0, 153, 255, 0.08),
+            transparent 35%
+        ),
+        #020611;
+
+    overflow-x: hidden;
+    animation: pageEnter 0.6s ease;
+}
+
+
+/* =========================================================
+   FUTURISTIC GRID BACKGROUND
+   ========================================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 212, 255, 0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0, 212, 255, 0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 50px 50px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black 0%,
+            transparent 85%
+        );
+
+    z-index: -2;
+}
+
+
+/* =========================================================
+   LARGE BACKGROUND GLOW
+   ========================================================= */
+
+body::after {
+    content: "";
+    position: fixed;
+
+    width: 600px;
+    height: 600px;
+
+    left: 45%;
+    top: 15%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 204, 255, 0.055),
+            transparent 70%
+        );
+
+    filter: blur(25px);
+
+    pointer-events: none;
+
+    animation:
+        floatingGlow 10s ease-in-out infinite;
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes floatingGlow {
+    0%,
+    100% {
+        transform:
+            translate(-40px, -20px)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(50px, 40px)
+            scale(1.12);
+    }
+}
+
+
+@keyframes sidebarEnter {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform:
+            translateY(20px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes neonLine {
+    0% {
+        transform: translateX(-120%);
+    }
+
+    100% {
+        transform: translateX(400%);
+    }
+}
+
+
+@keyframes statusPulse {
+    0% {
+        box-shadow:
+            0 0 0 0
+            rgba(34, 197, 94, 0.45);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 8px
+            rgba(34, 197, 94, 0);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0
+            rgba(34, 197, 94, 0);
+    }
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed !important;
+
+    left: 0;
+    top: 0;
+
+    width: 245px !important;
+    height: 100vh;
+
+    padding: 28px 16px !important;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(6, 17, 32, 0.98),
+            rgba(2, 7, 17, 0.99)
+        );
+
+    border-right:
+        1px solid
+        rgba(0, 214, 255, 0.14);
+
+    box-shadow:
+        12px 0 45px
+        rgba(0, 0, 0, 0.40);
+
+    z-index: 1000;
+
+    overflow-y: auto;
+
+    animation:
+        sidebarEnter 0.7s ease;
+}
+
+
+/* =========================================================
+   SIDEBAR LOGO
+   ========================================================= */
+
+.sidebar h2 {
+    text-align: center;
+
+    margin-bottom: 35px;
+
+    color: #f4fbff;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 0 18px
+        rgba(0, 214, 255, 0.30);
+}
+
+
+.sidebar h2::after {
+    content: "";
+
+    display: block;
+
+    width: 75px;
+    height: 2px;
+
+    margin: 13px auto 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #00d9ff,
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(0, 217, 255, 0.8);
+}
+
+
+/* =========================================================
+   SIDEBAR LINKS
+   ========================================================= */
+
+.sidebar a {
+    position: relative;
+
+    display: block;
+
+    padding: 13px 16px;
+
+    margin-bottom: 7px;
+
+    border-radius: 10px;
+
+    color: #8da6bd;
+
+    text-decoration: none;
+
+    border:
+        1px solid
+        transparent;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    overflow: hidden;
+}
+
+
+.sidebar a::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background: #00d9ff;
+
+    transform: scaleY(0);
+
+    transition:
+        transform 0.25s ease;
+
+    box-shadow:
+        0 0 14px
+        #00d9ff;
+}
+
+
+.sidebar a:hover {
+    color: #ffffff;
+
+    transform:
+        translateX(5px);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 217, 255, 0.10),
+            rgba(48, 70, 180, 0.06)
+        );
+
+    border-color:
+        rgba(0, 217, 255, 0.20);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.25);
+}
+
+
+.sidebar a:hover::before {
+    transform: scaleY(1);
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.sidebar .logout {
+    margin-top: 28px !important;
+
+    text-align: center;
+
+    color: #ff9baa !important;
+
+    background:
+        rgba(255, 65, 90, 0.035);
+
+    border:
+        1px solid
+        rgba(255, 65, 90, 0.15) !important;
+}
+
+
+.sidebar .logout:hover {
+    color: #ffffff !important;
+
+    background:
+        rgba(255, 65, 90, 0.12);
+
+    border-color:
+        rgba(255, 65, 90, 0.35) !important;
+
+    box-shadow:
+        0 8px 25px
+        rgba(255, 65, 90, 0.08);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.main {
+    margin-left: 245px !important;
+
+    width:
+        calc(100% - 245px);
+
+    min-height: 100vh;
+
+    padding: 30px !important;
+
+    overflow-x: auto;
+
+    animation:
+        cardEnter 0.7s ease;
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.topbar {
+    position: relative;
+
+    padding: 28px 30px;
+
+    margin-bottom: 24px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(12, 30, 51, 0.94),
+            rgba(5, 13, 27, 0.96)
+        );
+
+    border:
+        1px solid
+        rgba(0, 214, 255, 0.14);
+
+    box-shadow:
+        0 18px 45px
+        rgba(0, 0, 0, 0.30);
+
+    overflow: hidden;
+}
+
+
+.topbar::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 180px;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #00d9ff,
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px
+        rgba(0, 217, 255, 0.8);
+
+    animation:
+        neonLine 5s linear infinite;
+}
+
+
+.topbar h1 {
+    position: relative;
+
+    margin-bottom: 8px;
+
+    color: #ffffff;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+}
+
+
+.topbar p {
+    position: relative;
+
+    color: #7894ad;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+   ========================================================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+
+    margin-bottom: 24px;
+}
+
+
+.card {
+    position: relative;
+
+    min-height: 150px;
+
+    padding: 25px;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12, 37, 62, 0.92),
+            rgba(5, 17, 31, 0.96)
+        );
+
+    border:
+        1px solid
+        rgba(0, 214, 255, 0.13);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0, 0, 0, 0.28);
+
+    overflow: hidden;
+
+    animation:
+        cardEnter 0.7s ease both;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.card:nth-child(1) {
+    animation-delay: 0.08s;
+}
+
+
+.card:nth-child(2) {
+    animation-delay: 0.16s;
+}
+
+
+.card:nth-child(3) {
+    animation-delay: 0.24s;
+}
+
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 170px;
+    height: 170px;
+
+    right: -90px;
+    bottom: -90px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 214, 255, 0.13),
+            transparent 70%
+        );
+
+    transition:
+        transform 0.4s ease;
+}
+
+
+.card:hover {
+    transform:
+        translateY(-6px);
+
+    border-color:
+        rgba(0, 217, 255, 0.30);
+
+    box-shadow:
+        0 20px 45px
+        rgba(0, 0, 0, 0.35),
+
+        0 0 22px
+        rgba(0, 214, 255, 0.07);
+}
+
+
+.card:hover::before {
+    transform:
+        scale(1.5);
+}
+
+
+.card h3 {
+    position: relative;
+
+    margin-bottom: 14px;
+
+    color: #718da7;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.2px;
+}
+
+
+/* =========================================================
+   BALANCE
+   ========================================================= */
+
+.balance {
+    position: relative;
+
+    color: #55e6ff;
+
+    font-size: 31px;
+    font-weight: 700;
+
+    text-shadow:
+        0 0 18px
+        rgba(0, 217, 255, 0.28);
+}
+
+
+/* =========================================================
+   ACCOUNT NUMBER
+   ========================================================= */
+
+#accountNumber {
+    position: relative;
+
+    color: #edf8ff;
+
+    font-size: 22px;
+    font-weight: 600;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   ACCOUNT STATUS
+   ========================================================= */
+
+#accountStatus {
+    position: relative;
+
+    color: #4ade80;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    text-shadow:
+        0 0 14px
+        rgba(74, 222, 128, 0.25);
+}
+
+
+#accountStatus::before {
+    content: "●";
+
+    display: inline-block;
+
+    margin-right: 8px;
+
+    font-size: 12px;
+
+    animation:
+        statusPulse 2s infinite;
+}
+
+
+/* =========================================================
+   ACCOUNT INFORMATION
+   ========================================================= */
+
+.account-info {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 20px;
+
+    margin-bottom: 24px;
+}
+
+
+.info-box {
+    position: relative;
+
+    min-height: 120px;
+
+    padding: 23px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(8, 27, 47, 0.88);
+
+    border:
+        1px solid
+        rgba(100, 170, 210, 0.10);
+
+    box-shadow:
+        0 12px 32px
+        rgba(0, 0, 0, 0.24);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.info-box:hover {
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(0, 214, 255, 0.25);
+
+    box-shadow:
+        0 18px 40px
+        rgba(0, 0, 0, 0.30);
+}
+
+
+.info-box h4 {
+    margin-bottom: 11px;
+
+    color: #6f8ca5;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+
+.info-box p {
+    color: #edf8ff;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   TRANSACTIONS / CONTENT PANELS
+   ========================================================= */
+
+.transactions {
+    position: relative;
+
+    padding: 26px;
+
+    margin-bottom: 24px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(10, 32, 54, 0.95),
+            rgba(4, 15, 28, 0.96)
+        );
+
+    border:
+        1px solid
+        rgba(0, 214, 255, 0.12);
+
+    box-shadow:
+        0 18px 45px
+        rgba(0, 0, 0, 0.30);
+
+    animation:
+        cardEnter 0.8s ease;
+}
+
+
+.transactions h2 {
+    margin-bottom: 20px;
+
+    color: #f1faff;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    letter-spacing: 0.2px;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.transactions table {
+    width: 100%;
+
+    border-collapse: separate;
+
+    border-spacing: 0 6px;
+}
+
+
+.transactions th {
+    padding: 13px 14px;
+
+    color: #6e8ba4;
+
+    text-align: left;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.1px;
+
+    white-space: nowrap;
+}
+
+
+.transactions td {
+    padding: 14px;
+
+    color: #b9cddd;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border-top:
+        1px solid
+        rgba(100, 170, 220, 0.045);
+
+    border-bottom:
+        1px solid
+        rgba(100, 170, 220, 0.045);
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.transactions td:first-child {
+    border-left:
+        1px solid
+        rgba(100, 170, 220, 0.045);
+
+    border-radius:
+        9px 0 0 9px;
+}
+
+
+.transactions td:last-child {
+    border-right:
+        1px solid
+        rgba(100, 170, 220, 0.045);
+
+    border-radius:
+        0 9px 9px 0;
+}
+
+
+.transactions tbody tr {
+    transition:
+        transform 0.2s ease;
+}
+
+
+.transactions tbody tr:hover {
+    transform:
+        translateX(3px);
+}
+
+
+.transactions tbody tr:hover td {
+    color: #f0faff;
+
+    background:
+        rgba(0, 214, 255, 0.055);
+}
+
+
+/* =========================================================
+   CREDIT
+   ========================================================= */
+
+.credit {
+    color: #4ade80 !important;
+
+    font-weight: 700;
+
+    text-shadow:
+        0 0 10px
+        rgba(74, 222, 128, 0.20);
+}
+
+
+/* =========================================================
+   DEBIT
+   ========================================================= */
+
+.debit {
+    color: #fb7185 !important;
+
+    font-weight: 700;
+
+    text-shadow:
+        0 0 10px
+        rgba(251, 113, 133, 0.20);
+}
+
+
+/* =========================================================
+   NO DATA
+   ========================================================= */
+
+.no-data {
+    padding: 18px 0;
+
+    color: #718aa2;
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+
+input,
+select,
+textarea {
+    font-family: inherit;
+
+    color: #eaf7ff;
+
+    background:
+        rgba(5, 18, 32, 0.92);
+
+    border:
+        1px solid
+        rgba(110, 170, 210, 0.18);
+
+    border-radius: 9px;
+
+    outline: none;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color:
+        rgba(0, 217, 255, 0.55);
+
+    background:
+        rgba(5, 22, 39, 0.98);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(0, 217, 255, 0.07),
+
+        0 0 18px
+        rgba(0, 217, 255, 0.08);
+}
+
+
+input::placeholder,
+textarea::placeholder {
+    color: #60788f;
+}
+
+
+select option {
+    color: #eaf7ff;
+
+    background:
+        #071525;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+    font-family: inherit;
+
+    border: none;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+button:hover {
+    transform:
+        translateY(-2px);
+}
+
+
+button:active {
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   GENERIC PRIMARY BUTTON
+   ========================================================= */
+
+.btn-primary,
+button[type="submit"] {
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #008fd4,
+            #0066ff
+        );
+
+    box-shadow:
+        0 8px 22px
+        rgba(0, 119, 255, 0.20);
+}
+
+
+.btn-primary:hover,
+button[type="submit"]:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #00a9ef,
+            #3478ff
+        );
+
+    box-shadow:
+        0 10px 28px
+        rgba(0, 140, 255, 0.30);
+}
+
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.status,
+.badge {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+    color: #8eb5d1;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+a:hover {
+    color: #35dcff;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+
+::-webkit-scrollbar-track {
+    background:
+        #020611;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background:
+        linear-gradient(
+            180deg,
+            #075d7d,
+            #007da5
+        );
+
+    border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background:
+        #00cfff;
+}
+
+
+/* =========================================================
+   SIDEBAR SCROLLBAR
+   ========================================================= */
+
+.sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+
+.sidebar::-webkit-scrollbar-track {
+    background:
+        transparent;
+}
+
+
+.sidebar::-webkit-scrollbar-thumb {
+    background:
+        rgba(0, 217, 255, 0.20);
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   MAIN TABLE SAFETY
+   ========================================================= */
+
+.main table {
+    max-width: 100%;
+}
+
+
+.main > * {
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+    .cards,
+    .account-info {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        position: relative !important;
+
+        width: 100% !important;
+
+        height: auto;
+
+        min-height: auto;
+
+        padding: 18px !important;
+
+        border-right: none;
+
+        border-bottom:
+            1px solid
+            rgba(0, 214, 255, 0.14);
+    }
+
+
+    .sidebar h2 {
+        margin-bottom: 18px;
+    }
+
+
+    .sidebar a {
+        display: inline-block;
+
+        margin-right: 4px;
+
+        padding: 10px 12px;
+    }
+
+
+    .main {
+        margin-left: 0 !important;
+
+        width: 100%;
+
+        padding: 20px !important;
+    }
+
+
+    .cards,
+    .account-info {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .topbar {
+        padding: 23px;
+    }
+
+
+    .topbar h1 {
+        font-size: 25px;
+    }
+
+
+    .balance {
+        font-size: 28px;
+    }
+
+
+    .transactions {
+        overflow-x: auto;
+    }
+
+
+    .transactions table {
+        min-width: 650px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 550px) {
+
+    .main {
+        padding: 14px !important;
+    }
+
+
+    .topbar {
+        padding: 20px;
+    }
+
+
+    .topbar h1 {
+        font-size: 22px;
+    }
+
+
+    .transactions {
+        padding: 18px;
+    }
+
+
+    .card {
+        padding: 20px;
+    }
+
+
+    .info-box {
+        padding: 20px;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+}
+
+
+/* =========================================================
+   IBI BANK — ADMIN SIDEBAR REDESIGN
+   Add this at the VERY BOTTOM of style.css
+   ========================================================= */
+
+/* Sidebar frame */
+.sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+
+    width: 272px !important;
+    height: 100vh !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+
+    padding: 22px 14px 18px !important;
+
+    background:
+        linear-gradient(
+            180deg,
+            #031b3c 0%,
+            #031432 55%,
+            #020d22 100%
+        ) !important;
+
+    border-right: 2px solid #00d9ff !important;
+
+    box-shadow: 8px 0 28px rgba(0, 10, 30, 0.35) !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+
+    z-index: 9999 !important;
+}
+
+/* Logo / branding section */
+.sidebar .sidebar-brand {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    flex-shrink: 0 !important;
+
+    min-height: 82px !important;
+
+    margin: 0 5px 22px !important;
+    padding: 0 0 20px !important;
+
+    border-bottom: 1px solid rgba(0, 217, 255, 0.45) !important;
+}
+
+/* Logo image */
+.sidebar .sidebar-logo {
+    display: block !important;
+
+    width: 100px !important;
+    height: 65px !important;
+
+    max-width: 100% !important;
+
+    object-fit: contain !important;
+
+    filter: none !important;
+    box-shadow: none !important;
+
+    transition: none !important;
+}
+
+/* Stop the logo glowing on hover */
+.sidebar .sidebar-logo:hover {
+    filter: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* Menu links — supports both old and new HTML */
+.sidebar > a {
+    position: relative !important;
+
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+
+    flex: 0 0 auto !important;
+
+    width: 100% !important;
+    min-height: 52px !important;
+
+    margin: 0 0 7px !important;
+    padding: 12px 15px !important;
+
+    border: 1px solid transparent !important;
+    border-radius: 15px !important;
+
+    color: #a8c8ee !important;
+    background: transparent !important;
+
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    line-height: 1.35 !important;
+
+    text-align: left !important;
+    text-decoration: none !important;
+
+    transform: none !important;
+    box-shadow: none !important;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease !important;
+}
+
+/* Keep icon and label aligned */
+.sidebar > a > span {
+    display: inline-block !important;
+    flex: 1 1 auto !important;
+}
+
+/* Cyan selection marker */
+.sidebar > a::before {
+    content: "" !important;
+
+    position: absolute !important;
+    top: 9px !important;
+    bottom: 9px !important;
+    left: -1px !important;
+
+    width: 5px !important;
+    height: auto !important;
+
+    border-radius: 8px !important;
+
+    background: #00eaff !important;
+    box-shadow: 0 0 12px rgba(0, 234, 255, 0.85) !important;
+
+    opacity: 0 !important;
+    transform: scaleY(0.45) !important;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease !important;
+}
+
+/* Active page */
+.sidebar > a.active,
+.sidebar > a[aria-current="page"] {
+    color: #ffffff !important;
+
+    background:
+        linear-gradient(
+            100deg,
+            #087ac4 0%,
+            #0752a7 100%
+        ) !important;
+
+    border-color: rgba(0, 207, 255, 0.55) !important;
+
+    box-shadow:
+        inset 0 0 12px rgba(0, 213, 255, 0.12),
+        0 5px 18px rgba(0, 87, 190, 0.22) !important;
+}
+
+.sidebar > a.active::before,
+.sidebar > a[aria-current="page"]::before {
+    opacity: 1 !important;
+    transform: scaleY(1) !important;
+}
+
+/* Hover effect */
+.sidebar > a:hover {
+    color: #ffffff !important;
+
+    background: rgba(0, 154, 255, 0.12) !important;
+
+    border-color: rgba(0, 217, 255, 0.24) !important;
+
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.sidebar > a:hover::before {
+    opacity: 1 !important;
+    transform: scaleY(1) !important;
+}
+
+/* Logout stays at the bottom */
+.sidebar > a.logout {
+    margin-top: auto !important;
+    padding-top: 13px !important;
+    margin-bottom: 0 !important;
+
+    color: #ff738b !important;
+
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+.sidebar > a.logout:hover {
+    color: #ffffff !important;
+    background: rgba(255, 65, 90, 0.12) !important;
+    border-color: rgba(255, 65, 90, 0.25) !important;
+}
+
+/* Keep dashboard content aligned with sidebar */
+.main {
+    margin-left: 272px !important;
+    width: calc(100% - 272px) !important;
+}
+
+/* Mobile layout */
+@media (max-width: 900px) {
+    .sidebar {
+        position: relative !important;
+        inset: auto !important;
+
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+
+        padding: 16px !important;
+
+        border-right: none !important;
+        border-bottom: 2px solid #00d9ff !important;
+
+        overflow: visible !important;
+    }
+
+    .sidebar .sidebar-brand {
+        justify-content: flex-start !important;
+        min-height: 65px !important;
+        margin-bottom: 14px !important;
+    }
+
+    .sidebar .sidebar-logo {
+        width: 90px !important;
+        height: 55px !important;
+    }
+
+    .sidebar > a {
+        display: inline-flex !important;
+        width: auto !important;
+        min-height: 44px !important;
+        margin: 3px !important;
+        padding: 10px 12px !important;
+    }
+
+    .sidebar > a.logout {
+        margin-top: 3px !important;
+    }
+
+    .main {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+}

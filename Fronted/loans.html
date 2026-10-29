@@ -1,0 +1,1071 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#020b2b">
+<title>IBI Bank — Apply for a Loan</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root {
+    --bg: #020a23;
+    --panel: rgba(3, 20, 59, .94);
+    --panel2: rgba(3, 27, 76, .88);
+    --blue: #087bff;
+    --cyan: #00dfff;
+    --text: #f2f7ff;
+    --muted: #a8c8f2;
+    --green: #00e6b2;
+    --pink: #ff1764;
+    --border: rgba(0, 157, 255, .85);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(0, 58, 180, .23), transparent 48%),
+        radial-gradient(ellipse at 0% 60%, rgba(0, 104, 255, .09), transparent 38%),
+        #02091f;
+    color: var(--text);
+    font-family: Inter, Arial, sans-serif;
+    font-size: 13px;
+}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+.page-shell { max-width: 1660px; width: calc(100% - 48px); margin: 0 auto; }
+
+/* TOP BAR */
+.topbar {
+    min-height: 75px;
+    display: grid;
+    grid-template-columns: 310px minmax(200px, 1fr) auto;
+    align-items: center;
+    gap: 24px;
+    padding: 8px 3%;
+    background: rgba(2, 12, 39, .97);
+    border-bottom: 1px solid #075bcb;
+    box-shadow: 0 5px 22px rgba(0, 73, 255, .12);
+}
+.brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.brand img { width: 78px; height: 58px; object-fit: contain; display: block; }
+.brand-copy strong { display: block; font-size: 23px; letter-spacing: -.7px; }
+.brand-copy span { display: block; font-size: 10px; color: #c6dcff; margin-top: 2px; }
+.searchbox {
+    display: flex; align-items: center; gap: 12px;
+    max-width: 700px; width: 100%; margin: auto;
+    padding: 0 17px; height: 47px;
+    border: 1px solid #087dff; border-radius: 30px;
+    background: linear-gradient(100deg, #06358b, #0345b8);
+    box-shadow: 0 0 13px rgba(0, 113, 255, .23), inset 0 0 12px rgba(0, 121, 255, .12);
+}
+.searchbox i { font-size: 19px; }
+.searchbox input { border: 0; outline: 0; color: white; background: transparent; width: 100%; }
+.searchbox input::placeholder { color: #e2edff; }
+.user-controls { display: flex; align-items: center; gap: 13px; }
+.avatar {
+    display: grid; place-items: center; flex-shrink: 0;
+    width: 48px; height: 48px; border-radius: 50%;
+    font-size: 24px; color: white;
+    background: linear-gradient(145deg, #00e5ff, #0065ff);
+    border: 2px solid #00dfff;
+    box-shadow: 0 0 15px #007dff;
+}
+.welcome { line-height: 1.55; white-space: nowrap; }
+.welcome span { display: block; font-size: 10px; color: #d5e6ff; }
+.welcome strong { font-size: 12px; }
+.logout {
+    border: 1px solid #ff477b; border-radius: 11px; color: white;
+    padding: 13px 16px; font-weight: 700;
+    background: linear-gradient(120deg, #ff416d, #ef0048);
+    box-shadow: 0 0 14px rgba(255, 0, 83, .25);
+}
+.logout:hover, .back-btn:hover { filter: brightness(1.15); }
+
+/* HERO */
+.hero {
+    position: relative; overflow: hidden;
+    margin: 14px 0;
+    min-height: 180px;
+    padding: 23px 32px;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background:
+        radial-gradient(ellipse at 78% 110%, rgba(143, 0, 255, .65), transparent 31%),
+        radial-gradient(ellipse at 66% 0%, rgba(0, 48, 255, .75), transparent 46%),
+        linear-gradient(110deg, #031638, #031f68 65%, #09075a);
+    box-shadow: 0 0 18px rgba(0, 104, 255, .16), inset 0 0 30px rgba(0, 94, 255, .12);
+}
+.hero::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+        repeating-linear-gradient(155deg, transparent 0 44px, rgba(0, 195, 255, .035) 45px 46px),
+        linear-gradient(140deg, transparent 55%, rgba(0, 110, 255, .24), transparent 78%);
+}
+.hero-content { position: relative; z-index: 1; max-width: 900px; }
+.eyebrow { color: var(--cyan); font-size: 12px; font-weight: 800; letter-spacing: 1.7px; margin-bottom: 7px; }
+.hero h1 { font-size: clamp(23px, 2.2vw, 34px); line-height: 1.2; margin-bottom: 6px; }
+.hero h1 i { color: white; margin-left: 8px; text-shadow: 0 0 12px #008cff; }
+.hero p { color: #bde9ff; line-height: 1.6; max-width: 620px; }
+.hero-bottom { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+.back-btn, .hero-chip {
+    min-height: 37px; display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    padding: 0 16px; border-radius: 25px; font-size: 11px; font-weight: 700;
+}
+.back-btn { color: white; background: linear-gradient(100deg, #ff477b, #f00052); border: 1px solid #ff6a9a; box-shadow: 0 0 13px rgba(255, 0, 83, .38); }
+.hero-chip { color: #e5f5ff; background: rgba(0, 67, 159, .62); border: 1px solid #087bff; }
+.hero-chip i { color: #d8f8ff; font-size: 16px; }
+
+/* PANELS AND LAYOUT */
+.panel {
+    min-width: 0; border: 1px solid var(--border); border-radius: 12px;
+    background: linear-gradient(145deg, rgba(3, 22, 62, .98), rgba(2, 14, 43, .97));
+    box-shadow: 0 0 15px rgba(0, 112, 255, .12), inset 0 0 20px rgba(0, 89, 255, .04);
+}
+.main-grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr); gap: 14px; }
+.apply-panel { padding: 16px; }
+.section-heading { display: flex; align-items: center; gap: 13px; margin-bottom: 15px; }
+.heading-icon {
+    width: 47px; height: 47px; flex-shrink: 0; display: grid; place-items: center;
+    border-radius: 50%; color: white; font-size: 21px;
+    background: linear-gradient(140deg, #00e8ff, #0060ff 75%);
+    border: 1px solid #00cfff; box-shadow: 0 0 15px rgba(0, 146, 255, .65);
+}
+.section-heading h2 { font-size: 17px; margin-bottom: 4px; }
+.section-heading p { color: #b6d5ff; font-size: 11px; line-height: 1.5; }
+.heading-tag { margin-left: auto; border: 1px solid #067bff; color: #c8eaff; padding: 9px 12px; border-radius: 10px; font-size: 10px; white-space: nowrap; }
+.form-box { border: 1px solid #087bff; border-radius: 11px; padding: 13px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px 18px; }
+.field label { display: block; font-weight: 700; font-size: 11px; margin-bottom: 7px; color: #e8f4ff; }
+.required { color: #ff5c88; }
+.input-wrap {
+    display: flex; align-items: center; min-width: 0; height: 39px;
+    border: 1px solid #0876ff; border-radius: 9px; overflow: hidden;
+    background: rgba(0, 12, 43, .88);
+}
+.input-icon {
+    height: 100%; min-width: 39px; display: grid; place-items: center;
+    background: linear-gradient(140deg, #0759d7, #032e86); color: white; font-size: 15px;
+}
+.input-wrap input, .input-wrap select {
+    width: 100%; min-width: 0; height: 100%; padding: 0 10px;
+    border: 0; outline: 0; background: transparent; color: white;
+}
+.input-wrap select { cursor: pointer; }
+.input-wrap option { color: white; background: #03163c; }
+.input-wrap input::placeholder { color: #a5c2e8; }
+.input-wrap:focus-within { box-shadow: 0 0 0 2px rgba(0, 170, 255, .16); border-color: #00dfff; }
+.apply-btn {
+    display: flex; justify-content: center; align-items: center; gap: 10px;
+    width: 100%; min-height: 41px; margin-top: 14px; border: 1px solid #08bfff;
+    border-radius: 8px; color: white; font-weight: 800; font-size: 14px;
+    background: linear-gradient(100deg, #06b9ed, #0878ff 55%, #0348ff);
+    box-shadow: 0 0 13px rgba(0, 117, 255, .32);
+}
+.apply-btn:disabled { opacity: .65; cursor: wait; }
+.message { display: none; margin-top: 12px; padding: 11px 13px; border-radius: 8px; line-height: 1.5; overflow-wrap: anywhere; }
+.message.success { display: block; color: #a6ffdc; border: 1px solid #00dba7; background: rgba(0, 185, 130, .1); }
+.message.error { display: block; color: #ffd0de; border: 1px solid #ff477b; background: rgba(255, 30, 90, .1); }
+
+/* EMI */
+.emi-box { margin-top: 9px; padding: 12px; border: 1px solid #087bff; border-radius: 11px; }
+.emi-label { color: var(--cyan); font-weight: 800; font-size: 10px; letter-spacing: .5px; margin-bottom: 10px; }
+.emi-content { display: grid; grid-template-columns: 1.2fr 1fr; gap: 15px; align-items: stretch; }
+.emi-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.emi-stat { padding: 8px 10px; border-bottom: 1px solid rgba(0, 143, 255, .5); }
+.emi-stat span { display: block; color: #b6d8ff; font-size: 10px; margin-bottom: 4px; }
+.emi-stat strong { color: var(--cyan); font-size: 19px; }
+.emi-stat .small-value { font-size: 14px; }
+.emi-note { align-self: center; border: 1px solid #087bff; border-radius: 9px; padding: 12px; color: #b6d8ff; font-size: 10px; line-height: 1.65; background: rgba(0, 56, 145, .25); }
+.emi-note i { color: #16cfff; font-size: 17px; margin-right: 7px; }
+
+/* INFORMATION */
+.info-panel { padding: 16px; }
+.info-list { list-style: none; }
+.info-list li { display: grid; grid-template-columns: 32px 1fr; gap: 12px; padding: 10px 2px; border-bottom: 1px solid rgba(0, 121, 255, .45); }
+.check-icon { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(145deg, #00f3b5, #00a98f); color: white; box-shadow: 0 0 10px rgba(0, 242, 182, .4); }
+.info-list strong { display: block; font-size: 11px; margin-bottom: 4px; }
+.info-list p { font-size: 10px; color: #b8d7ff; line-height: 1.55; }
+.info-note { display: flex; gap: 12px; margin-top: 13px; padding: 13px; border: 1px solid #087bff; border-radius: 9px; background: rgba(0, 57, 157, .22); color: #c3ddff; line-height: 1.6; font-size: 10px; }
+.info-note i { font-size: 20px; color: #19baff; }
+
+/* RECORDS */
+.records-panel { margin-top: 14px; padding: 14px; }
+.records-top { display: flex; align-items: center; gap: 12px; margin-bottom: 13px; }
+.records-title { flex: 1; min-width: 160px; }
+.records-title h2 { font-size: 15px; margin-bottom: 4px; }
+.records-title p { font-size: 10px; color: #b4d2fa; }
+.record-count { white-space: nowrap; color: var(--cyan); font-size: 10px; border: 1px solid #075dca; border-radius: 20px; padding: 7px 11px; background: rgba(0, 75, 180, .22); }
+.record-search { display: flex; align-items: center; gap: 9px; height: 36px; padding: 0 11px; width: 220px; border: 1px solid #087bff; border-radius: 8px; }
+.record-search input { width: 100%; min-width: 0; border: 0; outline: 0; color: white; background: transparent; font-size: 10px; }
+.record-search input::placeholder { color: #a9c8f0; }
+.refresh-btn { height: 36px; padding: 0 13px; border-radius: 9px; border: 1px solid #087bff; background: rgba(0, 68, 170, .4); color: #e8f7ff; font-size: 11px; }
+.table-wrap { overflow-x: auto; border: 1px solid #075ec8; border-radius: 9px; }
+table { width: 100%; border-collapse: collapse; min-width: 760px; font-size: 10px; }
+thead { background: linear-gradient(90deg, #073e9a, #06317c); }
+th { text-align: left; white-space: nowrap; padding: 11px 12px; font-size: 9px; color: #e7f5ff; }
+td { padding: 10px 12px; border-top: 1px solid rgba(0, 92, 205, .3); color: #e3efff; white-space: nowrap; }
+tbody tr:hover { background: rgba(0, 100, 255, .09); }
+.amount-cell { color: var(--green); font-weight: 800; }
+.rate-cell { color: #ffbd19; font-weight: 700; }
+.loan-id { color: var(--cyan); font-weight: 800; }
+.status { display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px; border-radius: 18px; font-weight: 700; }
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.status-approved { color: #00edba; background: rgba(0, 200, 150, .18); }
+.status-pending { color: #ffcb50; background: rgba(255, 190, 0, .13); }
+.status-rejected { color: #ff809d; background: rgba(255, 40, 92, .18); }
+.view-btn { border: 1px solid #087bff; color: white; background: linear-gradient(120deg, #087fff, #0548dd); border-radius: 6px; padding: 6px 10px; }
+.empty-cell { text-align: center; color: #b9d7ff; padding: 25px; white-space: normal; }
+footer { text-align: center; padding: 12px 10px 16px; color: #178bff; font-size: 10px; }
+
+/* MODAL */
+.modal { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 18px; background: rgba(0, 4, 19, .82); }
+.modal.show { display: flex; }
+.modal-card { width: min(480px, 100%); padding: 22px; border: 1px solid #078bff; border-radius: 14px; background: #031638; box-shadow: 0 0 30px rgba(0, 114, 255, .3); }
+.modal-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 17px; }
+.modal-head h3 { font-size: 18px; }
+.modal-close { border: 0; background: transparent; color: white; font-size: 22px; }
+.detail-row { display: flex; justify-content: space-between; gap: 18px; padding: 11px 0; border-bottom: 1px solid rgba(0, 114, 255, .28); }
+.detail-row span { color: #a9c8ee; }
+.detail-row strong { text-align: right; overflow-wrap: anywhere; }
+.modal-ok { margin-top: 17px; width: 100%; border: 1px solid #078bff; background: #075bdf; color: white; border-radius: 8px; padding: 11px; }
+
+/* RESPONSIVE */
+@media (min-width: 1500px) {
+    .hero { min-height: 178px; }
+}
+@media (max-width: 1000px) {
+    .topbar { grid-template-columns: 230px 1fr; }
+    .searchbox { grid-column: 1 / -1; grid-row: 2; max-width: none; }
+    .user-controls { justify-self: end; }
+    .main-grid { grid-template-columns: 1fr; }
+    .info-panel { min-width: 0; }
+}
+@media (max-width: 650px) {
+    .page-shell { width: calc(100% - 20px); }
+    .topbar { padding: 10px; grid-template-columns: 1fr; gap: 10px; }
+    .brand { justify-content: center; }
+    .brand img { width: 66px; height: 48px; }
+    .brand-copy strong { font-size: 20px; }
+    .user-controls { justify-self: center; flex-wrap: wrap; }
+    .hero { padding: 20px 16px; }
+    .hero h1 { font-size: 24px; }
+    .hero-bottom { gap: 7px; }
+    .hero-chip, .back-btn { padding: 0 10px; font-size: 10px; }
+    .apply-panel, .info-panel, .records-panel { padding: 11px; }
+    .heading-tag { display: none; }
+    .form-grid { grid-template-columns: 1fr; gap: 12px; }
+    .emi-content { grid-template-columns: 1fr; }
+    .records-top { flex-wrap: wrap; }
+    .records-title { flex-basis: 70%; }
+    .record-search { order: 4; width: 100%; }
+    .record-count { margin-left: auto; }
+}
+@media print {
+    body { background: white; color: black; }
+    .topbar, .hero, .apply-panel, .info-panel, footer, .records-top, .view-btn { display: none !important; }
+    .page-shell, .records-panel, .panel { width: 100%; margin: 0; padding: 0; border: 0; background: white; box-shadow: none; }
+    table { min-width: 0; font-size: 9px; }
+    th, td { color: black; border: 1px solid #ccc; }
+}
+</style>
+</head>
+
+<body>
+<header class="topbar">
+    <a class="brand" href="#" id="brandHome" aria-label="IBI Bank home">
+        <img src="images/ibi-logo.png" alt="IBI Bank Logo"
+             onerror="this.onerror=null;this.src='../images/ibi-logo.png';">
+        <div class="brand-copy">
+            <strong>IBI Bank</strong>
+            <span>International Bank of India</span>
+        </div>
+    </a>
+
+    <label class="searchbox">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="globalSearch" type="search" placeholder="Search your loan records..." aria-label="Search loan records">
+    </label>
+
+    <div class="user-controls">
+        <div class="avatar"><i class="fa-regular fa-user"></i></div>
+        <div class="welcome">
+            <span>Welcome back,</span>
+            <strong id="customerName">Customer</strong>
+        </div>
+        <button class="logout" id="logoutBtn" type="button">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+    </div>
+</header>
+
+<main class="page-shell">
+    <section class="hero">
+        <div class="hero-content">
+            <div class="eyebrow">CUSTOMER PORTAL&nbsp; / &nbsp;LOANS</div>
+            <h1>Achieve More With <span style="color:#00dfff">IBI Loans</span>
+                <i class="fa-solid fa-building-columns"></i>
+            </h1>
+            <p>Explore loan options, calculate your estimated monthly EMI, and submit your application securely. Track your application status directly from your customer account.</p>
+            <div class="hero-bottom">
+                <button class="back-btn" type="button" id="backBtn">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Previous Page
+                </button>
+                <span class="hero-chip"><i class="fa-solid fa-shield-halved"></i> Secure Application</span>
+                <span class="hero-chip"><i class="fa-solid fa-bolt"></i> Flexible Tenure</span>
+                <span class="hero-chip"><i class="fa-regular fa-clock"></i> Fast Processing</span>
+                <span class="hero-chip"><i class="fa-solid fa-lock"></i> 100% Secure</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="main-grid">
+        <section class="panel apply-panel">
+            <div class="section-heading">
+                <div class="heading-icon"><i class="fa-solid fa-building-columns"></i></div>
+                <div>
+                    <h2>Apply for a Loan</h2>
+                    <p>Complete the details below to submit your application.</p>
+                </div>
+                <span class="heading-tag"><i class="fa-solid fa-shield-halved"></i>&nbsp; Secure Application</span>
+            </div>
+
+            <form id="loanForm" novalidate>
+                <div class="form-box">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="loanType">Loan Type <span class="required">*</span></label>
+                            <div class="input-wrap">
+                                <span class="input-icon"><i class="fa-solid fa-house-lock"></i></span>
+                                <select id="loanType" required>
+                                    <option value="">Loading loan types...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="interestRate">Interest Rate</label>
+                            <div class="input-wrap">
+                                <span class="input-icon"><i class="fa-solid fa-percent"></i></span>
+                                <input id="interestRate" type="text" value="Select a loan type" readonly>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="loanAmount">Loan Amount (₹) <span class="required">*</span></label>
+                            <div class="input-wrap">
+                                <span class="input-icon"><i class="fa-solid fa-indian-rupee-sign"></i></span>
+                                <input id="loanAmount" type="number" min="10000" max="10000000" step="1000"
+                                       placeholder="Enter amount" required inputmode="decimal">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="tenure">Tenure <span class="required">*</span></label>
+                            <div class="input-wrap">
+                                <span class="input-icon"><i class="fa-regular fa-calendar-days"></i></span>
+                                <select id="tenure" required>
+                                    <option value="">Select Tenure</option>
+                                    <option value="6">6 months</option>
+                                    <option value="12">12 months (1 year)</option>
+                                    <option value="18">18 months</option>
+                                    <option value="24">24 months (2 years)</option>
+                                    <option value="36">36 months (3 years)</option>
+                                    <option value="48">48 months (4 years)</option>
+                                    <option value="60">60 months (5 years)</option>
+                                    <option value="84">84 months (7 years)</option>
+                                    <option value="120">120 months (10 years)</option>
+                                    <option value="180">180 months (15 years)</option>
+                                    <option value="240">240 months (20 years)</option>
+                                    <option value="300">300 months (25 years)</option>
+                                    <option value="360">360 months (30 years)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="apply-btn" id="applyBtn" type="submit">
+                        <i class="fa-regular fa-paper-plane"></i> Submit Loan Application
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <div id="formMessage" class="message" role="status" aria-live="polite"></div>
+                </div>
+            </form>
+
+            <div class="emi-box">
+                <div class="emi-label"><i class="fa-solid fa-calculator"></i>&nbsp; YOUR ESTIMATED EMI BREAKDOWN</div>
+                <div class="emi-content">
+                    <div class="emi-stats">
+                        <div class="emi-stat">
+                            <span>Estimated monthly EMI</span>
+                            <strong id="monthlyEMI">₹0.00</strong>
+                        </div>
+                        <div class="emi-stat">
+                            <span>Annual interest</span>
+                            <strong class="small-value" id="annualRate">—</strong>
+                        </div>
+                        <div class="emi-stat">
+                            <span>Total interest</span>
+                            <strong class="small-value" id="totalInterest">₹0.00</strong>
+                        </div>
+                        <div class="emi-stat">
+                            <span>Total repayment</span>
+                            <strong class="small-value" id="totalRepayment">₹0.00</strong>
+                        </div>
+                    </div>
+                    <div class="emi-note">
+                        <i class="fa-regular fa-circle-question"></i>
+                        This is an estimate using the selected annual interest rate and reducing-balance EMI formula. Actual terms are subject to bank approval.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <aside class="panel info-panel">
+            <div class="section-heading">
+                <div class="heading-icon"><i class="fa-regular fa-file-lines"></i></div>
+                <div>
+                    <h2>Loan Information</h2>
+                    <p>Important details before submitting your application.</p>
+                </div>
+                <span class="heading-tag"><i class="fa-solid fa-building-columns"></i>&nbsp; IBI Finance</span>
+            </div>
+
+            <ul class="info-list">
+                <li>
+                    <span class="check-icon"><i class="fa-solid fa-check"></i></span>
+                    <div><strong>Flexible loan options</strong><p>Choose an available loan category based on your financial needs.</p></div>
+                </li>
+                <li>
+                    <span class="check-icon"><i class="fa-solid fa-check"></i></span>
+                    <div><strong>Flexible repayment tenure</strong><p>Select a tenure from 6 to 360 months, subject to bank rules.</p></div>
+                </li>
+                <li>
+                    <span class="check-icon"><i class="fa-solid fa-check"></i></span>
+                    <div><strong>Transparent EMI estimate</strong><p>Review the estimated monthly payment and total repayment before applying.</p></div>
+                </li>
+                <li>
+                    <span class="check-icon"><i class="fa-solid fa-check"></i></span>
+                    <div><strong>Application status tracking</strong><p>Check whether your application is Pending, Approved, or Rejected.</p></div>
+                </li>
+                <li>
+                    <span class="check-icon"><i class="fa-solid fa-check"></i></span>
+                    <div><strong>Active customer account required</strong><p>Your customer account and at least one bank account must be active.</p></div>
+                </li>
+            </ul>
+
+            <div class="info-note">
+                <i class="fa-regular fa-circle-info"></i>
+                <div><strong>Note:</strong><br>Submitting an application does not guarantee approval. The bank reviews your application before making a decision.</div>
+            </div>
+        </aside>
+    </div>
+
+    <section class="panel records-panel">
+        <div class="records-top">
+            <div class="heading-icon"><i class="fa-regular fa-file-lines"></i></div>
+            <div class="records-title">
+                <h2>My Loan Applications</h2>
+                <p>Review the applications associated with your logged-in account.</p>
+            </div>
+            <span class="record-count" id="recordCount">0 Records</span>
+            <label class="record-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="recordSearch" type="search" placeholder="Filter applications..." aria-label="Filter loan applications">
+            </label>
+            <button class="refresh-btn" id="refreshBtn" type="button">
+                <i class="fa-solid fa-arrows-rotate"></i>&nbsp; Refresh
+            </button>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>LOAN ID</th>
+                        <th>LOAN TYPE</th>
+                        <th>PRINCIPAL AMOUNT (₹)</th>
+                        <th>INTEREST RATE</th>
+                        <th>TENURE</th>
+                        <th>MONTHLY EMI*</th>
+                        <th>STATUS</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody id="loanTableBody">
+                    <tr><td colspan="8" class="empty-cell"><i class="fa-solid fa-spinner fa-spin"></i>&nbsp; Loading your loan applications...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>IBI Bank · International Bank of India · Customer Loan Management</footer>
+</main>
+
+<div class="modal" id="loanModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+        <div class="modal-head">
+            <h3 id="modalTitle"><i class="fa-regular fa-file-lines"></i> Loan Application Details</h3>
+            <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+        </div>
+        <div id="modalDetails"></div>
+        <button type="button" class="modal-ok" id="modalOk">Close</button>
+    </div>
+</div>
+
+<script>
+(() => {
+    "use strict";
+
+    const API = "http://127.0.0.1:5000";
+
+    const $ = (id) => document.getElementById(id);
+
+    const elements = {
+        customerName: $("customerName"),
+        loanType: $("loanType"),
+        interestRate: $("interestRate"),
+        loanAmount: $("loanAmount"),
+        tenure: $("tenure"),
+        monthlyEMI: $("monthlyEMI"),
+        annualRate: $("annualRate"),
+        totalInterest: $("totalInterest"),
+        totalRepayment: $("totalRepayment"),
+        loanForm: $("loanForm"),
+        applyBtn: $("applyBtn"),
+        formMessage: $("formMessage"),
+        loanTableBody: $("loanTableBody"),
+        recordCount: $("recordCount"),
+        recordSearch: $("recordSearch"),
+        globalSearch: $("globalSearch"),
+        refreshBtn: $("refreshBtn"),
+        logoutBtn: $("logoutBtn"),
+        backBtn: $("backBtn"),
+        loanModal: $("loanModal"),
+        modalDetails: $("modalDetails")
+    };
+
+    let currentUser = null;
+    let allLoans = [];
+    let loanTypes = [];
+    let accountRecords = [];
+
+    function parseStoredUser(key) {
+        const raw = localStorage.getItem(key);
+        if (!raw) return null;
+
+        try {
+            const parsed = JSON.parse(raw);
+            if (parsed && typeof parsed === "object") return parsed;
+        } catch (_) {}
+
+        return { email: raw };
+    }
+
+    function getUserEmail(user) {
+        if (!user) return "";
+        return String(
+            user.email ||
+            user.customer_email ||
+            user.customerEmail ||
+            user.user_email ||
+            ""
+        ).trim();
+    }
+
+    function getUserName(user) {
+        if (!user) return "";
+        return String(
+            user.name ||
+            user.customer_name ||
+            user.customerName ||
+            user.full_name ||
+            user.username ||
+            ""
+        ).trim();
+    }
+
+    function readSession() {
+        const user = parseStoredUser("loggedInUser");
+        const admin = parseStoredUser("loggedInAdmin");
+
+        currentUser = user || admin;
+
+        if (!currentUser) {
+            showMessage("Please log in to access your loan applications.", "error");
+            elements.applyBtn.disabled = true;
+            return false;
+        }
+
+        elements.customerName.textContent = getUserName(currentUser) || "Customer";
+
+        if (!getUserEmail(currentUser)) {
+            showMessage(
+                "Your login session does not contain an email address. Please log out and sign in again.",
+                "error"
+            );
+            elements.applyBtn.disabled = true;
+            return false;
+        }
+
+        return true;
+    }
+
+    async function apiFetch(path, options = {}) {
+        const response = await fetch(API + path, {
+            ...options,
+            headers: {
+                ...(options.body ? { "Content-Type": "application/json" } : {}),
+                ...(options.headers || {})
+            }
+        });
+
+        const text = await response.text();
+        let data;
+
+        try {
+            data = text ? JSON.parse(text) : {};
+        } catch (_) {
+            data = { message: text || "Unexpected server response." };
+        }
+
+        if (!response.ok) {
+            throw new Error(data.message || data.error || `Request failed (${response.status})`);
+        }
+
+        return data;
+    }
+
+    function money(value) {
+        const number = Number(value);
+        return "₹" + (Number.isFinite(number) ? number : 0).toLocaleString("en-IN", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    }
+
+    function wholeMoney(value) {
+        const number = Number(value);
+        return "₹" + (Number.isFinite(number) ? number : 0).toLocaleString("en-IN", {
+            maximumFractionDigits: 2
+        });
+    }
+
+    function escapeHTML(value) {
+        return String(value ?? "").replace(/[&<>"']/g, character => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        })[character]);
+    }
+
+    function showMessage(message, type) {
+        elements.formMessage.textContent = message;
+        elements.formMessage.className = "message " + type;
+    }
+
+    function clearMessage() {
+        elements.formMessage.textContent = "";
+        elements.formMessage.className = "message";
+    }
+
+    function selectedLoanType() {
+        const id = String(elements.loanType.value);
+        return loanTypes.find(type =>
+            String(type.loan_type_id) === id
+        ) || null;
+    }
+
+    function calculateEMI(principal, annualRate, months) {
+        principal = Number(principal);
+        annualRate = Number(annualRate);
+        months = Number(months);
+
+        if (!(principal > 0) || !(months > 0) || !Number.isFinite(annualRate)) {
+            return { emi: 0, interest: 0, total: 0 };
+        }
+
+        const monthlyRate = annualRate / 1200;
+        let emi;
+
+        if (monthlyRate === 0) {
+            emi = principal / months;
+        } else {
+            const factor = Math.pow(1 + monthlyRate, months);
+            emi = principal * monthlyRate * factor / (factor - 1);
+        }
+
+        const total = emi * months;
+
+        return {
+            emi: Number(emi.toFixed(2)),
+            interest: Number((total - principal).toFixed(2)),
+            total: Number(total.toFixed(2))
+        };
+    }
+
+    function updateEMI() {
+        const type = selectedLoanType();
+        const principal = Number(elements.loanAmount.value);
+        const months = Number(elements.tenure.value);
+
+        if (type) {
+            const rate = Number(type.interest_rate);
+            elements.interestRate.value =
+                Number.isFinite(rate) ? rate.toFixed(2) + "%" : "Rate unavailable";
+            elements.annualRate.textContent =
+                Number.isFinite(rate) ? rate.toFixed(2) + "%" : "—";
+        } else {
+            elements.interestRate.value = "Select a loan type";
+            elements.annualRate.textContent = "—";
+        }
+
+        if (!type || !(principal > 0) || !(months > 0)) {
+            elements.monthlyEMI.textContent = "₹0.00";
+            elements.totalInterest.textContent = "₹0.00";
+            elements.totalRepayment.textContent = "₹0.00";
+            return;
+        }
+
+        const result = calculateEMI(principal, type.interest_rate, months);
+        elements.monthlyEMI.textContent = money(result.emi);
+        elements.totalInterest.textContent = money(result.interest);
+        elements.totalRepayment.textContent = money(result.total);
+    }
+
+    async function loadLoanTypes() {
+        try {
+            const data = await apiFetch("/api/loan-types");
+            loanTypes = Array.isArray(data) ? data : [];
+
+            elements.loanType.innerHTML =
+                '<option value="">Select Loan Type</option>';
+
+            loanTypes.forEach(type => {
+                const option = document.createElement("option");
+                option.value = type.loan_type_id;
+                option.textContent = type.loan_type;
+                elements.loanType.appendChild(option);
+            });
+
+            if (!loanTypes.length) {
+                elements.loanType.innerHTML =
+                    '<option value="">No loan types available</option>';
+            }
+        } catch (error) {
+            elements.loanType.innerHTML =
+                '<option value="">Unable to load loan types</option>';
+            showMessage(
+                "Could not load loan types. Please ensure the IBI Bank server and database are running, then refresh this page.",
+                "error"
+            );
+        }
+
+        updateEMI();
+    }
+
+    async function loadAccounts() {
+        try {
+            const data = await apiFetch("/api/accounts");
+            accountRecords = Array.isArray(data) ? data : [];
+        } catch (_) {
+            accountRecords = [];
+        }
+    }
+
+    function isSameEmail(first, second) {
+        return String(first || "").trim().toLowerCase() ===
+               String(second || "").trim().toLowerCase();
+    }
+
+    function loanBelongsToUser(loan, email) {
+        return isSameEmail(loan.email || loan.customer_email, email);
+    }
+
+    function getLoanEMI(loan) {
+        return calculateEMI(
+            loan.principal_amount,
+            loan.interest_rate,
+            loan.tenure_months
+        ).emi;
+    }
+
+    function statusClass(status) {
+        const normalized = String(status || "").toLowerCase();
+        if (normalized === "approved") return "status-approved";
+        if (normalized === "rejected") return "status-rejected";
+        return "status-pending";
+    }
+
+    function renderLoans() {
+        const query = String(elements.recordSearch.value || "").trim().toLowerCase();
+
+        const filtered = allLoans.filter(loan => {
+            const searchable = [
+                loan.loan_id,
+                loan.loan_type,
+                loan.principal_amount,
+                loan.interest_rate,
+                loan.tenure_months,
+                loan.status
+            ].join(" ").toLowerCase();
+
+            return searchable.includes(query);
+        });
+
+        elements.recordCount.textContent =
+            `${filtered.length} ${filtered.length === 1 ? "Record" : "Records"}`;
+
+        if (!filtered.length) {
+            elements.loanTableBody.innerHTML = `
+                <tr><td colspan="8" class="empty-cell">
+                    ${allLoans.length
+                        ? "No loan applications match your search."
+                        : "You do not have any loan applications yet."}
+                </td></tr>`;
+            return;
+        }
+
+        elements.loanTableBody.innerHTML = filtered.map(loan => `
+            <tr>
+                <td class="loan-id">#${escapeHTML(loan.loan_id)}</td>
+                <td>${escapeHTML(loan.loan_type || "—")}</td>
+                <td class="amount-cell">${wholeMoney(loan.principal_amount)}</td>
+                <td class="rate-cell">${Number(loan.interest_rate || 0).toFixed(2)}%</td>
+                <td>${escapeHTML(loan.tenure_months)} months</td>
+                <td class="amount-cell">${money(getLoanEMI(loan))}</td>
+                <td><span class="status ${statusClass(loan.status)}">${escapeHTML(loan.status || "Pending")}</span></td>
+                <td><button class="view-btn" type="button" data-view-loan="${escapeHTML(loan.loan_id)}" title="View loan details" aria-label="View loan details"><i class="fa-regular fa-eye"></i></button></td>
+            </tr>
+        `).join("");
+    }
+
+    async function loadLoans() {
+        if (!currentUser || !getUserEmail(currentUser)) {
+            elements.loanTableBody.innerHTML =
+                '<tr><td colspan="8" class="empty-cell">Please log in to view your loan applications.</td></tr>';
+            return;
+        }
+
+        elements.loanTableBody.innerHTML =
+            '<tr><td colspan="8" class="empty-cell"><i class="fa-solid fa-spinner fa-spin"></i>&nbsp; Loading your loan applications...</td></tr>';
+
+        try {
+            const email = getUserEmail(currentUser);
+            const data = await apiFetch("/api/loans");
+
+            const loans = Array.isArray(data) ? data : [];
+
+            // The existing /api/loans endpoint returns all loans.
+            // Filter the results so this customer sees only their own applications.
+            allLoans = loans.filter(loan => loanBelongsToUser(loan, email));
+
+            renderLoans();
+        } catch (error) {
+            allLoans = [];
+            elements.loanTableBody.innerHTML = `
+                <tr><td colspan="8" class="empty-cell">
+                    Could not load loan applications. Check that the server is running and try Refresh.
+                </td></tr>`;
+        }
+    }
+
+    function showLoanDetails(loanId) {
+        const loan = allLoans.find(item => String(item.loan_id) === String(loanId));
+        if (!loan) return;
+
+        const emi = getLoanEMI(loan);
+
+        const details = [
+            ["Loan ID", "#" + loan.loan_id],
+            ["Loan Type", loan.loan_type],
+            ["Principal Amount", wholeMoney(loan.principal_amount)],
+            ["Annual Interest Rate", Number(loan.interest_rate || 0).toFixed(2) + "%"],
+            ["Tenure", loan.tenure_months + " months"],
+            ["Estimated Monthly EMI", money(emi)],
+            ["Application Status", loan.status || "Pending"]
+        ];
+
+        elements.modalDetails.innerHTML = details.map(([label, value]) => `
+            <div class="detail-row">
+                <span>${escapeHTML(label)}</span>
+                <strong>${escapeHTML(value)}</strong>
+            </div>
+        `).join("");
+
+        elements.loanModal.classList.add("show");
+    }
+
+    async function submitApplication(event) {
+        event.preventDefault();
+        clearMessage();
+
+        if (!currentUser || !getUserEmail(currentUser)) {
+            showMessage("Please sign in again before applying for a loan.", "error");
+            return;
+        }
+
+        const type = selectedLoanType();
+        const amount = Number(elements.loanAmount.value);
+        const tenure = Number(elements.tenure.value);
+
+        if (!type) {
+            showMessage("Please select a loan type.", "error");
+            elements.loanType.focus();
+            return;
+        }
+
+        if (!Number.isFinite(amount) || amount < 10000 || amount > 10000000) {
+            showMessage("Loan amount must be between ₹10,000 and ₹1,00,00,000.", "error");
+            elements.loanAmount.focus();
+            return;
+        }
+
+        if (!Number.isInteger(tenure) || tenure < 6 || tenure > 360) {
+            showMessage("Please select a tenure between 6 and 360 months.", "error");
+            elements.tenure.focus();
+            return;
+        }
+
+        // Check the accounts endpoint when available. The backend also verifies
+        // that the customer and their account are active before accepting an application.
+        if (accountRecords.length) {
+            const email = getUserEmail(currentUser);
+            const matchingAccounts = accountRecords.filter(account =>
+                isSameEmail(account.email, email) &&
+                String(account.status || "").toLowerCase() === "active"
+            );
+
+            if (!matchingAccounts.length) {
+                showMessage("An active bank account is required to apply for a loan.", "error");
+                return;
+            }
+        }
+
+        elements.applyBtn.disabled = true;
+        elements.applyBtn.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Submitting Application...';
+
+        try {
+            const result = await apiFetch("/api/loans/apply", {
+                method: "POST",
+                body: JSON.stringify({
+                    customer_email: getUserEmail(currentUser),
+                    loan_type_id: Number(type.loan_type_id),
+                    principal_amount: amount,
+                    tenure_months: tenure
+                })
+            });
+
+            if (!result.success) {
+                throw new Error(result.message || "Loan application could not be submitted.");
+            }
+
+            showMessage(
+                `${result.message || "Loan application submitted successfully."} Application ID: #${result.loan_id}. Estimated EMI: ${money(result.monthly_emi)}. Status: ${result.status || "Pending"}.`,
+                "success"
+            );
+
+            elements.loanForm.reset();
+            updateEMI();
+            await loadLoans();
+        } catch (error) {
+            showMessage(
+                error.message || "Unable to submit your loan application. Please try again.",
+                "error"
+            );
+        } finally {
+            elements.applyBtn.disabled = false;
+            elements.applyBtn.innerHTML =
+                '<i class="fa-regular fa-paper-plane"></i> Submit Loan Application <i class="fa-solid fa-arrow-right"></i>';
+        }
+    }
+
+    elements.loanType.addEventListener("change", updateEMI);
+    elements.loanAmount.addEventListener("input", updateEMI);
+    elements.tenure.addEventListener("change", updateEMI);
+    elements.loanForm.addEventListener("submit", submitApplication);
+    elements.recordSearch.addEventListener("input", renderLoans);
+
+    elements.globalSearch.addEventListener("input", () => {
+        elements.recordSearch.value = elements.globalSearch.value;
+        renderLoans();
+
+        if (elements.globalSearch.value.trim()) {
+            $("loanTableBody").scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    });
+
+    elements.refreshBtn.addEventListener("click", async () => {
+        elements.refreshBtn.disabled = true;
+        try {
+            await loadLoans();
+        } finally {
+            elements.refreshBtn.disabled = false;
+        }
+    });
+
+    elements.loanTableBody.addEventListener("click", event => {
+        const button = event.target.closest("[data-view-loan]");
+        if (button) showLoanDetails(button.dataset.viewLoan);
+    });
+
+    function closeModal() {
+        elements.loanModal.classList.remove("show");
+    }
+
+    $("modalClose").addEventListener("click", closeModal);
+    $("modalOk").addEventListener("click", closeModal);
+    elements.loanModal.addEventListener("click", event => {
+        if (event.target === elements.loanModal) closeModal();
+    });
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") closeModal();
+    });
+
+    elements.logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("loggedInUser");
+        localStorage.removeItem("loggedInAdmin");
+        window.location.href = "index.html";
+    });
+
+    elements.backBtn.addEventListener("click", () => {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.location.href = "dashboard.html";
+        }
+    });
+
+    $("brandHome").addEventListener("click", event => {
+        event.preventDefault();
+        window.location.href = "dashboard.html";
+    });
+
+    async function init() {
+        if (!readSession()) {
+            elements.loanTableBody.innerHTML =
+                '<tr><td colspan="8" class="empty-cell">Please log in to view your loan applications.</td></tr>';
+            return;
+        }
+
+        await Promise.all([
+            loadLoanTypes(),
+            loadAccounts(),
+            loadLoans()
+        ]);
+    }
+
+    init();
+})();
+</script>
+</body>
+</html>

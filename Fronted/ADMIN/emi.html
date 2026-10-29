@@ -1,0 +1,1698 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#02091d">
+<title>IBI Bank — Admin EMI</title>
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+:root {
+    --bg: #02091d;
+    --cyan: #00eaff;
+    --blue: #078bff;
+    --text: #eef8ff;
+    --muted: #9bc9ee;
+    --sidebar-width: 250px;
+}
+
+* { box-sizing: border-box; }
+html { min-height: 100%; scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--text);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    background:
+        radial-gradient(ellipse at 80% 10%, rgba(0,75,255,.18), transparent 38%),
+        radial-gradient(ellipse at 65% 80%, rgba(0,224,255,.06), transparent 40%),
+        linear-gradient(135deg,#010617,#03122c 55%,#02091d);
+}
+
+/* ================= DASHBOARD SIDEBAR ================= */
+
+.sidebar, .sidebar * { box-sizing: border-box !important; }
+
+.sidebar {
+    position: fixed !important;
+    inset: 0 auto 0 0 !important;
+    z-index: 1000 !important;
+    width: var(--sidebar-width) !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    margin: 0 !important;
+    padding: 14px 13px 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 5px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    background:
+        radial-gradient(ellipse at 25% 0%,rgba(0,123,255,.19),transparent 47%),
+        linear-gradient(180deg,#03132f 0%,#02102a 55%,#01091c 100%) !important;
+    border: 0 !important;
+    border-right: 1px solid rgba(0,234,255,.75) !important;
+    border-radius: 0 !important;
+    box-shadow: 4px 0 22px rgba(0,170,255,.13) !important;
+    scrollbar-width: thin;
+    scrollbar-color: #075caa transparent;
+}
+
+.sidebar > .sidebar-brand {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 143px !important;
+    margin: -14px 0 8px !important;
+    padding: 12px 5px !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(0,211,255,.32) !important;
+    border-radius: 0 0 15px 15px !important;
+    background: linear-gradient(180deg,rgba(0,95,190,.07),transparent) !important;
+}
+
+.sidebar .sidebar-logo {
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: 108px !important;
+    max-width: 100% !important;
+    height: 75px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    object-fit: contain !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+.sidebar .sidebar-brand-name {
+    display: block !important;
+    width: 100% !important;
+    margin: 4px 0 0 !important;
+    color: #e8f8ff !important;
+    font-size: 13px !important;
+    font-weight: 850 !important;
+    letter-spacing: 1.4px !important;
+    line-height: 1.4 !important;
+    text-align: center !important;
+}
+
+.sidebar .sidebar-brand-subtitle {
+    display: block !important;
+    width: 100% !important;
+    margin: 5px 0 0 !important;
+    color: #75d5ff !important;
+    font-size: 9px !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    text-align: center !important;
+}
+
+.sidebar > a,
+.sidebar > a:link,
+.sidebar > a:visited {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: 39px minmax(0,1fr) 10px !important;
+    align-items: center !important;
+    justify-content: initial !important;
+    column-gap: 10px !important;
+    flex: 0 0 52px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 52px !important;
+    max-height: 52px !important;
+    margin: 0 !important;
+    padding: 5px 9px !important;
+    overflow: hidden !important;
+    color: #a9d9ff !important;
+    font-family: Inter,"Segoe UI",Arial,sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 650 !important;
+    line-height: 1.25 !important;
+    text-align: left !important;
+    text-decoration: none !important;
+    text-transform: none !important;
+    white-space: nowrap !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+    transition: background .2s ease,border-color .2s ease,color .2s ease !important;
+}
+
+.sidebar > a::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 10px !important;
+    bottom: 10px !important;
+    left: 0 !important;
+    width: 3px !important;
+    border: 0 !important;
+    border-radius: 0 4px 4px 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.sidebar > a:hover {
+    color: #fff !important;
+    background: rgba(0,131,255,.13) !important;
+    border-color: rgba(0,210,255,.4) !important;
+}
+
+.sidebar > a > .menu-icon {
+    position: static !important;
+    display: flex !important;
+    grid-column: 1 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    justify-self: center !important;
+    width: 39px !important;
+    min-width: 39px !important;
+    max-width: 39px !important;
+    height: 39px !important;
+    min-height: 39px !important;
+    max-height: 39px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #50dfff !important;
+    background: linear-gradient(145deg,rgba(0,128,255,.23),rgba(0,49,115,.3)) !important;
+    border: 1px solid rgba(0,171,255,.65) !important;
+    border-radius: 11px !important;
+    box-shadow: inset 0 0 9px rgba(0,161,255,.08) !important;
+    overflow: hidden !important;
+}
+
+.sidebar > a > .menu-icon > svg {
+    display: block !important;
+    width: 21px !important;
+    min-width: 21px !important;
+    max-width: 21px !important;
+    height: 21px !important;
+    min-height: 21px !important;
+    max-height: 21px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.8 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+    overflow: visible !important;
+}
+
+.sidebar > a > .menu-label {
+    display: block !important;
+    grid-column: 2 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-self: center !important;
+    color: inherit !important;
+    font-family: Inter,"Segoe UI",Arial,sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 650 !important;
+    line-height: 1.3 !important;
+    text-align: left !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}
+
+.sidebar > a > .menu-arrow {
+    display: flex !important;
+    grid-column: 3 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    justify-self: center !important;
+    width: 10px !important;
+    min-width: 10px !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #00dfff !important;
+    font-family: Arial,sans-serif !important;
+    font-size: 21px !important;
+    font-weight: 400 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.sidebar > a.active {
+    color: #fff !important;
+    font-weight: 800 !important;
+    background: linear-gradient(110deg,#04aaff,#0759ce 56%,#063778) !important;
+    border: 1px solid #00eaff !important;
+    box-shadow: 0 0 10px rgba(0,213,255,.3),inset 0 0 12px rgba(0,226,255,.12) !important;
+}
+
+.sidebar > a.active::before {
+    background: #8affff !important;
+    box-shadow: 0 0 10px #00eaff !important;
+}
+
+.sidebar > a.active > .menu-icon {
+    color: #fff !important;
+    background: rgba(0,221,255,.2) !important;
+    border-color: rgba(148,255,255,.65) !important;
+}
+
+.sidebar > a.active > .menu-label {
+    color: #fff !important;
+    font-weight: 800 !important;
+}
+
+.sidebar > a.logout {
+    margin-top: auto !important;
+    color: #ff708d !important;
+    border-top: 1px solid rgba(0,210,255,.2) !important;
+    border-radius: 0 0 10px 10px !important;
+}
+
+.sidebar > a.logout > .menu-icon {
+    color: #ff6287 !important;
+    background: rgba(255,36,91,.08) !important;
+    border-color: rgba(255,62,121,.7) !important;
+}
+
+.sidebar > a.logout > .menu-arrow { color: #ff5b82 !important; }
+
+.sidebar > a.logout:hover {
+    color: #fff !important;
+    background: rgba(255,37,89,.12) !important;
+    border-color: rgba(255,64,121,.5) !important;
+}
+
+/* ================= MAIN PAGE ================= */
+
+.emi-page {
+    width: calc(100% - var(--sidebar-width)) !important;
+    min-width: 0;
+    min-height: 100vh;
+    margin-left: var(--sidebar-width) !important;
+    padding: 20px 24px 24px !important;
+    color: var(--text);
+    overflow-x: clip;
+}
+
+.page-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 17px;
+}
+
+.breadcrumb {
+    color: #a1c3e7;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.breadcrumb span { margin: 0 8px; color: var(--cyan); }
+
+.top-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    color: #72ffca;
+    background: rgba(0,194,133,.08);
+    border: 1px solid rgba(0,255,186,.28);
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 850;
+    white-space: nowrap;
+}
+
+.top-status-dot,
+.hero-status-dot {
+    flex: 0 0 auto;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #13ffd0;
+    box-shadow: 0 0 11px rgba(19,255,208,.8);
+}
+
+/* Dashboard-style hero */
+
+.admin-hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 145px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 1px solid #008dff;
+    border-radius: 15px;
+    background:
+        radial-gradient(ellipse at 90% 110%,rgba(0,221,255,.3),transparent 34%),
+        radial-gradient(ellipse at 75% 0%,rgba(0,87,255,.3),transparent 48%),
+        linear-gradient(115deg,#03132d,#06285c 58%,#052b73);
+    box-shadow: inset 0 0 20px rgba(0,123,255,.08);
+}
+
+.admin-hero::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -235px;
+    right: 170px;
+    width: 420px;
+    height: 420px;
+    border: 2px solid rgba(0,217,255,.45);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.admin-hero::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: -60px;
+    bottom: -145px;
+    width: 340px;
+    height: 230px;
+    border: 1px solid rgba(0,225,255,.35);
+    border-radius: 50%;
+    transform: rotate(-25deg);
+    pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 1; min-width: 0; }
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 11px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(0,209,255,.65);
+    border-radius: 999px;
+    background: rgba(0,151,255,.12);
+    color: #58f2ff;
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+}
+
+.hero-content h1 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(26px,2.6vw,35px);
+    font-weight: 900;
+    letter-spacing: -.7px;
+    line-height: 1.15;
+}
+
+.hero-content p {
+    max-width: 600px;
+    margin: 9px 0 0;
+    color: #b9dcff;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.hero-status {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 155px;
+    padding: 15px 12px;
+    border: 1px solid rgba(0,190,255,.5);
+    border-radius: 13px;
+    background: rgba(1,16,43,.65);
+    text-align: center;
+    box-shadow: inset 0 0 18px rgba(0,113,255,.1);
+}
+
+.hero-status-dot {
+    width: 11px;
+    height: 11px;
+    margin: 0 auto 9px;
+}
+
+.hero-status strong {
+    display: block;
+    color: #eafcff;
+    font-size: 14px;
+}
+
+.hero-status span {
+    display: block;
+    margin-top: 6px;
+    color: #9bc7ee;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+/* Dashboard-style EMI statistic cards */
+
+.emi-stats {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 13px;
+    margin-bottom: 20px;
+}
+
+.emi-stat-card {
+    --accent: #00dfff;
+    --accent-rgb: 0,223,255;
+    position: relative;
+    isolation: isolate;
+    min-width: 0;
+    min-height: 155px;
+    padding: 16px 17px;
+    overflow: hidden;
+    border: 1px solid rgba(var(--accent-rgb),.62);
+    border-radius: 14px;
+    background:
+        radial-gradient(ellipse at 100% 0%,rgba(var(--accent-rgb),.13),transparent 48%),
+        linear-gradient(145deg,rgba(4,28,66,.98),rgba(2,12,32,.98));
+    box-shadow: inset 0 0 15px rgba(var(--accent-rgb),.035);
+    transition: transform .2s ease,box-shadow .2s ease;
+}
+
+.emi-stat-card:nth-child(2) { --accent:#00ffd0; --accent-rgb:0,255,208; }
+.emi-stat-card:nth-child(3) { --accent:#ffcf58; --accent-rgb:255,207,88; }
+.emi-stat-card:nth-child(4) { --accent:#ff4c91; --accent-rgb:255,76,145; }
+
+.emi-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 17px rgba(var(--accent-rgb),.14);
+}
+
+.emi-stat-card::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: -20px;
+    bottom: -70px;
+    width: 130px;
+    height: 100px;
+    border: 1px solid rgba(var(--accent-rgb),.42);
+    border-radius: 50%;
+    transform: rotate(-25deg);
+    pointer-events: none;
+}
+
+.emi-stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 39px;
+    height: 39px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(var(--accent-rgb),.8);
+    border-radius: 11px;
+    background: rgba(var(--accent-rgb),.12);
+    color: var(--accent);
+    font-size: 21px;
+    line-height: 1;
+}
+
+.emi-stat-label {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 7px;
+    color: #b3d5f6;
+    font-size: 11px;
+    font-weight: 650;
+    line-height: 1.4;
+}
+
+.emi-stat-value {
+    position: relative;
+    z-index: 1;
+    color: var(--accent);
+    font-size: clamp(21px,1.8vw,27px);
+    font-weight: 900;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+    text-shadow: 0 0 13px rgba(var(--accent-rgb),.16);
+}
+
+/* Dashboard-matching panels */
+
+.emi-panel,
+.emi-table-panel {
+    width: 100%;
+    min-width: 0;
+    padding: 18px;
+    margin-bottom: 20px;
+    border: 1px solid #007fff;
+    border-radius: 14px;
+    background:
+        radial-gradient(ellipse at 100% 0%,rgba(0,111,255,.08),transparent 35%),
+        linear-gradient(145deg,rgba(4,24,54,.98),rgba(2,12,31,.99));
+    box-shadow: inset 0 0 15px rgba(0,125,255,.035);
+}
+
+.emi-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.emi-panel-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.emi-panel-title > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(0,192,255,.65);
+    border-radius: 11px;
+    background: rgba(0,142,255,.12);
+    color: #64eaff;
+    font-size: 20px;
+}
+
+.emi-panel-title h2 {
+    margin: 0;
+    color: #f2faff;
+    font-size: 17px;
+    font-weight: 850;
+}
+
+.emi-panel-subtitle {
+    margin-top: 5px;
+    color: #83a8cf;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.emi-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 11px;
+    border: 1px solid rgba(0,209,255,.5);
+    border-radius: 999px;
+    background: rgba(0,151,255,.12);
+    color: #58f2ff;
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Customer selection */
+
+.customer-select-wrapper { width: 100%; }
+
+.customer-select {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    padding: 13px 15px;
+    border: 1px solid rgba(0,147,255,.5);
+    border-radius: 10px;
+    background: #04142e;
+    color: #eef8ff;
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+    transition: border-color .2s ease,box-shadow .2s ease;
+}
+
+.customer-select:focus {
+    border-color: #00eaff;
+    box-shadow: 0 0 0 3px rgba(0,234,255,.08);
+}
+
+.customer-select option { background: #04142e; color: #fff; }
+
+.select-message {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid rgba(0,147,255,.24);
+    border-radius: 10px;
+    background: rgba(1,17,41,.55);
+    color: #8cb9e1;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Customer detail cards */
+
+.customer-details-grid {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 11px;
+}
+
+.customer-detail-card {
+    min-width: 0;
+    padding: 15px;
+    border: 1px solid rgba(0,147,255,.35);
+    border-radius: 12px;
+    background:
+        radial-gradient(ellipse at 100% 0%,rgba(0,119,255,.09),transparent 45%),
+        linear-gradient(145deg,#061b3b,#020e26);
+}
+
+.customer-detail-label {
+    margin-bottom: 8px;
+    color: #83a8cf;
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+.customer-detail-value {
+    color: #edf8ff;
+    font-size: 13px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.customer-detail-card:first-child .customer-detail-value { color: #49e8ff; }
+.customer-detail-card:nth-child(3) .customer-detail-value { color: #b58aff; }
+.customer-detail-card:nth-child(4) .customer-detail-value { color: #00ffd0; }
+
+/* EMI table */
+
+.emi-table-panel { margin-bottom: 20px; }
+
+.emi-table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    border: 1px solid rgba(0,142,255,.42);
+    border-radius: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #0872d5 #04132c;
+}
+
+.emi-table-wrapper::-webkit-scrollbar { height: 7px; }
+.emi-table-wrapper::-webkit-scrollbar-track { background: #04132c; }
+.emi-table-wrapper::-webkit-scrollbar-thumb { background: #0872d5; border-radius: 10px; }
+
+.emi-table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.emi-table th {
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(0,156,255,.38);
+    background: rgba(0,70,145,.18);
+    color: #a8d7ff;
+    font-size: 10px;
+    font-weight: 850;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: .35px;
+    white-space: nowrap;
+}
+
+.emi-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(0,131,255,.18);
+    background: rgba(1,17,41,.45);
+    color: #d0e6ff;
+    font-size: 11px;
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.emi-table tbody tr:last-child td { border-bottom: 0; }
+.emi-table tbody tr:hover td { background: rgba(0,103,220,.12); }
+
+.emi-table th:nth-child(1),.emi-table td:nth-child(1) { width: 8%; }
+.emi-table th:nth-child(2),.emi-table td:nth-child(2) { width: 15%; }
+.emi-table th:nth-child(3),.emi-table td:nth-child(3) { width: 9%; }
+.emi-table th:nth-child(4),.emi-table td:nth-child(4) { width: 12%; }
+.emi-table th:nth-child(5),.emi-table td:nth-child(5) { width: 14%; }
+.emi-table th:nth-child(6),.emi-table td:nth-child(6) { width: 13%; }
+.emi-table th:nth-child(7),.emi-table td:nth-child(7) { width: 14%; }
+.emi-table th:nth-child(8),.emi-table td:nth-child(8) { width: 15%; }
+
+.emi-table tbody td:nth-child(1) { color: #49e8ff; font-weight: 800; }
+.emi-table tbody td:nth-child(2) { color: #91c7ff; font-weight: 750; }
+.emi-table tbody td:nth-child(3) { color: #c3baff; font-weight: 800; }
+.emi-table tbody td:nth-child(5) { color: #00ffd0; font-weight: 900; }
+.emi-table tbody td:nth-child(6) { color: #ffcf58; font-weight: 900; }
+
+/* Status badges */
+
+.emi-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 75px;
+    padding: 5px 8px;
+    border-radius: 7px;
+    font-size: 9px;
+    font-weight: 850;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+}
+
+.emi-status-paid {
+    color: #00ffd0;
+    background: rgba(0,255,208,.08);
+    border: 1px solid rgba(0,255,208,.35);
+}
+
+.emi-status-pending {
+    color: #75ceff;
+    background: rgba(0,117,255,.10);
+    border: 1px solid rgba(0,169,255,.35);
+}
+
+.emi-status-overdue {
+    color: #ff829e;
+    background: rgba(255,36,91,.09);
+    border: 1px solid rgba(255,62,121,.4);
+}
+
+.emi-status-default {
+    color: #cbd5e1;
+    background: rgba(100,116,139,.14);
+    border: 1px solid rgba(148,163,184,.2);
+}
+
+.emi-empty {
+    padding: 28px !important;
+    color: #8cb9e1 !important;
+    text-align: center !important;
+}
+
+/* Footer */
+
+.emi-panel-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(0,131,255,.2);
+    color: #6489b2;
+    font-size: 10px;
+}
+
+.emi-panel-footer strong { color: #d0e6ff; }
+
+.emi-footer {
+    padding: 17px 4px 5px;
+    color: #6489b2;
+    font-size: 9px;
+    line-height: 1.8;
+    text-align: center;
+    letter-spacing: .4px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1250px) and (min-width:951px) {
+    .emi-page { padding: 19px !important; }
+    .emi-stats,.customer-details-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+    .sidebar { padding-right: 10px !important; padding-left: 10px !important; }
+}
+
+@media (max-width:950px) {
+    :root { --sidebar-width: 0px; }
+
+    .sidebar {
+        position: relative !important;
+        inset: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        padding: 10px !important;
+        overflow: visible !important;
+        border: 0 !important;
+        border-bottom: 1px solid var(--cyan) !important;
+    }
+
+    .sidebar > .sidebar-brand {
+        flex: 0 0 100% !important;
+        min-height: 94px !important;
+        margin: -10px 0 5px !important;
+        padding: 7px 5px 9px !important;
+    }
+
+    .sidebar .sidebar-logo { width: 92px !important; height: 53px !important; }
+    .sidebar .sidebar-brand-name { font-size: 11px !important; }
+    .sidebar .sidebar-brand-subtitle { font-size: 9px !important; }
+
+    .sidebar > a,.sidebar > a.logout {
+        display: grid !important;
+        grid-template-columns: 29px minmax(0,1fr) !important;
+        flex: 0 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+        min-height: 40px !important;
+        max-height: 40px !important;
+        margin: 0 !important;
+        padding: 4px 8px !important;
+        column-gap: 7px !important;
+        font-size: 10px !important;
+        border-top-color: transparent !important;
+    }
+
+    .sidebar > a > .menu-icon {
+        grid-column: 1 !important;
+        width: 29px !important;
+        min-width: 29px !important;
+        max-width: 29px !important;
+        height: 29px !important;
+        min-height: 29px !important;
+        max-height: 29px !important;
+        border-radius: 8px !important;
+    }
+
+    .sidebar > a > .menu-icon > svg {
+        width: 17px !important;
+        min-width: 17px !important;
+        max-width: 17px !important;
+        height: 17px !important;
+        min-height: 17px !important;
+        max-height: 17px !important;
+    }
+
+    .sidebar > a > .menu-label {
+        grid-column: 2 !important;
+        width: auto !important;
+        font-size: 10px !important;
+    }
+
+    .sidebar > a > .menu-arrow { display: none !important; }
+    .sidebar > a.logout { margin-top: 0 !important; }
+
+    .emi-page {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 19px !important;
+    }
+
+    .emi-stats,.customer-details-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+}
+
+@media (max-width:650px) {
+    .emi-page { padding: 13px !important; }
+
+    .page-topline {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 14px;
+    }
+
+    .admin-hero {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 18px;
+        gap: 15px;
+    }
+
+    .hero-status { flex-basis: auto; width: 100%; }
+
+    .emi-stats,.customer-details-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .emi-stat-card { min-height: 135px; padding: 14px 16px; }
+    .emi-stat-icon { margin-bottom: 9px; }
+
+    .emi-panel,.emi-table-panel { padding: 12px; }
+
+    .emi-panel-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .emi-panel-title h2 { font-size: 15px; }
+    .emi-panel-footer { align-items: flex-start; flex-direction: column; }
+    .top-status { font-size: 9px; }
+}
+
+@media (max-width:390px) {
+    .sidebar { justify-content: flex-start !important; }
+    .sidebar > a,.sidebar > a.logout { flex: 1 1 calc(50% - 7px) !important; }
+    .admin-hero { padding: 15px; }
+    .hero-content h1 { font-size: 26px; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+    *,*::before,*::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= DASHBOARD-MATCHING SIDEBAR ================= -->
+
+<nav class="sidebar" aria-label="Admin navigation">
+    <div class="sidebar-brand">
+        <img class="sidebar-logo" src="../images/ibi-logo.png" alt="IBI Bank logo">
+        <div class="sidebar-brand-name">IBI BANK</div>
+        <div class="sidebar-brand-subtitle">INTERNATIONAL BANK OF INDIA</div>
+    </div>
+
+    <a href="dashboard.html" data-page="dashboard.html">
+        <span class="menu-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 10.5 12 3l9 7.5"/>
+                <path d="M5.5 9.5V21h13V9.5"/>
+                <path d="M9.5 21v-7h5v7"/>
+            </svg>
+        </span>
+        <span class="menu-label">Dashboard</span>
+        <span class="menu-arrow" aria-hidden="true">›</span>
+    </a>
+
+    <a href="customers.html" data-page="customers.html">
+        <span class="menu-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="9" cy="8" r="3.5"/>
+                <path d="M2.5 20v-2a6.5 6.5 0 0 1 13 0v2z"/>
+                <path d="M16 4.8a3.5 3.5 0 0 1 0 6.7"/>
+                <path d="M18 14a5 5 0 0 1 3.5 4.8V20h-4"/>
+            </svg>
+        </span>
+        <span class="menu-label">Customers</span>
+        <span class="menu-arrow" aria-hidden="true">›</span>
+    </a>
+
+    <a href="accounts.html" data-page="accounts.html">
+        <span class="menu-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="4.5" width="18" height="15" rx="2"/>
+                <path d="M3 9h18M7 14h4"/>
+            </svg>
+        </span>
+        <span class="menu-label">Accounts</span>
+        <span class="menu-arrow" aria-hidden="true">›</span>
+    </a>
+
+    <a href="transactions.html" data-page="transactions.html">
+        <span class="menu-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 7h15m-4-4 4 4-4 4"/>
+                <path d="M20 17H5m4-4-4 4 4 4"/>
+            </svg>
+        </span>
+        <span class="menu-label">Transactions</span>
+        <span class="menu-arrow" aria-hidden="true">›</span>
+    </a>
+
+    <a href="transfers.html" data-page="transfers.html">
+        <span class="menu-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 3 21 12 3 21l4-9z"/>
+                <path d="M7 12h9"/>
+            </svg>
+        </span>
+        <span class="menu-label">Fund Transfer</span>
+        <span class="menu-arrow" aria-hidden="true">›</span>
+    </a>
+
+    <a href="loans.html" data-page="loans.html">
+        <span class="menu-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 9h18L12 3z"/>
+                <path d="M5 10v9M9 10v9M15 10v9M19 10v9"/>
+                <path d="M3 21h18M2 19h20"/>
+            </svg>
+        </span>
+        <span class="menu-label">Loans</span>
+        <span class="menu-arrow" aria-hidden="true">›</span>
+    </a>
+
+    <a href="emi.html" data-page="emi.html">
+        <span class="menu-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="5" width="16" height="16" rx="2"/>
+                <path d="M8 3v4M16 3v4M4 10h16M8 14h3M8 17h6"/>
+            </svg>
+        </span>
+        <span class="menu-label">EMI Payments</span>
+        <span class="menu-arrow" aria-hidden="true">›</span>
+    </a>
+
+    <a href="#" class="logout" id="logoutButton">
+        <span class="menu-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5"/>
+                <path d="m14 16 4-4-4-4M8 12h10"/>
+            </svg>
+        </span>
+        <span class="menu-label">Logout</span>
+        <span class="menu-arrow" aria-hidden="true">›</span>
+    </a>
+</nav>
+
+<!-- ================= EMI PAGE CONTENT ================= -->
+
+<main class="emi-page">
+
+    <div class="page-topline">
+        <div class="breadcrumb">IBI BANK <span aria-hidden="true">/</span> EMI MANAGEMENT</div>
+        <div class="top-status">
+            <span class="top-status-dot"></span>
+            ALL SYSTEMS OPERATIONAL
+        </div>
+    </div>
+
+    <section class="admin-hero">
+        <div class="hero-content">
+            <div class="hero-badge">✦ EMI Management Center</div>
+            <h1>EMI Payments</h1>
+            <p>Monitor customer EMI schedules, payment dates, outstanding dues and late fines across the banking system.</p>
+        </div>
+
+        <div class="hero-status">
+            <div class="hero-status-dot"></div>
+            <strong>EMI System Online</strong>
+            <span>Payment monitoring operational</span>
+        </div>
+    </section>
+
+    <!-- EMI STATISTICS -->
+
+    <section class="emi-stats" aria-label="EMI statistics">
+
+        <div class="emi-stat-card">
+            <div class="emi-stat-icon" aria-hidden="true">▦</div>
+            <div class="emi-stat-label">Total EMI Records</div>
+            <div class="emi-stat-value" id="totalEMIs">0</div>
+        </div>
+
+        <div class="emi-stat-card">
+            <div class="emi-stat-icon" aria-hidden="true">✓</div>
+            <div class="emi-stat-label">Paid EMIs</div>
+            <div class="emi-stat-value" id="paidEMIs">0</div>
+        </div>
+
+        <div class="emi-stat-card">
+            <div class="emi-stat-icon" aria-hidden="true">◷</div>
+            <div class="emi-stat-label">Pending EMIs</div>
+            <div class="emi-stat-value" id="pendingEMIs">0</div>
+        </div>
+
+        <div class="emi-stat-card">
+            <div class="emi-stat-icon" aria-hidden="true">!</div>
+            <div class="emi-stat-label">Overdue EMIs</div>
+            <div class="emi-stat-value" id="overdueEMIs">0</div>
+        </div>
+
+    </section>
+
+    <!-- CUSTOMER SELECTION -->
+
+    <section class="emi-panel">
+        <div class="emi-panel-header">
+            <div class="emi-panel-title">
+                <span aria-hidden="true">♙</span>
+                <div>
+                    <h2>Select Customer</h2>
+                    <div class="emi-panel-subtitle">Choose a customer to view their EMI schedule and payment history.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="customer-select-wrapper">
+            <select id="customerSelect" class="customer-select">
+                <option value="">-- Select Customer --</option>
+            </select>
+        </div>
+
+        <div id="selectMessage" class="select-message">
+            Please select a customer to view EMI details.
+        </div>
+    </section>
+
+    <!-- CUSTOMER DETAILS -->
+
+    <section class="emi-panel" id="customerDetails" style="display:none;">
+        <div class="emi-panel-header">
+            <div class="emi-panel-title">
+                <span aria-hidden="true">♙</span>
+                <div>
+                    <h2>Customer Details</h2>
+                    <div class="emi-panel-subtitle">Customer information for the selected account holder.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="customer-details-grid">
+            <div class="customer-detail-card">
+                <div class="customer-detail-label">Customer ID</div>
+                <div class="customer-detail-value" id="customerId">-</div>
+            </div>
+
+            <div class="customer-detail-card">
+                <div class="customer-detail-label">Customer</div>
+                <div class="customer-detail-value" id="customerName">-</div>
+            </div>
+
+            <div class="customer-detail-card">
+                <div class="customer-detail-label">Email</div>
+                <div class="customer-detail-value" id="customerEmail">-</div>
+            </div>
+
+            <div class="customer-detail-card">
+                <div class="customer-detail-label">Phone</div>
+                <div class="customer-detail-value" id="customerPhone">-</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EMI RECORDS -->
+
+    <section class="emi-table-panel" id="emiSection" style="display:none;">
+        <div class="emi-panel-header">
+            <div class="emi-panel-title">
+                <span aria-hidden="true">▤</span>
+                <div>
+                    <h2>EMI Payment Records</h2>
+                    <div class="emi-panel-subtitle">Payment schedule, installment amounts, payment dates and late fines.</div>
+                </div>
+            </div>
+
+            <div class="emi-badge">EMI Records</div>
+        </div>
+
+        <div class="emi-table-wrapper">
+            <table class="emi-table">
+                <thead>
+                    <tr>
+                        <th>Loan ID</th>
+                        <th>Loan Type</th>
+                        <th>EMI ID</th>
+                        <th>Due Date</th>
+                        <th>Amount</th>
+                        <th>Late Fine</th>
+                        <th>Payment Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="emiBody">
+                    <tr>
+                        <td colspan="8" class="emi-empty">Select a customer to view EMI records.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="emi-panel-footer">
+            <span>Showing <strong id="emiRecordCount">0</strong> EMI records</span>
+            <span>IBI Bank · EMI Management</span>
+        </div>
+    </section>
+
+    <footer class="emi-footer">
+        IBI BANK · INTERNATIONAL BANK OF INDIA · EMI MANAGEMENT PORTAL
+    </footer>
+
+</main>
+
+<script>
+"use strict";
+
+const API = "http://127.0.0.1:5000";
+
+/* ================= LOGIN CHECK ================= */
+
+const loggedInAdmin = localStorage.getItem("loggedInAdmin");
+const loggedInUser = localStorage.getItem("loggedInUser");
+
+if (!loggedInAdmin && !loggedInUser) {
+    window.location.href = "../index.html";
+}
+
+/* ================= ACTIVE SIDEBAR ITEM ================= */
+
+(function setActiveSidebarLink() {
+    const currentPage = window.location.pathname.split("/").pop().toLowerCase();
+
+    document.querySelectorAll(".sidebar a[data-page]").forEach(link => {
+        const isActive = link.dataset.page.toLowerCase() === currentPage;
+        link.classList.toggle("active", isActive);
+
+        if (isActive) {
+            link.setAttribute("aria-current", "page");
+        } else {
+            link.removeAttribute("aria-current");
+        }
+    });
+})();
+
+/* ================= GLOBAL DATA ================= */
+
+let customers = [];
+let loans = [];
+let emiData = [];
+
+/* ================= ESCAPE HTML ================= */
+
+function escapeHTML(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+/* ================= GET ARRAY FROM API ================= */
+
+function getArray(data, possibleKeys) {
+    if (Array.isArray(data)) {
+        return data;
+    }
+
+    if (data && typeof data === "object") {
+        for (const key of possibleKeys) {
+            if (Array.isArray(data[key])) {
+                return data[key];
+            }
+        }
+    }
+
+    return [];
+}
+
+/* ================= FORMAT DATE ================= */
+
+function formatDate(value) {
+    if (!value) return "-";
+
+    const date = new Date(value);
+
+    if (isNaN(date.getTime())) {
+        return String(value);
+    }
+
+    return date.toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    });
+}
+
+/* ================= FORMAT AMOUNT ================= */
+
+function formatAmount(value) {
+    if (value === null || value === undefined || value === "") {
+        return "0.00";
+    }
+
+    const number = Number(value);
+
+    if (isNaN(number)) {
+        return String(value);
+    }
+
+    return number.toLocaleString("en-IN", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+/* ================= UPDATE EMI STATISTICS ================= */
+
+function updateEMIStatistics() {
+    const total = emiData.length;
+
+    const paid = emiData.filter(emi =>
+        String(emi.status || "").toLowerCase() === "paid"
+    ).length;
+
+    const overdue = emiData.filter(emi =>
+        String(emi.status || "").toLowerCase() === "overdue"
+    ).length;
+
+    const pending = emiData.filter(emi => {
+        const status = String(emi.status || "").toLowerCase();
+        return status === "pending" || status === "unpaid";
+    }).length;
+
+    document.getElementById("totalEMIs").textContent = total;
+    document.getElementById("paidEMIs").textContent = paid;
+    document.getElementById("pendingEMIs").textContent = pending;
+    document.getElementById("overdueEMIs").textContent = overdue;
+}
+
+/* ================= LOAD EXISTING API DATA ================= */
+
+async function loadData() {
+    const selectMessage = document.getElementById("selectMessage");
+    selectMessage.textContent = "Loading customer and EMI data...";
+
+    try {
+        const customerResponse = await fetch(`${API}/api/customers`);
+
+        if (!customerResponse.ok) {
+            throw new Error("Failed to load customers");
+        }
+
+        const customerResult = await customerResponse.json();
+
+        customers = getArray(customerResult, [
+            "customers", "data", "records"
+        ]);
+
+        const loanResponse = await fetch(`${API}/api/loans`);
+
+        if (!loanResponse.ok) {
+            throw new Error("Failed to load loans");
+        }
+
+        const loanResult = await loanResponse.json();
+
+        loans = getArray(loanResult, [
+            "loans", "data", "records"
+        ]);
+
+        const emiResponse = await fetch(`${API}/api/emi`);
+
+        if (!emiResponse.ok) {
+            throw new Error("Failed to load EMI records");
+        }
+
+        const emiResult = await emiResponse.json();
+
+        emiData = getArray(emiResult, [
+            "emi", "emis", "data", "records"
+        ]);
+
+        updateEMIStatistics();
+        populateCustomers();
+
+        selectMessage.textContent =
+            "Please select a customer to view EMI details.";
+
+    } catch (error) {
+        console.error("EMI page data loading failed:", error);
+
+        selectMessage.textContent =
+            "Failed to load customer data. Please check that the backend server is running.";
+    }
+}
+
+/* ================= POPULATE CUSTOMER DROPDOWN ================= */
+
+function populateCustomers() {
+    const select = document.getElementById("customerSelect");
+
+    select.innerHTML = '<option value="">-- Select Customer --</option>';
+
+    customers.forEach(customer => {
+        const customerId =
+            customer.customer_id ??
+            customer.customerId ??
+            customer.id ??
+            "";
+
+        const customerName =
+            customer.name ??
+            customer.customer_name ??
+            "Unknown Customer";
+
+        if (customerId === "") return;
+
+        const option = document.createElement("option");
+        option.value = customerId;
+        option.textContent = `${customerId} - ${customerName}`;
+
+        select.appendChild(option);
+    });
+
+    if (customers.length === 0) {
+        document.getElementById("selectMessage").textContent =
+            "No customers were returned by the API.";
+    }
+}
+
+/* ================= CUSTOMER SELECT EVENT ================= */
+
+document.getElementById("customerSelect").addEventListener("change", function() {
+    const customerId = this.value;
+
+    if (!customerId) {
+        document.getElementById("customerDetails").style.display = "none";
+        document.getElementById("emiSection").style.display = "none";
+
+        const message = document.getElementById("selectMessage");
+        message.style.display = "block";
+        message.textContent = "Please select a customer to view EMI details.";
+
+        document.getElementById("emiRecordCount").textContent = "0";
+        return;
+    }
+
+    showCustomerDetails(Number(customerId));
+    showCustomerEMI(Number(customerId));
+});
+
+/* ================= SHOW CUSTOMER DETAILS ================= */
+
+function showCustomerDetails(customerId) {
+    let customer = customers.find(item =>
+        Number(item.customer_id ?? item.customerId ?? item.id) === Number(customerId)
+    );
+
+    /* Fallback from loan data */
+    if (!customer) {
+        const customerLoan = loans.find(loan =>
+            Number(loan.customer_id) === Number(customerId)
+        );
+
+        if (customerLoan) {
+            customer = {
+                customer_id: customerId,
+                name: customerLoan.customer_name || "-",
+                email: customerLoan.customer_email || "-",
+                phone: customerLoan.customer_phone || "-"
+            };
+        }
+    }
+
+    if (!customer) {
+        document.getElementById("customerDetails").style.display = "none";
+
+        const message = document.getElementById("selectMessage");
+        message.style.display = "block";
+        message.textContent = "Customer details could not be found.";
+        return;
+    }
+
+    document.getElementById("customerId").textContent =
+        customer.customer_id ?? customer.customerId ?? customerId;
+
+    document.getElementById("customerName").textContent =
+        customer.name ?? customer.customer_name ?? "-";
+
+    document.getElementById("customerEmail").textContent =
+        customer.email ?? customer.customer_email ?? "-";
+
+    document.getElementById("customerPhone").textContent =
+        customer.phone ?? customer.customer_phone ?? "-";
+
+    document.getElementById("selectMessage").style.display = "none";
+    document.getElementById("customerDetails").style.display = "block";
+}
+
+/* ================= STATUS CLASS ================= */
+
+function getStatusClass(status) {
+    const normalized = String(status || "").toLowerCase();
+
+    if (normalized === "paid") {
+        return "emi-status emi-status-paid";
+    }
+
+    if (normalized === "pending" || normalized === "unpaid") {
+        return "emi-status emi-status-pending";
+    }
+
+    if (normalized === "overdue") {
+        return "emi-status emi-status-overdue";
+    }
+
+    return "emi-status emi-status-default";
+}
+
+/* ================= SHOW SELECTED CUSTOMER'S EMI ================= */
+
+function showCustomerEMI(customerId) {
+    const emiBody = document.getElementById("emiBody");
+
+    const customerLoans = loans.filter(loan =>
+        Number(loan.customer_id ?? loan.customerId) === Number(customerId)
+    );
+
+    const customerLoanIds = customerLoans.map(loan =>
+        Number(loan.loan_id ?? loan.loanId)
+    );
+
+    const customerEMI = emiData.filter(emi => {
+        if (emi.customer_id !== undefined && emi.customer_id !== null) {
+            return Number(emi.customer_id) === Number(customerId);
+        }
+
+        return customerLoanIds.includes(
+            Number(emi.loan_id ?? emi.loanId)
+        );
+    });
+
+    document.getElementById("emiSection").style.display = "block";
+    document.getElementById("emiRecordCount").textContent =
+        customerEMI.length.toLocaleString("en-IN");
+
+    if (customerEMI.length === 0) {
+        if (customerLoans.length > 0) {
+            emiBody.innerHTML = `
+                <tr>
+                    <td colspan="8" class="emi-empty">
+                        This customer has loan records, but EMI has not been generated yet.
+                    </td>
+                </tr>
+            `;
+        } else {
+            emiBody.innerHTML = `
+                <tr>
+                    <td colspan="8" class="emi-empty">
+                        No EMI records found for this customer.
+                    </td>
+                </tr>
+            `;
+        }
+
+        return;
+    }
+
+    /* Map selected customer's loans by ID */
+    const loanMap = {};
+
+    customerLoans.forEach(loan => {
+        loanMap[Number(loan.loan_id ?? loan.loanId)] = loan;
+    });
+
+    /* Sort by loan ID, then EMI ID */
+    const sortedEMI = [...customerEMI].sort((a, b) => {
+        const loanDifference =
+            Number(a.loan_id ?? a.loanId ?? 0) -
+            Number(b.loan_id ?? b.loanId ?? 0);
+
+        if (loanDifference !== 0) return loanDifference;
+
+        return Number(a.emi_id ?? a.emiId ?? 0) -
+            Number(b.emi_id ?? b.emiId ?? 0);
+    });
+
+    emiBody.innerHTML = sortedEMI.map(emi => {
+        const loanId = emi.loan_id ?? emi.loanId ?? "-";
+        const emiId = emi.emi_id ?? emi.emiId ?? "-";
+        const loan = loanMap[Number(loanId)] || {};
+
+        const loanType =
+            emi.loan_type ||
+            loan.loan_type ||
+            loan.loanType ||
+            "Unknown Loan";
+
+        const status = emi.status || "-";
+        const lateFine = Number(emi.late_fee ?? emi.lateFee ?? 0);
+        const statusClass = getStatusClass(status);
+
+        return `
+            <tr>
+                <td>${escapeHTML(loanId)}</td>
+                <td>${escapeHTML(loanType)}</td>
+                <td>${escapeHTML(emiId)}</td>
+                <td>${escapeHTML(formatDate(emi.due_date ?? emi.dueDate))}</td>
+                <td>₹${escapeHTML(formatAmount(emi.amount))}</td>
+                <td>₹${escapeHTML(formatAmount(lateFine))}</td>
+                <td>${escapeHTML(formatDate(emi.payment_date ?? emi.paymentDate))}</td>
+                <td>
+                    <span class="${statusClass}">
+                        ${escapeHTML(status)}
+                    </span>
+                </td>
+            </tr>
+        `;
+    }).join("");
+}
+
+/* ================= LOGOUT ================= */
+
+function logout() {
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("loggedInAdmin");
+    window.location.href = "../index.html";
+}
+
+document.getElementById("logoutButton").addEventListener("click", event => {
+    event.preventDefault();
+    logout();
+});
+
+/* ================= INITIAL LOAD ================= */
+
+loadData();
+</script>
+
+</body>
+</html>

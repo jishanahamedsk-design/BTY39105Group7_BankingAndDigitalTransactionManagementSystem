@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#020a27">
+<title>IBI Bank — Fund Transfer</title>
+
+<style>
+:root {
+    color-scheme: dark;
+    --navy: #020a27;
+    --panel: #06194a;
+    --blue: #075cff;
+    --cyan: #00dfff;
+    --text: #f5f8ff;
+    --muted: #b7c9ed;
+    --border: rgba(0,190,255,.65);
+}
+
+* { box-sizing: border-box; }
+
+html { min-height: 100%; background: var(--navy); }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(ellipse at 50% 40%, rgba(0,61,180,.2), transparent 58%),
+        linear-gradient(135deg,#020a27,#031039 55%,#020824);
+}
+
+button,input,select { font: inherit; }
+button,a,input,select { -webkit-tap-highlight-color: transparent; }
+
+.topbar {
+    min-height: 86px;
+    padding: 10px 4.5%;
+    display: grid;
+    grid-template-columns: 300px minmax(180px,1fr) auto;
+    align-items: center;
+    gap: 24px;
+    background: rgba(2,10,43,.97);
+    border-bottom: 1px solid rgba(0,190,255,.55);
+    box-shadow: 0 5px 24px rgba(0,80,255,.13);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+}
+
+/* Logo visibility and sizing fix */
+.brand-logo {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 88px;
+    height: 70px;
+    min-width: 88px;
+    flex-shrink: 0;
+    object-fit: contain;
+    object-position: center;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    filter: none;
+    position: relative;
+    z-index: 10;
+}
+
+.brand-logo.logo-fallback {
+    width: 58px;
+    min-width: 58px;
+    height: 58px;
+    padding: 5px;
+    border: 1px solid rgba(0,223,255,.6);
+    border-radius: 50%;
+    color: #00dfff;
+    background: #06194a;
+    font-size: 10px;
+    text-align: center;
+}
+
+.brand-copy { min-width: 0; }
+
+.brand-copy h1 {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.brand-copy p {
+    margin: 3px 0 0;
+    color: #d1e2ff;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.searchbox {
+    width: 100%;
+    max-width: 700px;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 17px;
+    height: 51px;
+    border: 1px solid #087bff;
+    border-radius: 22px;
+    background: linear-gradient(100deg,#052d80,#0645c8);
+    box-shadow: inset 0 0 12px rgba(0,180,255,.12);
+}
+
+.searchbox span { color: var(--cyan); font-size: 21px; }
+
+.searchbox input {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 0;
+    border: 0;
+    outline: 0;
+    color: white;
+    background: transparent;
+    font-size: 13px;
+}
+
+.searchbox input::placeholder { color: #d5e3ff; }
+
+.user-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+.avatar {
+    width: 47px;
+    height: 47px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    color: white;
+    background: linear-gradient(145deg,#00dcff,#0755ff);
+    box-shadow: 0 0 15px rgba(0,190,255,.45);
+    font-size: 24px;
+}
+
+.user-details { max-width: 180px; font-size: 11px; line-height: 1.5; }
+
+.user-details strong {
+    display: block;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.logout-btn {
+    padding: 12px 19px;
+    border: 1px solid #ff7a9e;
+    border-radius: 13px;
+    color: white;
+    font-weight: 700;
+    background: linear-gradient(110deg,#ff426e,#ff0044);
+    box-shadow: 0 0 16px rgba(255,0,70,.32);
+    cursor: pointer;
+}
+
+.page-content {
+    width: min(1660px,100%);
+    margin: 0 auto;
+    padding: 14px 3.8% 30px;
+}
+
+.hero {
+    min-height: 210px;
+    display: grid;
+    grid-template-columns: minmax(0,1fr) 360px;
+    align-items: center;
+    gap: 28px;
+    padding: 25px 4.5%;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #008cff;
+    border-radius: 17px;
+    background:
+        linear-gradient(145deg,transparent 40%,rgba(0,110,255,.16) 40%,transparent 61%),
+        linear-gradient(125deg,#05266c,#071249 56%,#180b75);
+    box-shadow: inset 0 0 25px rgba(0,112,255,.16);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(150deg,transparent 42%,rgba(0,209,255,.25) 42.3%,transparent 42.8%,transparent 56%,rgba(0,109,255,.18) 56.4%,transparent 57%);
+}
+
+.hero-main,.hero-quote { position: relative; z-index: 1; }
+
+.eyebrow {
+    margin: 0 0 7px;
+    color: #00f0ff;
+    font-weight: 800;
+    letter-spacing: .7px;
+    font-size: 15px;
+}
+
+.hero h2 {
+    margin: 0;
+    font-size: clamp(29px,3vw,44px);
+    line-height: 1.1;
+    letter-spacing: -.8px;
+}
+
+.hero-description {
+    margin: 9px 0 15px;
+    color: #00e8ff;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+
+.back-btn {
+    padding: 12px 20px;
+    border: 1px solid #ffb4c4;
+    border-radius: 30px;
+    color: white;
+    background: linear-gradient(110deg,#ff5c80,#ff164d);
+    box-shadow: 0 0 15px rgba(255,40,90,.38);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 13px;
+    border: 1px solid rgba(0,145,255,.4);
+    border-radius: 25px;
+    background: rgba(0,45,125,.56);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.pill-icon { color: #fff; font-size: 16px; }
+
+.hero-quote {
+    min-height: 130px;
+    padding: 14px 0 14px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px solid #00dfff;
+}
+
+.quote-mark { margin-bottom: 0; color: #b68aff; font-size: 40px; font-weight: 900; line-height: .8; }
+
+.hero-quote p { max-width: 240px; margin: 5px 0 12px; font-size: 21px; line-height: 1.35; }
+
+.quote-line { width: 100px; height: 4px; border-radius: 5px; background: linear-gradient(90deg,#b600ff,#00eaff); }
+
+.form-container {
+    width: min(945px,100%);
+    margin: 14px auto;
+    padding: 21px 5.2% 20px;
+    border: 1px solid #008fff;
+    border-radius: 19px;
+    background:
+        linear-gradient(155deg,transparent 38%,rgba(0,91,255,.14) 38.3%,transparent 60%),
+        linear-gradient(130deg,#061d58,#03103c 70%,#081950);
+    box-shadow: inset 0 0 25px rgba(0,99,255,.17);
+}
+
+.form-heading { display: flex; align-items: center; gap: 17px; margin-bottom: 19px; }
+
+.transfer-icon {
+    width: 65px;
+    height: 65px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid #4cf5ff;
+    color: white;
+    background: linear-gradient(145deg,#00dfff,#094bff 70%);
+    box-shadow: 0 0 19px rgba(0,209,255,.55);
+    font-size: 31px;
+}
+
+.form-heading h3 { margin: 0 0 6px; font-size: 22px; }
+.form-heading p { margin: 0; color: #e0eaff; font-size: 13px; }
+
+.form-container label {
+    display: block;
+    margin: 13px 0 6px;
+    color: #f5f8ff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-container input,.form-container select {
+    display: block;
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 14px;
+    border: 1px solid #007bff;
+    border-radius: 9px;
+    outline: none;
+    color: white;
+    background-color: #03143d;
+    font-size: 14px;
+}
+
+.form-container input::placeholder { color: #9db2d6; }
+
+.form-container input:focus,.form-container select:focus {
+    border-color: #00eaff;
+    box-shadow: 0 0 0 2px rgba(0,221,255,.12);
+}
+
+.form-container input:disabled { opacity: .6; cursor: not-allowed; }
+
+.or-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 11px 0;
+    color: #91cfff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+}
+
+.or-divider::before,.or-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(0,166,255,.32);
+}
+
+.amount-wrap { position: relative; }
+
+.amount-wrap .currency-symbol {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    color: #fff;
+    font-weight: 800;
+    pointer-events: none;
+}
+
+.amount-wrap input {
+    padding-left: 38px;
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+.transfer-btn {
+    display: block;
+    width: 100%;
+    min-height: 49px;
+    margin-top: 13px;
+    padding: 13px 18px;
+    border: 1px solid #13bfff;
+    border-radius: 11px;
+    color: white;
+    background: linear-gradient(100deg,#00c9ed,#0862ff 68%);
+    box-shadow: 0 0 17px rgba(0,118,255,.25);
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.transfer-btn:hover { filter: brightness(1.1); }
+.transfer-btn:disabled { opacity: .65; cursor: wait; }
+
+.security-cards {
+    width: min(945px,100%);
+    margin: 0 auto 13px;
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 12px;
+}
+
+.security-card {
+    min-height: 81px;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    border: 1px solid;
+    border-radius: 14px;
+    background: rgba(2,18,58,.9);
+}
+
+.security-card.green { border-color: #00dca9; background: linear-gradient(110deg,rgba(0,115,90,.42),rgba(0,36,57,.88)); }
+.security-card.blue { border-color: #087bff; background: linear-gradient(110deg,rgba(0,66,180,.4),rgba(2,20,60,.9)); }
+.security-card.purple { border-color: #a000ff; background: linear-gradient(110deg,rgba(89,0,170,.4),rgba(23,6,68,.9)); }
+
+.security-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: white;
+    background: linear-gradient(140deg,#00e7ff,#074bff);
+    box-shadow: 0 0 14px rgba(0,158,255,.3);
+    font-size: 22px;
+}
+
+.green .security-icon { background: linear-gradient(140deg,#00efae,#008e64); }
+.purple .security-icon { background: linear-gradient(140deg,#ef00ff,#5c00ff); }
+
+.security-card strong { display: block; margin-bottom: 5px; font-size: 12px; }
+.security-card p { margin: 0; color: #c2d6fa; font-size: 11px; line-height: 1.45; }
+
+.notice {
+    width: min(945px,100%);
+    min-height: 45px;
+    margin: 0 auto 14px;
+    padding: 12px 16px;
+    border: 1px solid #075dcb;
+    border-radius: 11px;
+    color: #d6e8ff;
+    background: rgba(3,32,83,.8);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.notice::before { content: "●"; margin-right: 10px; color: #00dfff; }
+
+#message:empty { display: none; }
+#message { width: min(945px,100%); margin: 16px auto; }
+
+.message-error {
+    padding: 14px 16px;
+    border: 1px solid #ff5c83;
+    border-radius: 10px;
+    color: #ffdce5;
+    background: rgba(110,8,38,.38);
+    overflow-wrap: anywhere;
+}
+
+.message-info {
+    padding: 14px 16px;
+    border: 1px solid #00baff;
+    border-radius: 10px;
+    color: #dffaff;
+    background: rgba(0,55,115,.45);
+}
+
+/* Premium receipt */
+.transfer-receipt {
+    position: relative;
+    overflow: hidden;
+    padding: 30px 24px 24px;
+    border: 1px solid #087cff;
+    border-radius: 20px;
+    color: #f5f8ff;
+    background:
+        radial-gradient(ellipse at 50% 0%,rgba(0,104,255,.24),transparent 55%),
+        linear-gradient(135deg,#031b50,#020d32 62%,#090a48);
+    box-shadow: 0 0 30px rgba(0,101,255,.22);
+    text-align: left;
+}
+
+.transfer-receipt::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,#00eaff,#075bff,#b000ff,#00eaff);
+}
+
+.receipt-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 4px 0 22px;
+    text-align: left;
+}
+
+.receipt-check {
+    width: 66px;
+    height: 66px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border: 3px solid #00f0a8;
+    border-radius: 50%;
+    color: white;
+    background: radial-gradient(circle,#087f68,#023d50);
+    box-shadow: 0 0 12px #00e9a5,inset 0 0 15px rgba(0,255,180,.18);
+    font-size: 38px;
+    font-weight: 900;
+}
+
+.receipt-header h3 {
+    margin: 0 0 7px;
+    color: #f8fbff;
+    font-size: clamp(23px,3vw,32px);
+    font-weight: 800;
+    letter-spacing: -.5px;
+}
+
+.receipt-header p { margin: 0; color: #bcd2f7; font-size: 14px; line-height: 1.5; }
+
+.receipt-amount-box {
+    max-width: 620px;
+    margin: 0 auto 22px;
+    padding: 20px;
+    border: 1px solid #087fff;
+    border-radius: 16px;
+    text-align: center;
+    background: linear-gradient(125deg,rgba(0,100,255,.26),transparent 70%),linear-gradient(135deg,#05265d,#08114c);
+    box-shadow: inset 0 0 20px rgba(0,132,255,.15);
+}
+
+.receipt-amount-box span {
+    display: block;
+    color: #7feaff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+}
+
+.receipt-amount-box strong {
+    display: block;
+    margin-top: 9px;
+    color: #fff;
+    font-size: clamp(30px,5vw,44px);
+    font-weight: 800;
+    letter-spacing: -.7px;
+    overflow-wrap: anywhere;
+    text-shadow: 0 0 20px rgba(0,140,255,.35);
+}
+
+.receipt-details-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 16px 18px;
+    border: 1px solid rgba(0,131,255,.8);
+    border-radius: 13px 13px 0 0;
+    background: linear-gradient(100deg,#062761,#071849);
+}
+
+.receipt-details-heading h4 { margin: 0; font-size: 19px; }
+.receipt-details-heading p { margin: 5px 0 0; color: #bfd3f4; font-size: 12px; }
+.reference-summary { color: #e5edff; font-size: 12px; overflow-wrap: anywhere; }
+
+.receipt-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 0 28px;
+    padding: 12px 18px 16px;
+    border: 1px solid rgba(0,131,255,.65);
+    border-top: 0;
+    border-radius: 0 0 13px 13px;
+    background: rgba(2,18,55,.7);
+}
+
+.receipt-details-grid .receipt-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 0;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(103,165,255,.16);
+}
+
+.receipt-label { flex: 0 1 48%; color: #bfd1ef; font-size: 13px; line-height: 1.5; }
+
+.receipt-value {
+    flex: 1 1 52%;
+    min-width: 0;
+    color: #f7f9ff;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.receipt-reference { color: #c4a8ff; user-select: text; }
+
+.receipt-status {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid rgba(0,255,175,.5);
+    border-radius: 22px;
+    color: white;
+    background: linear-gradient(100deg,#087b60,#006548);
+    text-align: center;
+}
+
+.receipt-note {
+    margin: 17px 0 0;
+    padding: 13px 16px;
+    border: 1px solid #00dba6;
+    border-radius: 12px;
+    color: #effffb;
+    background: linear-gradient(100deg,rgba(0,125,89,.35),rgba(0,75,110,.4));
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.receipt-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+
+.receipt-actions button {
+    min-width: 145px;
+    padding: 13px 18px;
+    border: 1px solid #087dff;
+    border-radius: 12px;
+    color: white;
+    background: linear-gradient(110deg,#063c9c,#071e63);
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .2s ease,filter .2s ease;
+}
+
+.receipt-actions button:hover { filter: brightness(1.2); transform: translateY(-2px); }
+.receipt-actions button.primary { border-color: #00dfff; background: linear-gradient(100deg,#00aeea,#075bff); box-shadow: 0 0 16px rgba(0,132,255,.28); }
+.receipt-actions button.download { border-color: #008cff; background: linear-gradient(100deg,#008bff,#073bff); }
+.receipt-actions button.share { border-color: #a000ff; background: linear-gradient(100deg,#7b00ff,#3600bc); }
+.receipt-actions button.back { border-color: #ff507e; background: linear-gradient(100deg,#ff365c,#e60045); }
+.receipt-actions button:disabled { opacity: .5; cursor: not-allowed; }
+
+.footer { padding: 5px 10px 20px; color: #8daee6; text-align: center; font-size: 11px; }
+
+@media (max-width:1050px) {
+    .topbar { grid-template-columns: auto minmax(150px,1fr); }
+    .user-controls { grid-column: 1/-1; justify-content: flex-end; }
+    .hero { grid-template-columns: minmax(0,1fr) 260px; }
+}
+
+@media (max-width:720px) {
+    .topbar { padding: 12px 16px; grid-template-columns: minmax(0,1fr); gap: 12px; }
+    .brand-logo { width: 65px; min-width: 65px; height: 55px; }
+    .brand-copy h1 { font-size: 23px; }
+    .searchbox { max-width: none; }
+    .user-controls { grid-column: auto; justify-content: flex-start; }
+    .page-content { padding: 12px; }
+    .hero { grid-template-columns: minmax(0,1fr); gap: 12px; padding: 23px 20px; }
+    .hero-quote { min-height: auto; padding: 12px 0 0; border-left: 0; border-top: 1px solid #00dfff; }
+    .hero-quote p { max-width: none; font-size: 17px; }
+    .form-container { padding: 20px 17px; }
+    .form-heading h3 { font-size: 19px; }
+    .security-cards { grid-template-columns: minmax(0,1fr); }
+}
+
+@media (max-width:600px) {
+    .transfer-receipt { padding: 22px 14px 17px; border-radius: 15px; }
+    .receipt-header { justify-content: flex-start; gap: 12px; }
+    .receipt-check { width: 52px; height: 52px; font-size: 30px; }
+    .receipt-details-grid { grid-template-columns: minmax(0,1fr); padding: 10px 14px; }
+    .receipt-details-heading { align-items: flex-start; flex-direction: column; }
+    .receipt-actions button { flex: 1 1 100%; }
+}
+
+@media (max-width:420px) {
+    .hero h2 { font-size: 29px; }
+    .hero-actions { align-items: stretch; }
+    .back-btn { width: 100%; }
+    .pill { font-size: 11px; }
+    .form-heading { align-items: flex-start; gap: 12px; }
+    .transfer-icon { width: 49px; height: 49px; font-size: 25px; }
+}
+
+/* Print only the receipt */
+@media print {
+    @page { size: A4 portrait; margin: 12mm; }
+
+    html,body {
+        width: 100% !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #111 !important;
+        background: #fff !important;
+        overflow: visible !important;
+    }
+
+    body * { visibility: hidden !important; }
+
+    #message,#message .transfer-receipt,#message .transfer-receipt * {
+        visibility: visible !important;
+    }
+
+    #message {
+        display: block !important;
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    #message .transfer-receipt {
+        display: block !important;
+        position: relative !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 20px !important;
+        color: #111 !important;
+        background: #fff !important;
+        border: 1px solid #aabbd0 !important;
+        border-radius: 12px !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+
+    #message .receipt-header h3,
+    #message .receipt-amount-box strong,
+    #message .receipt-value,
+    #message .receipt-details-heading h4 {
+        color: #111 !important;
+        text-shadow: none !important;
+    }
+
+    #message .receipt-header p,
+    #message .receipt-label,
+    #message .receipt-details-heading p,
+    #message .reference-summary {
+        color: #444 !important;
+    }
+
+    #message .receipt-amount-box,
+    #message .receipt-details-heading,
+    #message .receipt-details-grid {
+        background: #f5f8fc !important;
+        border-color: #b8c7d9 !important;
+    }
+
+    #message .receipt-note {
+        color: #174d40 !important;
+        background: #effbf6 !important;
+        border-color: #7bcbb2 !important;
+    }
+
+    #message .receipt-check {
+        color: #08734e !important;
+        background: #e5fff4 !important;
+        border-color: #0a9c6c !important;
+        box-shadow: none !important;
+    }
+
+    #message .receipt-status {
+        color: #075c42 !important;
+        background: #e4f8ef !important;
+        border-color: #70bda0 !important;
+    }
+
+    #message .receipt-details-grid .receipt-row { border-bottom-color: #ddd !important; }
+    #message .receipt-actions { display: none !important; visibility: hidden !important; }
+}
+</style>
+</head>
+
+<body>
+<header class="topbar">
+    <div class="brand">
+        <img
+            class="brand-logo"
+            id="ibiBankLogo"
+            src="../images/ibi-logo.png"
+            alt="IBI Bank logo"
+        >
+        <div class="brand-copy">
+            <h1>IBI Bank</h1>
+            <p>International Bank of India</p>
+        </div>
+    </div>
+
+    <div class="searchbox">
+        <span aria-hidden="true">⌕</span>
+        <input type="search" id="globalSearch" placeholder="Search transactions, accounts, beneficiaries..." aria-label="Search this page">
+    </div>
+
+    <div class="user-controls">
+        <div class="avatar" aria-hidden="true">♙</div>
+        <div class="user-details">
+            <span>Welcome back,</span>
+            <strong id="customerName">Customer</strong>
+        </div>
+        <button type="button" class="logout-btn" id="logoutButton">⇥ Logout</button>
+    </div>
+</header>
+
+<main class="page-content">
+    <section class="hero">
+        <div class="hero-main">
+            <p class="eyebrow">FUND TRANSFER</p>
+            <h2>Transfer Money Securely</h2>
+            <p class="hero-description">Send money to your registered beneficiary quickly and securely.</p>
+            <div class="hero-actions">
+                <button class="back-btn" type="button" id="backButton">← Back to Previous Page</button>
+                <span class="pill"><span class="pill-icon">⛨</span> Secure Banking</span>
+                <span class="pill"><span class="pill-icon">ϟ</span> Fast Transfers</span>
+                <span class="pill"><span class="pill-icon">♡</span> Always With You</span>
+            </div>
+        </div>
+        <div class="hero-quote">
+            <div class="quote-mark">“</div>
+            <p>Your money,<br>delivered with confidence.</p>
+            <div class="quote-line"></div>
+        </div>
+    </section>
+
+    <section class="form-container">
+        <div class="form-heading">
+            <div class="transfer-icon" aria-hidden="true">➤</div>
+            <div>
+                <h3>Make a Fund Transfer</h3>
+                <p>Transfer money to your registered beneficiary securely.</p>
+            </div>
+        </div>
+
+        <form id="transferForm" novalidate>
+            <label for="beneficiary">Active Beneficiary</label>
+            <select id="beneficiary" name="beneficiary">
+                <option value="">Select Active Beneficiary</option>
+            </select>
+
+            <div class="or-divider">OR TRANSFER DIRECTLY</div>
+
+            <label for="receiverAccount">Receiver Bank Account Number / ID</label>
+            <input type="text" id="receiverAccount" name="receiverAccount" placeholder="Enter receiver bank account number or ID" maxlength="50" autocomplete="off">
+
+            <label for="amount">Amount (₹)</label>
+            <div class="amount-wrap">
+                <span class="currency-symbol" aria-hidden="true">₹</span>
+                <input type="number" id="amount" name="amount" placeholder="Enter amount" min="0.01" step="0.01" inputmode="decimal" autocomplete="off" required>
+            </div>
+
+            <button type="submit" class="transfer-btn" id="transferButton">💸 Transfer Money</button>
+        </form>
+    </section>
+
+    <section class="security-cards" aria-label="Transfer security features">
+        <div class="security-card green">
+            <div class="security-icon" aria-hidden="true">⛨</div>
+            <div><strong>Verified Beneficiary</strong><p>Transfer only to your registered beneficiaries.</p></div>
+        </div>
+        <div class="security-card blue">
+            <div class="security-icon" aria-hidden="true">ϟ</div>
+            <div><strong>Fast Processing</strong><p>Send money quickly and without delays.</p></div>
+        </div>
+        <div class="security-card purple">
+            <div class="security-icon" aria-hidden="true">♙</div>
+            <div><strong>Secure Transactions</strong><p>Your money is protected with bank-grade security.</p></div>
+        </div>
+    </section>
+
+    <div class="notice">Please verify beneficiary details before confirming your transfer.</div>
+    <section id="message" aria-live="polite"></section>
+</main>
+
+<footer class="footer">IBI Bank · International Bank of India · Secure Fund Transfer</footer>
+
+<script>
+"use strict";
+
+const API = "http://127.0.0.1:5000";
+const $ = id => document.getElementById(id);
+
+let currentBeneficiaries = [];
+let currentAccounts = [];
+
+/*
+ * LOGO PATH FIX
+ * First tries the original relative path, then common paths under the
+ * Fronted directory. The fallback text appears only if all paths fail.
+ */
+(function fixLogoPath() {
+    const logo = $("ibiBankLogo");
+    if (!logo) return;
+
+    const paths = [
+        "../images/ibi-logo.png",
+        "/Fronted/images/ibi-logo.png",
+        "/images/ibi-logo.png",
+        "./images/ibi-logo.png"
+    ];
+
+    let pathIndex = 0;
+    const originalPath = logo.getAttribute("src");
+
+    logo.addEventListener("load", () => {
+        logo.classList.remove("logo-fallback");
+        logo.style.display = "block";
+        logo.style.visibility = "visible";
+        logo.style.opacity = "1";
+        console.info("IBI Bank logo loaded:", logo.currentSrc || logo.src);
+    });
+
+    logo.addEventListener("error", () => {
+        pathIndex++;
+
+        if (pathIndex < paths.length) {
+            console.warn("Logo path failed; trying:", paths[pathIndex]);
+            logo.src = paths[pathIndex];
+            return;
+        }
+
+        console.error(
+            "IBI Bank logo could not be loaded. Tried:",
+            [originalPath, ...paths.slice(1)]
+        );
+
+        const fallback = document.createElement("div");
+        fallback.className = "brand-logo logo-fallback";
+        fallback.setAttribute("role", "img");
+        fallback.setAttribute("aria-label", "IBI Bank logo unavailable");
+        fallback.textContent = "IBI BANK";
+
+        logo.replaceWith(fallback);
+    });
+
+    // Start from the exact original path supplied in the page.
+    logo.src = paths[0];
+})();
+
+function getLoginData(key) {
+    const value = localStorage.getItem(key);
+    if (!value || value === "undefined" || value === "null") return null;
+
+    try {
+        return JSON.parse(value);
+    } catch {
+        if (value.includes("@")) return { email: value };
+        return null;
+    }
+}
+
+function getUserEmail(user) {
+    if (!user) return "";
+    return String(user.email || user.customer_email || user.user_email || "").trim();
+}
+
+function getUserName(user) {
+    if (!user) return "Customer";
+    return String(user.name || user.full_name || user.customer_name || user.username || getUserEmail(user) || "Customer");
+}
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+    })[character]);
+}
+
+function maskEmail(email) {
+    if (!email || typeof email !== "string" || !email.includes("@")) return "Hidden";
+    const separator = email.lastIndexOf("@");
+    const local = email.slice(0, separator);
+    const domain = email.slice(separator + 1);
+    if (!local || !domain) return "Hidden";
+    return local.slice(0, Math.min(2, local.length)) + "****@" + domain;
+}
+
+function maskAccountNumber(accountNumber) {
+    if (accountNumber === null || accountNumber === undefined || String(accountNumber).trim() === "") {
+        return "Not available";
+    }
+    const account = String(accountNumber).trim();
+    return account.length <= 4 ? "****" : "XXXXXX" + account.slice(-4);
+}
+
+function showMessage(message, type = "error") {
+    $("message").innerHTML = `<div class="${type === "error" ? "message-error" : "message-info"}">${escapeHTML(message)}</div>`;
+}
+
+function clearMessage() {
+    $("message").innerHTML = "";
+}
+
+async function readResponse(response) {
+    const text = await response.text();
+    if (!text) return {};
+    try {
+        return JSON.parse(text);
+    } catch {
+        throw new Error("The server returned an unreadable response.");
+    }
+}
+
+async function fetchJSON(url) {
+    const response = await fetch(url);
+    const data = await readResponse(response);
+    if (!response.ok) {
+        throw new Error(data.message || data.error || `Request failed (${response.status}).`);
+    }
+    return data;
+}
+
+function getAccountOwnerEmail(account) {
+    return String(account.email || account.customer_email || account.user_email || "").trim().toLowerCase();
+}
+
+function getAccountId(account) {
+    return Number(account.account_id ?? account.id);
+}
+
+function getBeneficiaryAccountId(beneficiary) {
+    return Number(beneficiary.account_id ?? beneficiary.owner_account_id);
+}
+
+function getBeneficiaryStatus(beneficiary) {
+    return String(beneficiary.status || "").trim().toLowerCase();
+}
+
+function getBeneficiaryId(beneficiary) {
+    return beneficiary.beneficiary_id ?? beneficiary.id;
+}
+
+function getBeneficiaryName(beneficiary) {
+    return beneficiary.beneficiary_name || beneficiary.name || "Beneficiary";
+}
+
+function getBeneficiaryAccountNo(beneficiary) {
+    return beneficiary.beneficiary_account_no || beneficiary.account_no || beneficiary.account_number || "";
+}
+
+function renderBeneficiaries(user, isAdmin) {
+    const select = $("beneficiary");
+    select.innerHTML = "";
+
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Select Active Beneficiary";
+    select.appendChild(placeholder);
+
+    const email = getUserEmail(user).toLowerCase();
+    const userAccounts = isAdmin ? [] : currentAccounts.filter(account => getAccountOwnerEmail(account) === email);
+    const accountIds = userAccounts.map(getAccountId);
+
+    const eligible = currentBeneficiaries.filter(beneficiary => {
+        if (getBeneficiaryStatus(beneficiary) !== "active") return false;
+        if (isAdmin) return true;
+        return accountIds.includes(getBeneficiaryAccountId(beneficiary));
+    });
+
+    eligible.forEach(beneficiary => {
+        const option = document.createElement("option");
+        option.value = String(getBeneficiaryId(beneficiary));
+        option.textContent = `${getBeneficiaryName(beneficiary)} - ${getBeneficiaryAccountNo(beneficiary)}`;
+        select.appendChild(option);
+    });
+
+    if (eligible.length === 0) placeholder.textContent = "No active beneficiaries available";
+}
+
+async function loadData() {
+    const user = getLoginData("loggedInUser");
+    const admin = getLoginData("loggedInAdmin");
+    const email = getUserEmail(user);
+
+    if (!user && !admin) {
+        showMessage("Please log in to use fund transfer.");
+        $("beneficiary").innerHTML = '<option value="">Please log in first</option>';
+        return;
+    }
+
+    if (user && !email) {
+        showMessage("Your login session has no customer email. Please log in again.");
+        return;
+    }
+
+    try {
+        $("beneficiary").innerHTML = '<option value="">Loading beneficiaries...</option>';
+
+        const requests = [fetchJSON(`${API}/api/beneficiaries`)];
+        if (user) requests.push(fetchJSON(`${API}/api/accounts`));
+        else requests.push(Promise.resolve([]));
+
+        const [beneficiaries, accounts] = await Promise.all(requests);
+        if (!Array.isArray(beneficiaries)) throw new Error("Beneficiary data was not returned as a list.");
+        if (!Array.isArray(accounts)) throw new Error("Account data was not returned as a list.");
+
+        currentBeneficiaries = beneficiaries;
+        currentAccounts = accounts;
+        renderBeneficiaries(user || admin, Boolean(admin));
+if ($("beneficiary").options.length === 1) {
+    // Show this notice only when no transfer receipt is being displayed.
+    if (!document.querySelector(".transfer-receipt")) {
+        showMessage(
+            "No active beneficiaries were found. You can use direct transfer if your bank supports it.",
+            "info"
+        );
+    }
+}
+    } catch (error) {
+        console.error("Transfer data loading error:", error);
+        $("beneficiary").innerHTML = '<option value="">Unable to load beneficiaries</option>';
+        showMessage(`${error.message || "Failed to load transfer data."} Check that the backend is running.`);
+    }
+}
+
+
+function updateTransferMode() {
+    const beneficiary = $("beneficiary");
+    const receiver = $("receiverAccount");
+
+    if (receiver.value.trim() !== "") {
+        beneficiary.value = "";
+    }
+
+    const hasBeneficiary = beneficiary.value.trim() !== "";
+
+    receiver.disabled = false;
+
+    if (hasBeneficiary) {
+        receiver.value = "";
+        receiver.placeholder = "Not required when a beneficiary is selected";
+    } else {
+        receiver.placeholder = "Enter receiver bank account number or ID";
+    }
+}
+
+$("beneficiary").addEventListener("change", () => {
+    const receiver = $("receiverAccount");
+
+    if ($("beneficiary").value.trim() !== "") {
+        receiver.value = "";
+    }
+
+    updateTransferMode();
+    clearMessage();
+});
+
+$("receiverAccount").addEventListener("input", () => {
+    if ($("receiverAccount").value.trim() !== "") {
+        $("beneficiary").value = "";
+    }
+
+    updateTransferMode();
+    clearMessage();
+});
+
+$("amount").addEventListener("input", clearMessage);
+
+function formatCurrency(amount) {
+    return Number(amount).toLocaleString("en-IN", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+function getResponseReference(data) {
+    const transaction = data.transaction && typeof data.transaction === "object" ? data.transaction : {};
+    return data.reference_no || data.reference_id || data.referenceId ||
+        data.transaction_reference || data.transaction_reference_id ||
+        data.transaction_id || data.transactionId ||
+        transaction.reference_no || transaction.reference_id ||
+        transaction.referenceId || transaction.transaction_reference ||
+        transaction.transaction_reference_id || transaction.transaction_id ||
+        transaction.transactionId || "";
+}
+
+function showReceipt(details) {
+    const reference = details.reference || "";
+    const referenceText = reference || "Not returned by server";
+
+    $("message").innerHTML = `
+        <div class="transfer-receipt" id="successfulReceipt">
+            <div class="receipt-header">
+                <div class="receipt-check" aria-hidden="true">✓</div>
+                <div>
+                    <h3>Transfer Successful</h3>
+                    <p>Your transaction has been completed successfully.</p>
+                </div>
+            </div>
+
+            <div class="receipt-amount-box">
+                <span>TRANSFER AMOUNT</span>
+                <strong>₹ ${escapeHTML(formatCurrency(details.amount))}</strong>
+            </div>
+
+            <div class="receipt-details-heading">
+                <div>
+                    <h4>Transaction Details</h4>
+                    <p>Keep this receipt for your records.</p>
+                </div>
+                <div class="reference-summary">Reference ID: <strong>${escapeHTML(referenceText)}</strong></div>
+            </div>
+
+            <div class="receipt-details-grid">
+                <div class="receipt-row">
+                    <span class="receipt-label">Recipient Name</span>
+                    <span class="receipt-value">${escapeHTML(details.recipientName)}</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Reference ID</span>
+                    <span class="receipt-value receipt-reference" id="receiptReference">${escapeHTML(referenceText)}</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Account Number</span>
+                    <span class="receipt-value">${escapeHTML(maskAccountNumber(details.recipientAccount))}</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Customer Email</span>
+                    <span class="receipt-value">${escapeHTML(maskEmail(details.senderEmail))}</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Bank Name</span>
+                    <span class="receipt-value">${escapeHTML(details.bankName || "Bank transfer")}</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Date &amp; Time</span>
+                    <span class="receipt-value">${escapeHTML(details.date)}</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Transaction Type</span>
+                    <span class="receipt-value">Fund Transfer</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Status</span>
+                    <span class="receipt-value"><span class="receipt-status">${escapeHTML(details.status || "Successful")}</span></span>
+                </div>
+            </div>
+
+            <div class="receipt-note">
+                ✓ &nbsp; Your transfer confirmation is recorded. Please retain this receipt for your records.
+            </div>
+
+            <div class="receipt-actions">
+                <button type="button" class="primary" id="printReceipt">▣ &nbsp; Print Receipt</button>
+                <button type="button" class="download" id="copyReference" ${reference ? "" : "disabled"}>▣ &nbsp; Copy Reference</button>
+                <button type="button" class="share" id="shareReceipt">↗ &nbsp; Share Receipt</button>
+                <button type="button" class="back" id="newTransfer">← &nbsp; New Transfer</button>
+            </div>
+        </div>
+    `;
+
+    $("printReceipt").addEventListener("click", () => window.print());
+
+    $("copyReference").addEventListener("click", async () => {
+        if (!reference) return;
+
+        try {
+            await navigator.clipboard.writeText(reference);
+            $("copyReference").textContent = "Reference Copied";
+        } catch {
+            const range = document.createRange();
+            range.selectNodeContents($("receiptReference"));
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            showMessage("Select and copy the highlighted reference ID.", "info");
+        }
+    });
+
+    $("shareReceipt").addEventListener("click", async () => {
+        const receiptText = [
+            "IBI Bank — Fund Transfer Receipt",
+            `Amount: ₹${formatCurrency(details.amount)}`,
+            `Reference ID: ${referenceText}`,
+            `Recipient: ${details.recipientName}`,
+            `Account: ${maskAccountNumber(details.recipientAccount)}`,
+            `Status: ${details.status || "Successful"}`,
+            `Date: ${details.date}`
+        ].join("\n");
+
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: "IBI Bank Transfer Receipt",
+                    text: receiptText
+                });
+            } catch (error) {
+                if (error.name !== "AbortError") {
+                    showMessage("Unable to share the receipt.", "error");
+                }
+            }
+        } else {
+            try {
+                await navigator.clipboard.writeText(receiptText);
+                $("shareReceipt").textContent = "Receipt Copied";
+            } catch {
+                showMessage("Sharing is not supported by this browser.", "error");
+            }
+        }
+    });
+
+    $("newTransfer").addEventListener("click", () => {
+        $("transferForm").reset();
+        $("receiverAccount").disabled = false;
+        $("receiverAccount").placeholder = "Enter receiver bank account number or ID";
+        clearMessage();
+        $("amount").focus();
+    });
+}
+
+$("transferForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const user = getLoginData("loggedInUser");
+    const email = getUserEmail(user);
+    const beneficiaryId = $("beneficiary").value.trim();
+    const receiverAccount = $("receiverAccount").value.trim();
+    const rawAmount = $("amount").value.trim();
+    const amount = Number(rawAmount);
+
+    if (!user || !email) {
+        showMessage("Please log in as a customer before transferring money.");
+        return;
+    }
+
+    if (!beneficiaryId && !receiverAccount) {
+        showMessage("Select an active beneficiary or enter a receiver account number.");
+        return;
+    }
+
+    if (beneficiaryId && receiverAccount) {
+        showMessage("Use either a beneficiary or a direct receiver account, not both.");
+        return;
+    }
+
+    if (rawAmount === "" || !Number.isFinite(amount) || amount <= 0) {
+        showMessage("Please enter an amount greater than zero.");
+        $("amount").focus();
+        return;
+    }
+
+    if (!Number.isFinite(amount * 100) || amount * 100 > Number.MAX_SAFE_INTEGER) {
+        showMessage("Please enter a valid transfer amount.");
+        $("amount").focus();
+        return;
+    }
+
+    let recipientName = "Direct bank transfer";
+    let recipientAccount = receiverAccount;
+
+    if (beneficiaryId) {
+        const selected = currentBeneficiaries.find(
+            item => String(getBeneficiaryId(item)) === beneficiaryId
+        );
+
+        if (!selected || getBeneficiaryStatus(selected) !== "active") {
+            showMessage("This beneficiary is unavailable or inactive. Refresh the page and try again.");
+            return;
+        }
+
+        recipientName = getBeneficiaryName(selected);
+        recipientAccount = getBeneficiaryAccountNo(selected);
+    }
+
+    const senderName = getUserName(user);
+    const transferButton = $("transferButton");
+
+    const requestData = {
+        customer_email: email,
+        beneficiary_id: beneficiaryId ? Number(beneficiaryId) : null,
+        receiver_account_no: receiverAccount ? receiverAccount.toUpperCase() : null,
+        amount
+    };
+
+    transferButton.disabled = true;
+    transferButton.textContent = "Processing Transfer...";
+    showMessage("Processing your transfer. Please do not refresh this page.", "info");
+
+    try {
+        const response = await fetch(`${API}/api/transfer`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requestData)
+        });
+
+        const data = await readResponse(response);
+
+        if (!response.ok || data.success !== true) {
+            showMessage(
+                data.message ||
+                data.error ||
+                `Transfer failed${response.status ? ` (${response.status})` : ""}.`
+            );
+            return;
+        }
+
+        const transaction = data.transaction && typeof data.transaction === "object"
+            ? data.transaction
+            : {};
+
+        const rawDate = data.transaction_date || data.created_at ||
+            transaction.transaction_date || transaction.created_at || data.date || "";
+
+        let formattedDate = new Date().toLocaleString("en-IN", {
+            dateStyle: "medium",
+            timeStyle: "short"
+        });
+
+        if (rawDate) {
+            const parsedDate = new Date(rawDate);
+
+            if (!Number.isNaN(parsedDate.getTime())) {
+                formattedDate = parsedDate.toLocaleString("en-IN", {
+                    dateStyle: "medium",
+                    timeStyle: "short"
+                });
+            }
+        }
+
+        const reference = getResponseReference(data);
+
+        const serverRecipientName = data.beneficiary_name || data.receiver_name ||
+            data.recipient_name || transaction.beneficiary_name ||
+            transaction.receiver_name || recipientName;
+
+        const serverRecipientAccount = data.receiver_account_no ||
+            data.receiver_account_number || data.beneficiary_account_no ||
+            data.account_number || transaction.receiver_account_no ||
+            transaction.receiver_account_number ||
+            transaction.beneficiary_account_no || recipientAccount;
+
+        $("transferForm").reset();
+        $("receiverAccount").disabled = false;
+        $("receiverAccount").placeholder = "Enter receiver bank account number or ID";
+
+        showReceipt({
+            reference,
+            amount: data.amount ?? transaction.amount ?? amount,
+            status: data.status || transaction.status || "Completed",
+            recipientName: serverRecipientName,
+            recipientAccount: serverRecipientAccount,
+            senderName,
+            senderEmail: email,
+            date: formattedDate,
+            bankName: data.bank_name || transaction.bank_name || "IBI Bank"
+        });
+
+       loadData() .catch(error => console.error("Beneficiary refresh error:", error));
+
+    } catch (error) {
+        console.error("Transfer request error:", error);
+        showMessage("Unable to connect to the transfer server. Check your backend and network connection.");
+    } finally {
+        transferButton.disabled = false;
+        transferButton.textContent = "💸 Transfer Money";
+    }
+});
+
+$("logoutButton").addEventListener("click", () => {
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("loggedInAdmin");
+    window.location.href = "index.html";
+});
+
+$("backButton").addEventListener("click", () => {
+    if (window.history.length > 1) {
+        window.history.back();
+    } else {
+        window.location.href = "dashboard.html";
+    }
+});
+
+$("globalSearch").addEventListener("input", () => {
+    const query = $("globalSearch").value.trim().toLowerCase();
+
+    document.querySelectorAll(".hero,.form-container,.security-card,.notice,.transfer-receipt").forEach(element => {
+        if (!query) {
+            element.style.display = "";
+        } else {
+            element.style.display = element.textContent.toLowerCase().includes(query) ? "" : "none";
+        }
+    });
+});
+
+const activeUser = getLoginData("loggedInUser") || getLoginData("loggedInAdmin");
+$("customerName").textContent = getUserName(activeUser);
+
+loadData();
+</script>
+</body>
+</html>

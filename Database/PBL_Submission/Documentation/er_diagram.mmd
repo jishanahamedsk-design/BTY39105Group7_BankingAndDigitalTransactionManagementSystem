@@ -1,0 +1,109 @@
+﻿erDiagram
+    CUSTOMER {
+        int customer_id PK
+        string name
+        string email
+        string phone
+        string address
+        string status
+    }
+    USERS {
+        int user_id PK
+        string name
+        string email
+        string phone
+        string password
+        string role
+        datetime email_verified_at
+        int token_version
+        boolean is_active
+    }
+    ACCOUNT {
+        int account_id PK
+        int customer_id FK
+        int branch_id FK
+        int account_type_id FK
+        string account_number
+        decimal balance
+        string status
+    }
+    ACCOUNT_TYPE {
+        int account_type_id PK
+        string type_name
+        decimal interest_rate
+        decimal minimum_balance
+    }
+    BRANCH {
+        int branch_id PK
+        string branch_name
+        string IFSC
+        string city
+    }
+    TRANSACTION {
+        int transaction_id PK
+        int account_id FK
+        string transaction_type
+        decimal amount
+        datetime transaction_date
+        string description
+    }
+    BENEFICIARY {
+        int beneficiary_id PK
+        int account_id FK
+        int account_type_id FK
+        string beneficiary_name
+        string beneficiary_account_no
+        string bank_name
+        string IFSC
+        string status
+        datetime deleted_at
+    }
+    FUND_TRANSFER {
+        int transfer_id PK
+        int sender_account_id FK
+        int receiver_account_id FK
+        int beneficiary_id FK
+        decimal amount
+        datetime transfer_date
+        string status
+        string reference_no
+    }
+    LOAN_TYPE {
+        int loan_type_id PK
+        string loan_type
+        decimal interest_rate
+    }
+    LOAN {
+        int loan_id PK
+        int customer_id FK
+        string loan_type
+        decimal principal_amount
+        decimal interest_rate
+        int tenure_months
+        string status
+    }
+    EMI_PAYMENT {
+        int emi_id PK
+        int loan_id FK
+        date due_date
+        decimal amount
+        date payment_date
+        string status
+        decimal late_fee
+    }
+    ACCOUNT_BALANCE_AUDIT {
+        string audit_columns "See actual schema"
+    }
+    EMAIL_VERIFICATION_CODES {
+        string verification_columns "See actual schema"
+    }
+
+    CUSTOMER ||--o{ ACCOUNT : has
+    BRANCH ||--o{ ACCOUNT : serves
+    ACCOUNT_TYPE ||--o{ ACCOUNT : classifies
+    ACCOUNT ||--o{ TRANSACTION : records
+    ACCOUNT ||--o{ FUND_TRANSFER : sends_or_receives
+    ACCOUNT ||--o{ BENEFICIARY : stores
+    BENEFICIARY o|--o{ FUND_TRANSFER : may_reference
+    CUSTOMER ||--o{ LOAN : applies_for
+    LOAN ||--o{ EMI_PAYMENT : schedules
