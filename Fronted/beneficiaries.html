@@ -317,7 +317,7 @@ body{margin:0!important;width:100%;max-width:100%;overflow-x:clip;background:var
 <script>
 "use strict";
 
-const API_BASE = "http://127.0.0.1:5000";
+const API_BASE = "https://ibi-bank-api.onrender.com";
 
 let currentUser = null;
 let currentAdmin = null;
@@ -791,7 +791,7 @@ async function deleteBeneficiary(beneficiaryId) {
 
     try {
         const url =
-            "http://127.0.0.1:5000/api/beneficiaries/" +
+            "https://ibi-bank-api.onrender.com/api/beneficiaries/" +
             encodeURIComponent(beneficiaryId) +
             "?email=" +
             encodeURIComponent(user.email);
