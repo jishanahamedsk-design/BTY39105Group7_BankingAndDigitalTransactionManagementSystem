@@ -1,4 +1,4 @@
-﻿
+
 require("dotenv").config({
     path: require("path").join(__dirname, ".env")
 });
@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 
     next();
 });
-const PORT = 5000;
+const PORT = Number(process.env.PORT) || 5000;
 
 /* =========================================================
    MIDDLEWARE
@@ -2184,6 +2184,6 @@ async function rollbackLoan(
    START SERVER
 ========================================================= */
 
-app.listen(PORT, "127.0.0.1", () => {
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on http://127.0.0.1:${PORT}`);
 });
