@@ -505,7 +505,7 @@ router.post(
             const [customers] = await queryDatabase(
                 db,
                 `SELECT customer_id
-                 FROM Customer
+                 FROM customer
                  WHERE LOWER(TRIM(email)) = ?
                     OR TRIM(phone) = ?
                  LIMIT 1`,
@@ -661,7 +661,7 @@ router.post("/send-verification-code", async (req, res) => {
         const [customers] = await queryDatabase(
             db,
             `SELECT customer_id, status
-             FROM Customer
+             FROM customer
              WHERE LOWER(TRIM(email)) = ?
              LIMIT 1`,
             [email]
@@ -809,7 +809,7 @@ router.post("/signup", async (req, res) => {
         const [customers] = await queryDatabase(
             db,
             `SELECT customer_id, name, email, phone, status
-             FROM Customer
+             FROM customer
              WHERE LOWER(TRIM(email)) = ?
              LIMIT 1`,
             [email]
@@ -1014,7 +1014,7 @@ router.post("/login", async (req, res) => {
         const [customers] = await queryDatabase(
             db,
             `SELECT customer_id, status
-             FROM Customer
+             FROM customer
              WHERE LOWER(TRIM(email)) = ?
              LIMIT 1`,
             [email]
@@ -1183,7 +1183,7 @@ router.post("/resend-login-code", async (req, res) => {
             const [customers] = await queryDatabase(
                 db,
                 `SELECT customer_id, status
-                 FROM Customer
+                 FROM customer
                  WHERE LOWER(TRIM(email)) = ?
                  LIMIT 1`,
                 [email]
@@ -1287,7 +1287,7 @@ router.post("/verify-email-code", async (req, res) => {
             const [customers] = await queryDatabase(
                 db,
                 `SELECT customer_id, status
-                 FROM Customer
+                 FROM customer
                  WHERE LOWER(TRIM(email)) = ?
                  LIMIT 1`,
                 [email]
@@ -1925,7 +1925,7 @@ router.post(
             const [customers] = await queryConnection(
                 connection,
                 `SELECT customer_id, name, email, phone, address, status
-                 FROM Customer
+                 FROM customer
                  WHERE LOWER(TRIM(email)) = ?
                     OR TRIM(phone) = ?
                  FOR UPDATE`,
@@ -1990,7 +1990,7 @@ router.post(
             } else {
                 const [inserted] = await queryConnection(
                     connection,
-                    `INSERT INTO Customer
+                    `INSERT INTO customer
                         (name, email, phone, address, status)
                      VALUES (?, ?, ?, ?, 'Active')`,
                     [name, email, phone, address]
