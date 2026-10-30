@@ -1,4 +1,4 @@
-const express = require("express");
+﻿const express = require("express");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
@@ -234,7 +234,7 @@ async function upgradeLegacyPassword(db, user, password) {
 
     await queryDatabase(
         db,
-        `UPDATE Users SET password = ? WHERE user_id = ?`,
+        `UPDATE users SET password = ? WHERE user_id = ?`,
         [hash, user.user_id]
     );
 
@@ -429,7 +429,7 @@ function publicUser(user) {
 }
 
 // =========================================================
-// MAIN ADMIN — EMPLOYEE ADMIN MANAGEMENT
+// MAIN ADMIN â€” EMPLOYEE ADMIN MANAGEMENT
 // =========================================================
 
 router.get(
@@ -442,7 +442,7 @@ router.get(
                 getDb(req),
                 `SELECT user_id, name, email, phone, role,
                         is_active, email_verified_at
-                 FROM Users
+                 FROM users
                  WHERE LOWER(TRIM(role)) = 'admin'
                  ORDER BY name ASC`
             );
@@ -495,7 +495,7 @@ router.post(
             const [users] = await queryDatabase(
                 db,
                 `SELECT user_id
-                 FROM Users
+                 FROM users
                  WHERE LOWER(TRIM(email)) = ?
                     OR TRIM(phone) = ?
                  LIMIT 1`,
@@ -524,7 +524,7 @@ router.post(
 
             const [inserted] = await queryDatabase(
                 db,
-                `INSERT INTO Users
+                `INSERT INTO users
                     (name, email, phone, password, role,
                      email_verified_at, token_version, is_active)
                  VALUES (?, ?, ?, ?, 'admin', NOW(), 0, 1)`,
@@ -599,7 +599,7 @@ router.patch(
 
             const [result] = await queryDatabase(
                 db,
-                `UPDATE Users
+                `UPDATE users
                  SET is_active = ?,
                      token_version = COALESCE(token_version, 0) + 1
                  WHERE user_id = ?
@@ -611,7 +611,7 @@ router.patch(
                 const [existing] = await queryDatabase(
                     db,
                     `SELECT user_id
-                     FROM Users
+                     FROM users
                      WHERE user_id = ?
                        AND LOWER(TRIM(role)) = 'admin'`,
                     [employeeId]
@@ -642,7 +642,7 @@ router.patch(
 );
 
 // =========================================================
-// CUSTOMER SIGNUP — SEND VERIFICATION CODE
+// CUSTOMER SIGNUP â€” SEND VERIFICATION CODE
 // =========================================================
 
 router.post("/send-verification-code", async (req, res) => {
@@ -688,7 +688,7 @@ router.post("/send-verification-code", async (req, res) => {
         const [users] = await queryDatabase(
             db,
             `SELECT user_id
-             FROM Users
+             FROM users
              WHERE LOWER(TRIM(email)) = ?
              LIMIT 1`,
             [email]
@@ -846,17 +846,17 @@ router.post("/signup", async (req, res) => {
             });
         }
 
-        const [existingUsers] = await queryDatabase(
+        const [existingusers] = await queryDatabase(
             db,
             `SELECT user_id
-             FROM Users
+             FROM users
              WHERE LOWER(TRIM(email)) = ?
                 OR TRIM(phone) = ?
              LIMIT 1`,
             [email, phone]
         );
 
-        if (existingUsers.length) {
+        if (existingusers.length) {
             return res.status(409).json({
                 success: false,
                 message:
@@ -930,7 +930,7 @@ router.post("/signup", async (req, res) => {
 
             await queryConnection(
                 connection,
-                `INSERT INTO Users
+                `INSERT INTO users
                     (name, email, phone, password, role, email_verified_at)
                  VALUES (?, ?, ?, ?, 'user', NOW())`,
                 [
@@ -969,7 +969,7 @@ router.post("/signup", async (req, res) => {
 });
 
 // =========================================================
-// CUSTOMER LOGIN — PASSWORD, THEN EMAIL OTP
+// CUSTOMER LOGIN â€” PASSWORD, THEN EMAIL OTP
 // =========================================================
 
 router.post("/login", async (req, res) => {
@@ -992,7 +992,7 @@ router.post("/login", async (req, res) => {
             db,
             `SELECT user_id, name, email, phone, password, role,
                     email_verified_at, token_version
-             FROM Users
+             FROM users
              WHERE LOWER(TRIM(email)) = ?
                AND LOWER(TRIM(role)) = 'user'
              LIMIT 1`,
@@ -1046,7 +1046,7 @@ router.post("/login", async (req, res) => {
 });
 
 // =========================================================
-// ADMIN LOGIN — PASSWORD, THEN EMAIL OTP
+// ADMIN LOGIN â€” PASSWORD, THEN EMAIL OTP
 // =========================================================
 
 router.post("/admin-login", async (req, res) => {
@@ -1070,7 +1070,7 @@ router.post("/admin-login", async (req, res) => {
             db,
             `SELECT user_id, name, email, phone, password, role,
                     email_verified_at, token_version, is_active
-             FROM Users
+             FROM users
              WHERE LOWER(TRIM(email)) = ?
                AND LOWER(TRIM(role)) IN ('admin', 'main_admin')
              LIMIT 1`,
@@ -1146,7 +1146,7 @@ router.post("/resend-login-code", async (req, res) => {
         const [users] = await queryDatabase(
             db,
             `SELECT user_id, email, role, is_active, email_verified_at
-             FROM Users
+             FROM users
              WHERE LOWER(TRIM(email)) = ?
              LIMIT 1`,
             [email]
@@ -1216,7 +1216,7 @@ router.post("/resend-login-code", async (req, res) => {
 });
 
 // =========================================================
-// VERIFY LOGIN OTP — ISSUE JWT
+// VERIFY LOGIN OTP â€” ISSUE JWT
 // =========================================================
 
 router.post("/verify-email-code", async (req, res) => {
@@ -1247,7 +1247,7 @@ router.post("/verify-email-code", async (req, res) => {
             db,
             `SELECT user_id, name, email, phone, role,
                     email_verified_at, token_version, is_active
-             FROM Users
+             FROM users
              WHERE user_id = ?
                AND LOWER(TRIM(email)) = ?
              LIMIT 1`,
@@ -1314,7 +1314,7 @@ router.post("/verify-email-code", async (req, res) => {
 
         await queryDatabase(
             db,
-            `UPDATE Users
+            `UPDATE users
              SET email_verified_at = COALESCE(email_verified_at, NOW())
              WHERE user_id = ?`,
             [user.user_id]
@@ -1339,7 +1339,7 @@ router.post("/verify-email-code", async (req, res) => {
 });
 
 // =========================================================
-// FORGOT PASSWORD — SEND RESET CODE
+// FORGOT PASSWORD â€” SEND RESET CODE
 // =========================================================
 
 router.post("/forgot-password", async (req, res) => {
@@ -1358,7 +1358,7 @@ router.post("/forgot-password", async (req, res) => {
         const [users] = await queryDatabase(
             db,
             `SELECT user_id, email, role, is_active
-             FROM Users
+             FROM users
              WHERE LOWER(TRIM(email)) = ?
              LIMIT 1`,
             [email]
@@ -1443,7 +1443,7 @@ router.post("/verify-password-reset-code", async (req, res) => {
         const [users] = await queryDatabase(
             db,
             `SELECT user_id, email, role, is_active
-             FROM Users
+             FROM users
              WHERE user_id = ?
                AND LOWER(TRIM(email)) = ?
              LIMIT 1`,
@@ -1638,7 +1638,7 @@ router.post("/reset-password", async (req, res) => {
 
             const [updated] = await queryConnection(
                 connection,
-                `UPDATE Users
+                `UPDATE users
                  SET password = ?,
                      token_version = COALESCE(token_version, 0) + 1
                  WHERE user_id = ?
@@ -1888,7 +1888,7 @@ router.post(
             const [users] = await queryConnection(
                 connection,
                 `SELECT user_id, email, phone, role
-                 FROM Users
+                 FROM users
                  WHERE LOWER(TRIM(email)) = ?
                     OR TRIM(phone) = ?
                  FOR UPDATE`,

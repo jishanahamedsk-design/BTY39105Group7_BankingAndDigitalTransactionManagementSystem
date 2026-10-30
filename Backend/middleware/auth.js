@@ -1,4 +1,4 @@
-
+﻿
 "use strict";
 
 const jwt = require("jsonwebtoken");
@@ -98,7 +98,7 @@ function requireAuth(req, res, next) {
             email_verified_at,
             token_version,
             is_active
-         FROM Users
+         FROM users
          WHERE user_id = ?
          LIMIT 1`,
         [payload.userId],
